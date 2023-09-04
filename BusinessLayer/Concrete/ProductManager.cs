@@ -18,6 +18,11 @@ namespace BusinessLayer.Concrete
             _productDal = productDal;
         }
 
+        public List<Product> GetListAllWithCategory()
+        {
+            return _productDal.GetListWithCategoryName();
+        }
+
         public void TAdd(Product t)
         {
             _productDal.Insert(t);

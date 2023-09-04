@@ -1,7 +1,9 @@
-﻿
+﻿@using EntityLayer.Concrete
+@model List<Product>
 @{
     ViewData["Title"] = "Məhsullar";
     Layout = "~/Views/Shared/_sellerLayout.cshtml";
+    ViewData["ActiveP"] = "active";
 }
 <a style="margin-left:900px;" href="/Seller/Product/AddProduct/" class="btn btn-success">+ Məhsul əlavə et!</a>
 <div class="table-responsive">
@@ -11,29 +13,40 @@
                 <th>Ad</th>
                 <th>Kateqoriya</th>
                 <th>Vəziyyət</th>
-                <th>Qİymət</th>
+                <th>Qiymət</th>
                 <th>Yaradılma tarixi</th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>
-                    <a href="#">
-                        <img style="margin-right:10px" src="~/vetra/assets/images/products/1.jpg" class="rounded" width="40">
-                        Headphone
-                    </a>
-                </td>
-                <td>Kateqoriya</td>
-                <td>
-                    <span class="badge rounded-pill bg-success">In Stock</span>
-                </td>
-                <td>$499,90</td>
-                <td>02/03/2021</td>
-                <td>
-                    
-                </td>
-            </tr>
+            @foreach(var product in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="#">
+                            <img style="margin-right:10px" src="@product.Image1" class="rounded" width="40">
+                            @product.ProductName
+                        </a>
+                    </td>
+                    <td>@product.Category.Name</td>
+                    <td>
+                        @if (product.InStock)
+                        {
+                            <span class="badge rounded-pill bg-success">Mövcuddur</span>
+                        }
+                        else
+                        {
+                            <span class="badge rounded-pill bg-danger">Mövcud deyil</span>
+                        }
+                        
+                    </td>
+                    <td>@product.Price ₼</td>
+                    <td>@(((DateTime)product.CreatedDate).ToString("MMMM dd, yyy"))</td>
+                    <td>
+                    </td>
+                </tr>
+            }
+            
         </tbody>
     </table>
 </div>

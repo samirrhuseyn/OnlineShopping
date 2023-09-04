@@ -15,6 +15,7 @@ namespace EntityLayer.Concrete
         public string? Image2 { get; set; }
         public string? Image3 { get; set; }
         public string? ProductName { get; set; }
+        public string? Price { get; set; }
         public string? ProductDescription { get; set; }
         public string? Color { get; set; }
         public string? Size { get; set; }

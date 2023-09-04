@@ -12,10 +12,9 @@ namespace OnlineShopping.Areas.Seller.Controllers
     {
         ProductManager productManager = new ProductManager(new EfProductDal());
         CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
-        StoreManager storeManager = new StoreManager(new EfStoreDal());
         public IActionResult Index()
         {
-            var value = productManager.TGetList();
+            var value = productManager.GetListAllWithCategory();
             return View(value);
         }
 
@@ -23,11 +22,11 @@ namespace OnlineShopping.Areas.Seller.Controllers
         public IActionResult AddProduct()
         {
             List<SelectListItem> categoryvalues = (from x in categoryManager.TGetList()
-                                                    select new SelectListItem
-                                                    {
-                                                        Text = x.Name,
-                                                        Value = x.CategoryID.ToString()
-                                                    }).ToList();
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.Name,
+                                                       Value = x.CategoryID.ToString()
+                                                   }).ToList();
             ViewBag.cv = categoryvalues;
             return View();
         }
@@ -50,7 +49,8 @@ namespace OnlineShopping.Areas.Seller.Controllers
                     Size = addProduct.Size,
                     Color = addProduct.Color,
                     InStock = true,
-                    StoreID = 1,
+                    Price = addProduct.Price,
+                    StoreID = 1
                 };
                 productManager.TAdd(product);
                 return RedirectToAction("Index");

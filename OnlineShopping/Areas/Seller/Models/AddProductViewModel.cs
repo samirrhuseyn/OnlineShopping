@@ -24,6 +24,9 @@ namespace OnlineShopping.Areas.Seller.Models
         public string? Color { get; set; }
 
         public string? Size { get; set; }
+
+        [Required(ErrorMessage = "Məhsulun qiymətini boş buraxa bilməzsiniz!")]
+        public string? Price { get; set; }
         public DateTime? CreatedDate { get; set; }
         public int StoreID { get; set; }
         public int CategoryID { get; set; }
