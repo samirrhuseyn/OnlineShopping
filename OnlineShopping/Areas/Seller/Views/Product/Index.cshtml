@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Məhsullar";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+}
+<a style="margin-left:900px;" href="/Seller/Product/AddProduct/" class="btn btn-success">+ Məhsul əlavə et!</a>
+<div class="table-responsive">
+    <table class="table table-custom table-lg mb-0" id="products">
+        <thead>
+            <tr>
+                <th>Ad</th>
+                <th>Kateqoriya</th>
+                <th>Vəziyyət</th>
+                <th>Qİymət</th>
+                <th>Yaradılma tarixi</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <a href="#">
+                        <img style="margin-right:10px" src="~/vetra/assets/images/products/1.jpg" class="rounded" width="40">
+                        Headphone
+                    </a>
+                </td>
+                <td>Kateqoriya</td>
+                <td>
+                    <span class="badge rounded-pill bg-success">In Stock</span>
+                </td>
+                <td>$499,90</td>
+                <td>02/03/2021</td>
+                <td>
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
