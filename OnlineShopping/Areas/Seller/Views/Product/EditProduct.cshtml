@@ -1,0 +1,81 @@
+﻿@model OnlineShopping.Areas.Seller.Models.EditProductViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Məhsulu yenilə!";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+    ViewData["ActiveP"] = "active";
+}
+<div class="card">
+    <div class="card-body">
+        <form class="row g-3" method="post" enctype="multipart/form-data" asp-action="EditProduct" asp-controller="Product">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="ProductID" hidden/>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Məhsulun Adı:<span class="text-danger">*</span></label>
+                <input asp-for="ProductName" type="text" class="form-control" id="inputEmail4">
+                <span asp-validation-for="ProductName" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="inputPassword4" class="form-label">Məhsulun rəngi: <span class="text-danger">(Bu sahə bütün məhsullara şamil edilmir!*)</span></label>
+                <input asp-for="Color" type="text" class="form-control" id="inputPassword4">
+            </div>
+            <div class="col-6">
+                <label for="inputAddress" class="form-label">Məhsulun ölçüsü: <span class="text-danger">(Bu sahə bütün məhsullara şamil edilmir!*)</span></label>
+                <input asp-for="Size" type="text" class="form-control" id="inputAddress">
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Qiyməti:<span class="text-danger">*</span></label>
+                <input asp-for="Price" type="text" class="form-control" id="inputEmail4">
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="col-md-6">
+                <label for="inputEmail4" class="form-label">Endirimli qiyməti:<span class="text-danger">*</span></label>
+                <input asp-for="DiscountedPrice" type="text" class="form-control" id="inputEmail4">
+            </div>
+            <div class="col-md-6">
+                <label for="inputState" class="form-label">Kateqoriya:<span class="text-danger">*</span></label>
+                <select asp-for="CategoryID" asp-items="@ViewBag.cv" id="inputState" class="form-select">
+                    <option selected>Choose...</option>
+                </select>
+            </div>
+            <div class="col-md-12">
+                <label for="inputEmail4" class="form-label">Məhsul haqqında ətraflı məlumat:<span class="text-danger">*</span></label>
+                <textarea asp-for="ProductDescription" type="text" class="form-control" id="editor"></textarea>
+                <span asp-validation-for="ProductDescription" class="text-danger"></span>
+            </div>
+            <div class="col-md-4">
+                <img src="@Model.Image1Pre" id="blah" alt="your image" width="250" height="200" />
+                <br />
+                <input asp-for="Image1" class="form-control" type="file"
+                       onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+            </div>
+            <div class="col-md-4">
+                <img src="@Model.Image2Pre" id="blah1" alt="your image" width="250" height="200" />
+                <br />
+                <input asp-for="Image2" class="form-control" type="file"
+                       onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])">
+            </div>
+            <div class="col-md-4">
+                <img src="@Model.Image3Pre" id="blah2" alt="your image" width="250" height="200" />
+                <br />
+                <input asp-for="Image3" class="form-control" type="file"
+                       onchange="document.getElementById('blah2').src = window.URL.createObjectURL(this.files[0])">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>Yaddaşda saxla!</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/ckeditor5-build-classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+        })
+        .then(editor => {
+            window.editor = editor;
+        })
+        .catch(err => {
+            console.error(err.stack);
+        });
+</script>

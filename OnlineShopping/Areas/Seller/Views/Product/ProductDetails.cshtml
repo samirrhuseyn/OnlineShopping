@@ -1,0 +1,183 @@
+﻿@model EntityLayer.Concrete.Product
+@{
+    ViewData["Title"] = Model.ProductName;
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+    ViewData["ActiveP"] = "active";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="slick-wrapper">
+                            <div class="slider-for mb-3">
+                                <div class="slick-slide-item">
+                                    <img src="@Model.Image1" class="w-100 rounded"
+                                         alt="image">
+                                </div>
+                                <div class="slick-slide-item">
+                                    <img src="@Model.Image2" class="w-100 rounded"
+                                         alt="image">
+                                </div>
+                                <div class="slick-slide-item">
+                                    <img src="@Model.Image3" class="w-100 rounded"
+                                         alt="image">
+                                </div>
+                            </div>
+                            <div class="slick-nav-wrapper">
+                                <div class="slider-nav">
+                                    <div class="slick-slide-item m-2">
+                                        <img src="@Model.Image1" class="w-100 rounded"
+                                             alt="image">
+                                    </div>
+                                    <div class="slick-slide-item m-2">
+                                        <img src="@Model.Image2" class="w-100 rounded"
+                                             alt="image">
+                                    </div>
+                                    <div class="slick-slide-item m-2">
+                                        <img src="@Model.Image3" class="w-100 rounded"
+                                             alt="image">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="d-flex justify-content-between align-items-start mt-4 mt-md-0">
+                            <div>
+                                <div class="small text-muted mb-2">@Model.Category.Name</div>
+                                <h2>@Model.ProductName</h2>
+                                <p>
+
+                                    @if (Model.InStock)
+                                    {
+                                        <span class="badge rounded-pill bg-success">Mövcuddur</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge rounded-pill bg-danger">Mövcud deyil</span>
+                                    }
+                                </p>
+                                <p>
+                                    @Html.Raw(Model.ProductDescription)
+                                </p>
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-text bg-orange rounded-circle"><i class="bi bi-paint-bucket"></i></span>
+                                </div>@Model.Color
+                                <br />
+                                <div style="margin-top:10px;" class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-text bg-orange rounded-circle"><i class="bi bi-rulers"></i></i></span>
+                                </div>@Model.Size
+                                <br />
+                                <div style="margin-top:10px;" class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-text bg-orange rounded-circle"><i class="bi bi-wallet"></i></span>
+                                </div>
+                                @if(Model.DiscountedPrice != null)
+                                {
+                                    <del>@Model.Price ₼</del>  <strong>@Model.DiscountedPrice ₼</strong>
+                                }
+                                else
+                                {
+                                    <strong>@Model.Price ₼</strong>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="tab-content">
+                        <div>
+                            <div class="row">
+                                <div class="col-lg-8">
+                                    <div class="mb-5">
+                                        <div class="display-6">4.0</div>
+                                        <div class="d-flex gap-2 my-3">
+                                            <i class="bi bi-star-fill icon-lg text-warning"></i>
+                                            <i class="bi bi-star-fill icon-lg text-warning"></i>
+                                            <i class="bi bi-star-fill icon-lg text-warning"></i>
+                                            <i class="bi bi-star-fill icon-lg text-warning"></i>
+                                            <i class="bi bi-star-fill icon-lg text-muted"></i>
+                                            <span>(3)</span>
+                                        </div>
+                                    </div>
+                                    <div class="list-group list-group-flush mb-4">
+                                        <div class="list-group-item d-flex px-0">
+                                            <div class="avatar flex-shrink-0 me-3">
+                                                <span class="avatar-text bg-purple rounded-circle">R</span>
+                                            </div>
+                                            <div>
+                                                <h5 class="mb-1">Rodger Stutely</h5>
+                                                <div class="d-flex gap-2 mb-3">
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-muted"></i>
+                                                </div>
+                                                <div>
+                                                    I love your products. It is very easy and fun to use this panel. I would
+                                                    recommend it
+                                                    to
+                                                    everyone.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item d-flex px-0">
+                                            <div class="avatar flex-shrink-0 me-3">
+                                                <span class="avatar-text bg-orange rounded-circle">C</span>
+                                            </div>
+                                            <div>
+                                                <h5 class="mb-1">Corly Hailston</h5>
+                                                <div class="d-flex gap-2 mb-3">
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                </div>
+                                                <div>
+                                                    I love your products. It is very easy and fun to use this panel. I would
+                                                    recommend it
+                                                    to
+                                                    everyone.
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="list-group-item d-flex px-0">
+                                            <div class="avatar flex-shrink-0 me-3">
+                                                <img src="~/vetra/assets/images/user/man_avatar2.jpg" class="rounded-circle" alt="image">
+                                            </div>
+                                            <div>
+                                                <h5 class="mb-1">Hurleigh Smallcomb</h5>
+                                                <div class="d-flex gap-2 mb-3">
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                    <i class="bi bi-star-fill text-warning"></i>
+                                                </div>
+                                                <div>
+                                                    I love your products. It is very easy and fun to use this panel. I would
+                                                    recommend it
+                                                    to
+                                                    everyone.
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

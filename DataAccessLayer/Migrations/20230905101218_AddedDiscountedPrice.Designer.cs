@@ -4,6 +4,7 @@ using DataAccessLayer.Concrete;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20230905101218_AddedDiscountedPrice")]
+    partial class AddedDiscountedPrice
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,36 +23,6 @@ namespace DataAccessLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("EntityLayer.Concrete.CampaignSurvey", b =>
-                {
-                    b.Property<int>("CampaignID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CampaignID"), 1L, 1);
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsApproved")
-                        .HasColumnType("bit");
-
-                    b.Property<DateTime?>("SendDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("StoreID")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Title")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CampaignID");
-
-                    b.HasIndex("StoreID");
-
-                    b.ToTable("CampaignSurveys");
-                });
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
                 {
@@ -179,17 +151,6 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Stores");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.CampaignSurvey", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Store", "Store")
-                        .WithMany("Campaigns")
-                        .HasForeignKey("StoreID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Store");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Category", "Category")
@@ -227,8 +188,6 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Store", b =>
                 {
-                    b.Navigation("Campaigns");
-
                     b.Navigation("Products");
                 });
 #pragma warning restore 612, 618

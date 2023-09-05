@@ -15,7 +15,7 @@
                 <th>Vəziyyət</th>
                 <th>Qiymət</th>
                 <th>Yaradılma tarixi</th>
-                <th></th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -23,7 +23,7 @@
             {
                 <tr>
                     <td>
-                        <a href="#">
+                        <a href="/Seller/Product/ProductDetails/@product.ProductID">
                             <img style="margin-right:10px" src="@product.Image1" class="rounded" width="40">
                             @product.ProductName
                         </a>
@@ -41,8 +41,21 @@
                         
                     </td>
                     <td>@product.Price ₼</td>
+                    
                     <td>@(((DateTime)product.CreatedDate).ToString("MMMM dd, yyy"))</td>
                     <td>
+                        <div class="dropdown">
+                            <a href="#" data-bs-toggle="dropdown"
+                               class="btn btn-floating"
+                               aria-haspopup="true" aria-expanded="false">
+                                <i class="bi bi-three-dots"></i>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="/Seller/Product/ProductDetails/@product.ProductID" class="dropdown-item text-success">View Details</a>
+                                <a href="/Seller/Product/EditProduct/@product.ProductID" class="dropdown-item text-primary">Edit</a>
+                                <a href="/Seller/Product/DeleteProduct/@product.ProductID" class="dropdown-item text-danger">Delete</a>
+                            </div>
+                        </div>
                     </td>
                 </tr>
             }

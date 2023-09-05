@@ -13,6 +13,16 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfProductDal : GenericRepository<Product>, IProductDal
     {
+        public Product GetByIdWithCategory(int id)
+        {
+            using(var context = new Context())
+            {
+                return context.Products
+                    .Include(x => x.Category)
+                    .FirstOrDefault(x => x.ProductID == id);
+            }
+        }
+
         public List<Product> GetListWithCategoryName()
         {
             using (var context = new Context())

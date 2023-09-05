@@ -1,0 +1,24 @@
+﻿<div class="sidebar" id="notifications">
+    <div class="sidebar-header d-block align-items-end">
+        <div class="align-items-center d-flex justify-content-between py-4">
+            Notifications
+            <button data-sidebar-close>
+                <i class="bi bi-arrow-right"></i>
+            </button>
+        </div>
+        <ul class="nav nav-pills">
+            <li class="nav-item">
+                <a class="nav-link active nav-link-notify" data-bs-toggle="tab" href="#activities">Messages</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-bs-toggle="tab" href="#notes">Notes</a>
+            </li>
+        </ul>
+    </div>
+    <div class="sidebar-content">
+        <div class="tab-content">
+            @await Component.InvokeAsync("MessagesLayout")
+            @await Component.InvokeAsync("NotesLayout")
+        </div>
+    </div>
+</div>

@@ -1,0 +1,42 @@
+﻿<div class="menu">
+    <div class="menu-header">
+            <a style="width:100px;" href="index.html" class="menu-header-logo">
+                <img src="~/vetra/assets/images/logo-dark.png" alt="logo">
+        </a>
+        <a href="index.html" class="btn btn-sm menu-close-btn">
+            <i class="bi bi-x"></i>
+        </a>
+    </div>
+    <div class="menu-body">
+        @await Component.InvokeAsync("ProfileLayout")
+        <ul>
+            <li>
+                <a class="#"
+                    href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-bar-chart"></i>
+                    </span>
+                    <span>Hesabatlar</span>
+                </a>
+            </li>
+            <li>
+                <a class="@ViewBag.ActiveP"
+                    href="/Seller/Product/Index/">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-layers"></i>
+                    </span>
+                    <span>Məhsullar</span>
+                </a>
+            </li>
+            <li>
+                <a class="#"
+                    href="#">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-calendar2-plus"></i>
+                    </span>
+                    <span>Kompaniya sorğuları</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
