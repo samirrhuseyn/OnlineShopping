@@ -17,13 +17,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Areas\Admin\Controllers\" />
     <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Seller\Data\" />
     <Folder Include="Views\Shared\AdminPartial\" />
     <Folder Include="Views\Shared\PublicPartial\" />
+    <Folder Include="wwwroot\ImagesFiles\SellerImagesFiles\" />
     <Folder Include="wwwroot\ImagesFiles\ProductImagesFiles\" />
   </ItemGroup>
 

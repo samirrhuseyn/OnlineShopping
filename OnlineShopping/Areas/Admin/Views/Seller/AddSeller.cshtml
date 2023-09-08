@@ -1,0 +1,64 @@
+﻿@using OnlineShopping.Areas.Admin.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model AddSellerViewModel
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Seller Add Page</title>
+    <link rel="shortcut icon" href="~/vetra/assets/images/favicon.png" />
+</head>
+<body>
+    <form method="post" enctype="multipart/form-data" asp-action="AddSeller" asp-controller="Seller">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <div>
+            <img src="~/3927-200.png" id="blah2" alt="your image" width="250" height="200" />
+            <br />
+            <input class="form-control" type="file"
+                   onchange="document.getElementById('blah2').src = window.URL.createObjectURL(this.files[0])">
+        </div>
+        <br />
+        <div>
+            <label class="form-control">Name:</label>
+            <input type="text" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label class="form-control">Surname:</label>
+            <input type="text" class="form-control" />
+            <span asp-validation-for="Surname" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label class="form-control">Mail:</label>
+            <input type="text" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label class="form-control">Username:</label>
+            <input type="text" class="form-control" />
+            <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+        <br />
+        <label>Store</label>
+        <select asp-for="StoreID" asp-items="@ViewBag.sv" class="form-control"></select>
+        <br />
+        <br />
+        <br />
+        <div>
+            <label class="form-control">Password:</label>
+            <input type="password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+        <br />
+        <div>
+            <label class="form-control">Confirm Password:</label>
+            <input type="password" class="form-control" />
+            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+        </div>
+        <br />
+        <button type="submit">Save</button>
+    </form>
+</body>
+</html>
