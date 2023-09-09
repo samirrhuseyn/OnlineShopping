@@ -13,31 +13,31 @@
         <div>
             <img src="~/3927-200.png" id="blah2" alt="your image" width="250" height="200" />
             <br />
-            <input class="form-control" type="file"
+            <input asp-for="Image" class="form-control" type="file"
                    onchange="document.getElementById('blah2').src = window.URL.createObjectURL(this.files[0])">
         </div>
         <br />
         <div>
             <label class="form-control">Name:</label>
-            <input type="text" class="form-control" />
+            <input asp-for="Name" type="text" class="form-control" />
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
         <br />
         <div>
             <label class="form-control">Surname:</label>
-            <input type="text" class="form-control" />
+            <input asp-for="Surname" type="text" class="form-control" />
             <span asp-validation-for="Surname" class="text-danger"></span>
         </div>
         <br />
         <div>
             <label class="form-control">Mail:</label>
-            <input type="text" class="form-control" />
+            <input asp-for="Email" type="text" class="form-control" />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
         <br />
         <div>
             <label class="form-control">Username:</label>
-            <input type="text" class="form-control" />
+            <input asp-for="Username" type="text" class="form-control" />
             <span asp-validation-for="Username" class="text-danger"></span>
         </div>
         <br />
@@ -48,13 +48,13 @@
         <br />
         <div>
             <label class="form-control">Password:</label>
-            <input type="password" class="form-control" />
+            <input asp-for="Password" type="password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
         <br />
         <div>
             <label class="form-control">Confirm Password:</label>
-            <input type="password" class="form-control" />
+            <input asp-for="ConfirmPassword" type="password" class="form-control" />
             <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
         </div>
         <br />

@@ -34,5 +34,7 @@ namespace OnlineShopping.Areas.Admin.Models
         [Display(Name = "Password Again")]
         [Compare("Password", ErrorMessage = "Passwords do not match")]
         public string? ConfirmPassword { get; set; }
+        public bool IsSeller { get; set; }
+        public bool IsAdmin { get; set; }
     }
 }

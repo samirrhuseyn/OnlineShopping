@@ -2,6 +2,7 @@
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -22,18 +23,18 @@ namespace OnlineShopping.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return View(_userManager.Users.Include(x => x.Store).Where(x => x.IsSeller == true).Where(x => x.IsAdmin == false).ToList());
         }
 
         [HttpGet]
         public IActionResult AddSeller()
         {
             List<SelectListItem> storevalues = (from x in storeManager.TGetList()
-                                                   select new SelectListItem
-                                                   {
-                                                       Text = x.Name,
-                                                       Value = x.StoreID.ToString()
-                                                   }).ToList();
+                                                select new SelectListItem
+                                                {
+                                                    Text = x.Name,
+                                                    Value = x.StoreID.ToString()
+                                                }).ToList();
             ViewBag.sv = storevalues;
             return View();
         }
@@ -51,12 +52,14 @@ namespace OnlineShopping.Areas.Admin.Controllers
                     Surname = addSeller.Surname,
                     UserName = addSeller.Username,
                     StoreID = addSeller.StoreID,
-                    ProfileImage = UploadFile(addSeller.Image)
+                    ProfileImage = UploadFile(addSeller.Image),
+                    IsAdmin = false,
+                    IsSeller = true
                 };
                 var result = await _userManager.CreateAsync(appUser, addSeller.Password);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Seller");
+                    return RedirectToAction("Index");
                 }
                 else
                 {
