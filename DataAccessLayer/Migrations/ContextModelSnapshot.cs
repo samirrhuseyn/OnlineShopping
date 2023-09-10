@@ -167,6 +167,9 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ComplaintID"), 1L, 1);
 
+                    b.Property<DateTime?>("DateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Image1")
                         .HasColumnType("nvarchar(max)");
 
@@ -176,15 +179,20 @@ namespace DataAccessLayer.Migrations
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 
-                    b.Property<int>("Reason")
-                        .HasColumnType("int");
+                    b.Property<string>("Reason")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("SalesCode")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("ComplaintID");
 
                     b.HasIndex("ProductID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("Complaints");
                 });
@@ -224,11 +232,11 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("ProductDescription")
+                    b.Property<string>("ProductCode")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ProductID1")
-                        .HasColumnType("int");
+                    b.Property<string>("ProductDescription")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ProductName")
                         .HasColumnType("nvarchar(max)");
@@ -242,8 +250,6 @@ namespace DataAccessLayer.Migrations
                     b.HasKey("ProductID");
 
                     b.HasIndex("CategoryID");
-
-                    b.HasIndex("ProductID1");
 
                     b.HasIndex("StoreID");
 
@@ -454,12 +460,18 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concrete.Complaint", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Product", "Product")
-                        .WithMany()
+                        .WithMany("Complaints")
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID");
+
                     b.Navigation("Product");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
@@ -469,10 +481,6 @@ namespace DataAccessLayer.Migrations
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("EntityLayer.Concrete.Product", null)
-                        .WithMany("Products")
-                        .HasForeignKey("ProductID1");
 
                     b.HasOne("EntityLayer.Concrete.Store", "Store")
                         .WithMany("Products")
@@ -554,7 +562,7 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
                 {
-                    b.Navigation("Products");
+                    b.Navigation("Complaints");
 
                     b.Navigation("Sale");
                 });

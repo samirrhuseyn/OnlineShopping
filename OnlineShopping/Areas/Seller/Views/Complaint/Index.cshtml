@@ -1,0 +1,43 @@
+﻿@using EntityLayer.Concrete
+@model List<Complaint>
+@{
+    ViewData["Title"] = "Məhsul şikayətləri";
+    ViewData["ActiveMSH"] = "active";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+}
+
+<div style="margin-top:15px;" class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Şikayətçi</th>
+                        <th>Məhsul</th>
+                        <th>Satış kodu</th>
+                        <th>Göndərilmə tarixi</th>
+                        <th>Hərəkətlər</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var complaint in Model)
+                    {
+                        <tr>
+                            <td><img style="border-radius:30%" src="@complaint.User.ProfileImage" height="40" width="40" /> @complaint.User.Name @complaint.User.Surname</td>
+                            <td>@complaint.Product.ProductCode</td>
+                            <td>@complaint.SalesCode</td>
+                            <td>@(((DateTime)complaint.DateTime).ToString("MMMM dd, yyyy HH:mm"))</td>
+                            <td>
+                                <div style="padding:10px">
+                                    <a href="#"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Ətraflı məlumat" class="bg-success bi-info"></i></a>
+                                    <a href="#"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Yeniləmək" class="bg-info bi-pen"></i></a>
+                                    <a href="#"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Silmək" class="bg-danger bi-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

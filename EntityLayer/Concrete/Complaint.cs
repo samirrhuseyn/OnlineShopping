@@ -11,11 +11,14 @@ namespace EntityLayer.Concrete
     {
         [Key]
         public int ComplaintID { get; set; }
-        public int Reason { get; set; }
+        public string? Reason { get; set; }
         public string? Image1 { get; set; }
         public string? Image2 { get; set; }
         public int ProductID { get; set; }
         public Product? Product { get; set; }
         public string? SalesCode { get; set; }
+        public string? UserID { get; set; }
+        public AppUser? User { get; set; }
+        public DateTime? DateTime { get; set;}
     }
 }
