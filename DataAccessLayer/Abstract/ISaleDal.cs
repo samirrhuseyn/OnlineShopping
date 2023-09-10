@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface ISaleDal : IGenericDal<Sale>
     {
+        Sale GetById(string id);
     }
 }

@@ -18,6 +18,11 @@ namespace BusinessLayer.Concrete
             _saleDal = saleDal;
         }
 
+        public Sale GetByID(string id)
+        {
+            return _saleDal.GetById(id);
+        }
+
         public void TAdd(Sale t)
         {
             _saleDal.Insert(t);
@@ -30,7 +35,8 @@ namespace BusinessLayer.Concrete
 
         public Sale TGetByID(int id)
         {
-            return _saleDal.GetByID(id);
+            throw new NotImplementedException();
+            
         }
 
         public List<Sale> TGetList()

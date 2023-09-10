@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface ISaleService : IGenericService<Sale>
     {
+        Sale GetByID(string id);
     }
 }
