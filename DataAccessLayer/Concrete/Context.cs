@@ -22,5 +22,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<Product>? Products { get; set; }
         public DbSet<Sale>? Sales { get; set; }
         public DbSet<CampaignSurvey>? CampaignSurveys { get; set; }
+        public DbSet<Complaint>? Complaints { get; set; }
     }
 }

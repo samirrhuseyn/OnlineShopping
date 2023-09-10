@@ -1,9 +1,63 @@
-﻿
+﻿@using EntityLayer.Concrete
+@model List<CampaignSurvey>
 @{
     ViewData["Title"] = "Kompaniya Sorğularım";
     Layout = "~/Views/Shared/_sellerLayout.cshtml";
     ViewData["ActiveCS"] = "active";
 }
+<a style="margin-left:900px;" href="/Seller/CampaignSurvey/AddSurvey/" class="btn btn-success">+ Sorğu əlavə et!</a>
 
-<h1>Index</h1>
+<div style="margin-top:15px;" class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Başlıq</th>
+                        <th>Ətraflı məlumat</th>
+                        <th>Göndərilmə tarixi</th>
+                        <th>Vəziyyət</th>
+                        <th>Hərəkətlər</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var survey in Model)
+                    {
+                        <tr>
+                            <td>@survey.Title</td>
+                            <td>
+                                @if (survey.Description.Length < 20)
+                                {
+                                    <span>@Html.Raw(survey.Description)</span>
+                                }
+                                else
+                                {
+                                    <span>@Html.Raw(survey.Description.Substring(0, 20)) ...</span>
+                                }
+                            </td>
+                            <td>@(((DateTime)survey.SendDate).ToString("MMMM dd, yyyy"))</td>
+                            <td>
+                                @if (survey.IsApproved)
+                                {
+                                    <span class="badge rounded-pill bg-success">Təsdiqlənib</span>
+                                }
+                                else
+                                {
+                                    <span class="badge rounded-pill bg-warning">Gözləmədə</span>
+                                }
+                            </td>
+                            <td>
+                                <div style="padding:10px">
+                                    <a href="/Seller/CampaignSurvey/Details/@survey.CampaignID"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Ətraflı məlumat" class="bg-success bi-info"></i></a>
+                                    <a href="/Seller/CampaignSurvey/EditSurvey/@survey.CampaignID"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Yeniləmək" class="bg-info bi-pen"></i></a>
+                                    <a href="/Seller/CampaignSurvey/DeleteSurvey/@survey.CampaignID"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Silmək" class="bg-danger bi-trash"></i></a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 

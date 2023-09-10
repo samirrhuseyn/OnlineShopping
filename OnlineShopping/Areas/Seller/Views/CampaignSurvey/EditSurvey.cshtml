@@ -1,0 +1,42 @@
+﻿@using EntityLayer.Concrete
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model CampaignSurvey
+@{
+    ViewData["Title"] = "Sorğunu redaktə et!";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+    ViewData["ActiveCS"] = "active";
+}
+
+<div class="card">
+    <div class="card-body">
+        <form class="row g-3" method="post" asp-action="EditSurvey" asp-controller="CampaignSurvey">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input asp-for="CampaignID" hidden/>
+            <div class="mb-3">
+                <label for="formGroupExampleInput" class="form-label">Sorğu başlığı<span class="text-danger">*</span></label>
+                <input asp-for=Title type="text" class="form-control" id="formGroupExampleInput">
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label for="formGroupExampleInput2" class="form-label">Sorğu haqqında ətraflı məlumat<span class="text-danger">*</span></label>
+                <textarea asp-for="Description" id=editor class="form-control"></textarea>
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-success"><i class="fa fa-save"></i>Yaddaşda saxla!</button>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="~/ckeditor5-build-classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#editor'), {
+        })
+        .then(editor => {
+            window.editor = editor;
+        })
+        .catch(err => {
+            console.error(err.stack);
+        });
+</script>

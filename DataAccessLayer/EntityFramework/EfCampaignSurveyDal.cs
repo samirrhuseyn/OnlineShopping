@@ -19,7 +19,7 @@ namespace DataAccessLayer.EntityFramework
             {
                 return context.CampaignSurveys
                     .Include(x => x.Store)
-                    .OrderByDescending(x=>x.SendDate)
+                    .OrderByDescending(x => x.SendDate)
                     .ToList();
             }
         }
