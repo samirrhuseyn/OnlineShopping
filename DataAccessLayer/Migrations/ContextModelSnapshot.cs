@@ -176,6 +176,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("Image2")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<bool>("IsLooked")
+                        .HasColumnType("bit");
+
                     b.Property<int>("ProductID")
                         .HasColumnType("int");
 

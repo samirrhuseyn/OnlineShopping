@@ -13,6 +13,17 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfComplaintDal : GenericRepository<Complaint>, IComplaintDal
     {
+        public Complaint GetComplaint(int id)
+        {
+            using (Context context = new Context())
+            {
+                return context.Complaints
+                    .Include(x => x.User)
+                    .Include(x => x.Product)
+                    .FirstOrDefault(x => x.ComplaintID == id);
+            }
+        }
+
         public List<Complaint> GetComplaintList()
         {
             using (Context context = new Context())

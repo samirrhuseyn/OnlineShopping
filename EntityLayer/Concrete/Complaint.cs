@@ -20,5 +20,6 @@ namespace EntityLayer.Concrete
         public string? UserID { get; set; }
         public AppUser? User { get; set; }
         public DateTime? DateTime { get; set;}
+        public bool IsLooked { get; set; }  
     }
 }

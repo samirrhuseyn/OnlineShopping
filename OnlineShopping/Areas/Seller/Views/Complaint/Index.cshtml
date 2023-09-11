@@ -29,9 +29,8 @@
                             <td>@(((DateTime)complaint.DateTime).ToString("MMMM dd, yyyy HH:mm"))</td>
                             <td>
                                 <div style="padding:10px">
-                                    <a href="#"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Ətraflı məlumat" class="bg-success bi-info"></i></a>
-                                    <a href="#"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Yeniləmək" class="bg-info bi-pen"></i></a>
-                                    <a href="#"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Silmək" class="bg-danger bi-trash"></i></a>
+                                    <a href="/Seller/Complaint/Details/@complaint.ComplaintID"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Ətraflı məlumat" class="bg-success bi-info"></i></a>
+                                    <a href="/Seller/Complaint/Delete/@complaint.ComplaintID"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Silmək" class="bg-danger bi-trash"></i></a>
                                 </div>
                             </td>
                         </tr>

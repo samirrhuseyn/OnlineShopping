@@ -13,5 +13,21 @@ namespace OnlineShopping.Areas.Seller.Controllers
             var value = complaintManager.GetComplaints();
             return View(value);
         }
+
+
+        public IActionResult Details(int id)
+        {
+            var value = complaintManager.GetComplaint(id);
+            value.IsLooked = true;
+            complaintManager.TUpdate(value);
+            return View(value);
+        }
+
+        public IActionResult Delete(int id) 
+        {
+            var value = complaintManager.TGetByID(id);
+            complaintManager.TDelete(value);
+            return RedirectToAction("Index");
+        }
     }
 }

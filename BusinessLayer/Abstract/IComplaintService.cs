@@ -10,5 +10,6 @@ namespace BusinessLayer.Abstract
     public interface IComplaintService:IGenericService<Complaint>
     {
         List<Complaint> GetComplaints();
+        Complaint GetComplaint(int id);
     }
 }

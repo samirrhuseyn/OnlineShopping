@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
     public interface IComplaintDal:IGenericDal<Complaint>
     {
         List<Complaint> GetComplaintList();
+        Complaint GetComplaint(int id);
     }
 }

@@ -1,0 +1,70 @@
+﻿@model EntityLayer.Concrete.Complaint
+@{
+    ViewData["Title"] = "Şikayət haqqında ətraflı məlumat";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+    ViewData["ActiveMSH"] = "active";
+}
+
+<div class="row">
+    <div class="col-md-12">
+
+        <div class="card mb-4">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="slick-wrapper">
+                            <div class="slider-for mb-3">
+                                <div class="slick-slide-item">
+                                    <a href="@Model.Image1">
+                                        <img src="@Model.Image1" class="w-100 rounded"
+                                             alt="image">
+                                    </a>
+                                </div>
+                                <div class="slick-slide-item">
+                                    <a href="@Model.Image2">
+                                        <img src="@Model.Image2" class="w-100 rounded"
+                                             alt="image">
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="slick-nav-wrapper">
+                                <div class="slider-nav">
+                                    <div class="slick-slide-item m-2">
+                                        <img src="@Model.Image1" class="w-100 rounded"
+                                             alt="image">
+                                    </div>
+                                    <div class="slick-slide-item m-2">
+                                        <img src="@Model.Image2" class="w-100 rounded"
+                                             alt="image">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-7">
+                        <div class="d-flex justify-content-between align-items-start mt-4 mt-md-0">
+                            <div>
+                                <div class="small text-muted mb-2">@Model.Product.ProductCode</div>
+                                <h6><img style="border-radius:30%;" src="@Model.User.ProfileImage" width="30" /> @Model.User.Name @Model.User.Surname</h6>
+                                
+                                <p>
+                                    @Model.Reason
+                                </p>
+                                <div class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-text bg-dark rounded-circle"><i style="color:white;" class="bi bi-calendar"></i></i></span>
+                                </div> @(((DateTime)Model.DateTime).ToString("MMMM dd, yyyy HH:mm"))
+                                <br />
+                                <div style="margin-top:5px;" class="avatar flex-shrink-0 me-3">
+                                    <span class="avatar-text bg-dark rounded-circle"><i style="color:white;" class="bi bi-receipt"></i></i></span>
+                                </div> @Model.SalesCode
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>

@@ -18,6 +18,11 @@ namespace BusinessLayer.Concrete
             _complaintDal = complaintDal;
         }
 
+        public Complaint GetComplaint(int id)
+        {
+            return _complaintDal.GetComplaint(id);
+        }
+
         public List<Complaint> GetComplaints()
         {
             return _complaintDal.GetComplaintList();
