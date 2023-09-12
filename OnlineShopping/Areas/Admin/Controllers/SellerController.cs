@@ -53,8 +53,10 @@ namespace OnlineShopping.Areas.Admin.Controllers
                     UserName = addSeller.Username,
                     StoreID = addSeller.StoreID,
                     ProfileImage = UploadFile(addSeller.Image),
+                    Phone = addSeller.Phone,
                     IsAdmin = false,
-                    IsSeller = true
+                    IsSeller = true,
+                    IsActive = true
                 };
                 var result = await _userManager.CreateAsync(appUser, addSeller.Password);
                 if (result.Succeeded)
@@ -87,6 +89,29 @@ namespace OnlineShopping.Areas.Admin.Controllers
             }
 
             return "/ImagesFiles/SellerImagesFiles/" + file.FileName;
+        }
+
+        public async Task<IActionResult> ChangeStatusActive(string id)
+        {
+            var value = await _userManager.FindByIdAsync(id);
+            value.IsActive = true;
+            await _userManager.UpdateAsync(value);
+            return RedirectToAction("Index");
+        }
+        
+        public async Task<IActionResult> ChangeStatusPassive(string id)
+        {
+            var value = await _userManager.FindByIdAsync(id);
+            value.IsActive = false;
+            await _userManager.UpdateAsync(value);
+            return RedirectToAction("Index");
+        }
+        
+        public async Task<IActionResult> DeleteSeller(string id)
+        {
+            var value = await _userManager.FindByIdAsync(id);
+            await _userManager.DeleteAsync(value);
+            return RedirectToAction("Index");
         }
     }
 }

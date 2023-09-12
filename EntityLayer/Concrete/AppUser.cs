@@ -16,5 +16,7 @@ namespace EntityLayer.Concrete
         public Store? Store { get; set; }
         public bool IsSeller { get; set; }
         public bool IsAdmin { get; set; }
+        public bool IsActive { get; set; }
+        public string? Phone { get; set; }
     }
 }
