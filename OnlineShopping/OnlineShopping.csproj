@@ -19,7 +19,6 @@
   <ItemGroup>
     <Folder Include="Areas\Admin\Data\" />
     <Folder Include="Areas\Seller\Data\" />
-    <Folder Include="Views\Shared\AdminPartial\" />
     <Folder Include="Views\Shared\PublicPartial\" />
     <Folder Include="wwwroot\ImagesFiles\SellerImagesFiles\" />
     <Folder Include="wwwroot\ImagesFiles\ProductImagesFiles\" />
