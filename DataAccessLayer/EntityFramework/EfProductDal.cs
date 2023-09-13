@@ -19,6 +19,7 @@ namespace DataAccessLayer.EntityFramework
             {
                 return context.Products
                     .Include(x => x.Category)
+                    .Include(x => x.Store)
                     .FirstOrDefault(x => x.ProductID == id);
             }
         }
@@ -29,6 +30,7 @@ namespace DataAccessLayer.EntityFramework
             {
                 return context.Products
                     .Include(x => x.Category)
+                    .Include(x => x.Store)
                     .OrderByDescending(x => x.CreatedDate)
                     .ToList();
             }
