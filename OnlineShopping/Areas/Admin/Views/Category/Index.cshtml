@@ -1,0 +1,89 @@
+﻿@using EntityLayer.Concrete
+@model List<Category>
+@{
+    ViewData["Title"] = "Kateqoriyalar";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+
+<div class="col-xl-12">
+    <div class="col-xl-12">
+        <div class="page-title flex-wrap">
+            <div class="input-group search-area mb-md-0 mb-3">
+                <input type="text" class="form-control" placeholder="Kateqoriya axtar...">
+                <span class="input-group-text">
+                    <a href="javascript:void(0)">
+                        <svg width="15" height="15" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M17.5605 15.4395L13.7527 11.6317C14.5395 10.446 15 9.02625 15 7.5C15 3.3645 11.6355 0 7.5 0C3.3645 0 0 3.3645 0 7.5C0 11.6355 3.3645 15 7.5 15C9.02625 15 10.446 14.5395 11.6317 13.7527L15.4395 17.5605C16.0245 18.1462 16.9755 18.1462 17.5605 17.5605C18.1462 16.9747 18.1462 16.0252 17.5605 15.4395V15.4395ZM2.25 7.5C2.25 4.605 4.605 2.25 7.5 2.25C10.395 2.25 12.75 4.605 12.75 7.5C12.75 10.395 10.395 12.75 7.5 12.75C4.605 12.75 2.25 10.395 2.25 7.5V7.5Z" fill="#01A3FF" />
+                        </svg>
+                    </a>
+                </span>
+            </div>
+            <div>
+                <!-- Button trigger modal -->
+                <a href="/Admin/Category/AddCategory/" class="btn btn-primary">
+                    + Kateqoriya əlavə et!
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card" id="bootstrap-table5">
+        
+        <!-- tab-content -->
+        <div class="tab-content" id="myTabContent-4">
+            <div class="tab-pane fade show active" id="leftPosition" role="tabpanel" aria-labelledby="home-tab-4">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-responsive-sm">
+                            <thead>
+                                <tr>
+                                    <th>Kateqoriya adı</th>
+                                    <th>Vəziyyəti</th>
+                                    <th>Hərəkətlər</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var category in Model)
+                                {
+                                    <tr>
+                                        <td style="-webkit-text-fill-color:black;font-size:15px;">
+                                            <img style="margin-right:10px;" width="50" src="@category.Image" alt="">
+                                            @category.Name
+                                        </td>
+                                        <td>
+                                            @if (category.IsActive)
+                                            {
+                                                <span class="badge badge-primary">Aktivdir</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-danger">Aktiv deyil</span>
+                                            }
+                                        </td>
+                                        <td class="color-primary">
+                                            <div class="d-flex">
+                                                @if (category.IsActive)
+                                                {
+                                                    <a href="/Admin/Category/ChangeStatusPassive/@category.CategoryID" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-refresh"></i></a>
+                                                }
+                                                else
+                                                {
+                                                    <a href="/Admin/Category/ChangeStatusActive/@category.CategoryID" class="btn btn-success shadow btn-xs sharp me-1"><i class="fa fa-refresh"></i></a>
+                                                }
+                                                <a href="/Admin/Category/EditCategory/@category.CategoryID" class="btn btn-primary shadow btn-xs sharp me-1"><i class="fa fa-pencil"></i></a>
+                                                <a href="/Admin/Category/DeleteCategory/@category.CategoryID" class="btn btn-danger shadow btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- /tab-content -->
+
+    </div>
+</div>

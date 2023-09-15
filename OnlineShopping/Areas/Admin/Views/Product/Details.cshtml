@@ -22,20 +22,46 @@
         <div style="padding:15px;">
             <h3>@Model.ProductName</h3>
             <br />
-            <span style="height:30px; width:30px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-calendar-day"></i></span>  <span style="margin-left:5px; color:black">@(((DateTime)Model.CreatedDate).ToString("MMMM dd, yyy"))</span>
-            <br />
-            <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; font-size:15px; margin-top:3px;" class="fa fa-manat-sign"></i></span> <span style="margin-left:5px; color:black"><del style="color:red">@Model.Price Azn</del> 10 Azn</span>
-            <br />
-            <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-dashboard"></i></span> <span style="margin-left:5px; color:black">@Model.Category.Name</span>
-            @if(Model.Color != null)
-            {
-                <br />
-                <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-paintbrush"></i></span> <span style="margin-left:5px; color:black">@Model.Color</span>
-            }
-            else
-            {
+            <div>
+                <div>
+                    <h6>Xüsusiyyətlər:</h6>
+                    <span style="height:30px; width:30px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-calendar-day"></i></span>  <span style="margin-left:5px; color:black">@(((DateTime)Model.CreatedDate).ToString("MMMM dd, yyy"))</span>
+                    <br />
+                    <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; font-size:15px; margin-top:3px;" class="fa fa-manat-sign"></i></span> <span style="margin-left:5px; color:black" @if (Model.DiscountedPrice != null)
+                    {
+                       <del>@Model.Price ₼</del>  <strong>@Model.DiscountedPrice ₼</strong>
+                    }
+                    else
+                    {
+                       <strong>@Model.Price ₼</strong>
+                    } 
+                    </span>
+                    <br />
+                    <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-sitemap"></i></span> <span style="margin-left:5px; color:black">@Model.Category.Name</span>
+                    <br />
+                    <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-store"></i></span> <span style="margin-left:5px; color:black">@Model.Store.Name</span>
+                    @if (Model.Color != null)
+                    {
+                        <br />
+                        <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-paintbrush"></i></span> <span style="margin-left:5px; color:black">@Model.Color</span>
+                    }
+                    else
+                    {
 
-            }
+                    }
+                    @if (Model.Size != null)
+                    {
+                        <br />
+                        <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-ruler"></i></span> <span style="margin-left:5px; color:black">@Model.Size</span>
+                    }
+                    else
+                    {
+
+                    }
+                </div>
+                <br />
+                <span style="-webkit-text-fill-color:black">@Html.Raw(Model.ProductDescription)</span>
+            </div>
         </div>
     </div>
 </div>
