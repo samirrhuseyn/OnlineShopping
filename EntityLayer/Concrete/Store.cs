@@ -15,7 +15,7 @@ namespace EntityLayer.Concrete
         public string? Content { get; set; }
         public string? LogoImage { get; set; }
         public string? Adress { get; set; }
-        public bool? IsActive { get; set; }
+        public bool IsActive { get; set; }
         public List<Product>? Products { get; set; }
         public List<CampaignSurvey>? Campaigns { get; set; }
         public List<AppUser>? AppUsers { get; set; }
