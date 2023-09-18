@@ -28,6 +28,11 @@ namespace BusinessLayer.Concrete
             return _productDal.GetListWithCategoryName();
         }
 
+        public List<Product> GetProductListByStoreID(int id)
+        {
+            return _productDal.GetProductListByStore(id);
+        }
+
         public void TAdd(Product t)
         {
             _productDal.Insert(t);

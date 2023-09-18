@@ -1,0 +1,42 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Product>
+<div class="col-xl-4">
+    <div class="row">
+        @foreach (var prooduct in Model)
+        {
+            <div class="col-xl-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="profile-interest">
+                            <div class="row mt-4 sp4" id="lightgallery">
+                                <a href="@prooduct.Image1" data-exthumbimage="@prooduct.Image1" data-src="@prooduct.Image1" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
+                                    <img src="@prooduct.Image1" alt="" class="img-fluid rounded">
+                                </a>
+                                <a href="@prooduct.Image2" data-exthumbimage="@prooduct.Image2" data-src="@prooduct.Image2" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
+                                    <img src="@prooduct.Image2" alt="" class="img-fluid rounded">
+                                </a>
+                                <a href="@prooduct.Image3" data-exthumbimage="@prooduct.Image3" data-src="@prooduct.Image3" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
+                                    <img src="@prooduct.Image3" alt="" class="img-fluid rounded">
+                                </a>
+
+                            </div>
+                            <h4><a href="#" class="text-black"> @prooduct.ProductName</a></h4>
+                            <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; font-size:15px; margin-top:3px;" class="fa fa-manat-sign"></i></span> 
+                            <span style="margin-left:5px; color:black">
+                            @if (prooduct.DiscountedPrice != null)
+                            {
+                               <del>@prooduct.Price ₼</del>  <strong>@prooduct.DiscountedPrice ₼</strong>
+                            }
+                            else
+                            {
+                               <strong>@prooduct.Price ₼</strong>
+                            }
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+    </div>
+</div>

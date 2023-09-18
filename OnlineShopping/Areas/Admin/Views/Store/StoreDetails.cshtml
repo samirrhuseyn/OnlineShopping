@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = Model.Name + " mağazası";
     Layout = "~/Views/Shared/_adminLayout.cshtml";
+    ViewData["ID"] = Model.StoreID;
 }
 
 
@@ -33,76 +34,7 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xl-4">
-        <div class="row">
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="profile-interest">
-                            <div class="row mt-4 sp4" id="lightgallery">
-                                <a href="/Akademi/xhtml/images/profile/2.jpg" data-exthumbimage="/Akademi/xhtml/images/profile/2.jpg" data-src="/Akademi/xhtml/images/profile/2.jpg" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                    <img src="~/Akademi/xhtml/images/profile/2.jpg" alt="" class="img-fluid rounded">
-                                </a>
-                                <a href="/Akademi/xhtml/images/profile/3.jpg" data-exthumbimage="/Akademi/xhtml/images/profile/3.jpg" data-src="/Akademi/xhtml/images/profile/3.jpg" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                    <img src="~/Akademi/xhtml/images/profile/3.jpg" alt="" class="img-fluid rounded">
-                                </a>
-                                <a href="/Akademi/xhtml/images/profile/4.jpg" data-exthumbimage="/Akademi/xhtml/images/profile/4.jpg" data-src="/Akademi/xhtml/images/profile/4.jpg" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                    <img src="~/Akademi/xhtml/images/profile/4.jpg" alt="" class="img-fluid rounded">
-                                </a>
-                                
-                            </div>
-                            <h4><a href="post-details.html" class="text-black">	Proof That EDUCATION Is Exactly What You Are Looking For</a></h4>
-                            <p class="mb-0">For developing a nation, it is important to provide education to each one of living in the society. The key to a developed nation is connected with the education.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="profile-interest">
-                            <div class="row mt-4 sp4" id="lightgallery">
-                                <a href="/Akademi/xhtml/images/profile/2.jpg" data-exthumbimage="/Akademi/xhtml/images/profile/2.jpg" data-src="/Akademi/xhtml/images/profile/2.jpg" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                    <img src="~/Akademi/xhtml/images/profile/2.jpg" alt="" class="img-fluid rounded">
-                                </a>
-                                <a href="/Akademi/xhtml/images/profile/3.jpg" data-exthumbimage="/Akademi/xhtml/images/profile/3.jpg" data-src="/Akademi/xhtml/images/profile/3.jpg" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                    <img src="~/Akademi/xhtml/images/profile/3.jpg" alt="" class="img-fluid rounded">
-                                </a>
-                                <a href="/Akademi/xhtml/images/profile/4.jpg" data-exthumbimage="/Akademi/xhtml/images/profile/4.jpg" data-src="/Akademi/xhtml/images/profile/4.jpg" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                    <img src="~/Akademi/xhtml/images/profile/4.jpg" alt="" class="img-fluid rounded">
-                                </a>
-
-                            </div>
-                            <h4><a href="post-details.html" class="text-black">	Proof That EDUCATION Is Exactly What You Are Looking For</a></h4>
-                            <p class="mb-0">For developing a nation, it is important to provide education to each one of living in the society. The key to a developed nation is connected with the education.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-12">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="profile-interest">
-                            <div class="row mt-4 sp4" id="lightgallery">
-                                <a href="/Akademi/xhtml/images/profile/2.jpg" data-exthumbimage="/Akademi/xhtml/images/profile/2.jpg" data-src="/Akademi/xhtml/images/profile/2.jpg" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                    <img src="~/Akademi/xhtml/images/profile/2.jpg" alt="" class="img-fluid rounded">
-                                </a>
-                                <a href="/Akademi/xhtml/images/profile/3.jpg" data-exthumbimage="/Akademi/xhtml/images/profile/3.jpg" data-src="/Akademi/xhtml/images/profile/3.jpg" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                    <img src="~/Akademi/xhtml/images/profile/3.jpg" alt="" class="img-fluid rounded">
-                                </a>
-                                <a href="/Akademi/xhtml/images/profile/4.jpg" data-exthumbimage="/Akademi/xhtml/images/profile/4.jpg" data-src="/Akademi/xhtml/images/profile/4.jpg" class="mb-1 col-lg-4 col-xl-4 col-sm-4 col-6">
-                                    <img src="~/Akademi/xhtml/images/profile/4.jpg" alt="" class="img-fluid rounded">
-                                </a>
-
-                            </div>
-                            <h4><a href="post-details.html" class="text-black">	Proof That EDUCATION Is Exactly What You Are Looking For</a></h4>
-                            <p class="mb-0">For developing a nation, it is important to provide education to each one of living in the society. The key to a developed nation is connected with the education.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @await Component.InvokeAsync("ProductListInDetails")
     <div class="col-xl-8">
         <div class="card h-auto">
             <div class="card-body">

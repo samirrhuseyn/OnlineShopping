@@ -35,5 +35,17 @@ namespace DataAccessLayer.EntityFramework
                     .ToList();
             }
         }
+
+        public List<Product> GetProductListByStore(int ID)
+        {
+            using ( var context = new Context())
+            {
+                return context.Products
+                    .Where(x => x.StoreID == ID)
+                    .Take(3)
+                    .OrderByDescending(x => x.CreatedDate)
+                    .ToList();
+            }
+        }
     }
 }
