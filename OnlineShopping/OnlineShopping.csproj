@@ -21,6 +21,7 @@
     <Folder Include="Areas\Seller\Data\" />
     <Folder Include="Views\Shared\PublicPartial\" />
     <Folder Include="wwwroot\ImagesFiles\CategoryImagesFiles\" />
+    <Folder Include="wwwroot\ImagesFiles\StoreImagesFiles\" />
     <Folder Include="wwwroot\ImagesFiles\SellerImagesFiles\" />
     <Folder Include="wwwroot\ImagesFiles\ProductImagesFiles\" />
   </ItemGroup>

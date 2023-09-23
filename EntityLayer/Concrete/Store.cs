@@ -12,7 +12,6 @@ namespace EntityLayer.Concrete
         [Key]
         public int StoreID { get; set; }
         public string? Name { get; set; }
-        public string? Content { get; set; }
         public string? LogoImage { get; set; }
         public string? Adress { get; set; }
         public bool IsActive { get; set; }

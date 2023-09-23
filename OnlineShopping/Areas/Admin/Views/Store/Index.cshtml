@@ -23,7 +23,7 @@
                         </span>
                     </div>
                     <div>
-                        <a href="#" class="btn btn-primary">
+                        <a href="/Admin/Store/AddStore" class="btn btn-primary">
                             + Mağaza əlavə et!
                         </a>
                     </div>
@@ -56,9 +56,16 @@
                                                 </svg>
                                             </a>
                                             <div class="dropdown-menu dropdown-menu-end">
-                                                <a class="dropdown-item" href="javascript:void(0);">Sil</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Redaktə et</a>
-                                                <a class="dropdown-item" href="javascript:void(0);">Deaktiv et</a>
+                                                <a class="dropdown-item" href="/Admin/Store/DeleteStore/@store.StoreID">Sil</a>
+                                                <a class="dropdown-item" href="/Admin/Store/EditStore/@store.StoreID">Redaktə et</a>
+                                                @if (store.IsActive)
+                                                {
+                                                    <a class="dropdown-item" href="/Admin/Store/ChangeStatusPassive/@store.StoreID">Deaktiv et</a>
+                                                }
+                                                else
+                                                {
+                                                    <a class="dropdown-item" href="/Admin/Store/ChangeStatusActive/@store.StoreID">Aktiv et</a>
+                                                }
                                             </div>
                                         </div>
                                     </div>
@@ -69,7 +76,7 @@
                                         }
                                         else
                                         {
-                                            <span class="badge badge-danger light">Aktiv deyil</span>
+                                            <span class="badge badge-danger light">Deaktiv</span>
                                         }
 
                                     </div>

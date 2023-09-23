@@ -10,7 +10,7 @@ namespace OnlineShopping.ViewComponents.AdminStoreDetails
 
         public IViewComponentResult Invoke()
         {
-            int id = 1;
+            int id = ViewBag.ID;
             var value = productManager.GetProductListByStoreID(id);
             return View(value);
         }
