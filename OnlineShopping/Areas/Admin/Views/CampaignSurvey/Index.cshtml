@@ -1,0 +1,84 @@
+﻿@using EntityLayer.Concrete
+@model List<CampaignSurvey>
+@{
+    ViewData["Title"] = "Kompaniya Sorğuları";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="col-xl-12">
+	<div class="card" id="bootstrap-table5">
+		<!-- tab-content -->
+		<div class="tab-content" id="myTabContent-4">
+			<div class="tab-pane fade show active" id="leftPosition" role="tabpanel" aria-labelledby="home-tab-4">
+				<div class="card-body p-0">
+					<div class="table-responsive">
+						<table class="table table-bordered table-responsive-sm">
+							<thead>
+								<tr>
+									<th>Başlıq</th>
+									<th>Ətraflı məlumat</th>
+									<th>Göndərilmə tarixi</th>
+									<th>Mağaza</th>
+									<th></th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody>
+								@foreach(var survey in Model)
+								{
+									<tr>
+										<td>@survey.Title</td>
+										<td>
+											@if (survey.Description.Length < 20)
+											{
+												<span>@Html.Raw(survey.Description)</span>
+											}
+											else
+											{
+												<span>@Html.Raw(survey.Description.Substring(0, 20)) ...</span>
+											}
+										</td>
+										<td>@(((DateTime)survey.SendDate).ToString("MMMM dd, yyyy"))</td>
+										<td>@survey.Store.Name</td>
+										<td>
+											<a href="/Admin/CampaignSurvey/Details/@survey.CampaignID" class="btn btn-primary">
+												<span class="btn-icon-start text-primary">
+													<i class="fa-solid fa-info"></i>
+												</span>Ətraflı
+											</a>
+										</td>
+										<td>
+											@if (survey.IsApproved)
+											{
+												<button class="btn btn-success" disabled>
+													<span class="btn-icon-start text-success">
+														<i class="fa-solid fa-check"></i>
+													</span>Təsdiqlənib!
+												</button>
+											}
+											else
+											{
+												<a href="/Admin/CampaignSurvey/Approve/@survey.CampaignID" class="btn btn-success">
+													<span class="btn-icon-start text-success">
+														<i class="fa-solid fa-check"></i>
+													</span>Təsdiqlə!
+												</a>
+											}
+											
+										</td>
+									</tr>
+								}
+								
+								
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+		<!-- /tab-content -->
+
+	</div>
+</div>

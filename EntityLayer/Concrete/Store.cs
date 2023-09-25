@@ -18,5 +18,6 @@ namespace EntityLayer.Concrete
         public List<Product>? Products { get; set; }
         public List<CampaignSurvey>? Campaigns { get; set; }
         public List<AppUser>? AppUsers { get; set; }
+        public List<Campaign>? Campaignss { get; set; }
     }
 }

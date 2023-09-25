@@ -23,7 +23,12 @@ namespace BusinessLayer.Concrete
             return _campaignSurvey.GetAll();
         }
 
-        public void TAdd(CampaignSurvey t)
+		public CampaignSurvey GetBySurveyId(int id)
+		{
+			return _campaignSurvey.GetSurveyById(id);
+		}
+
+		public void TAdd(CampaignSurvey t)
         {
             _campaignSurvey.Insert(t);  
         }

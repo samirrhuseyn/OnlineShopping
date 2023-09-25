@@ -10,5 +10,6 @@ namespace BusinessLayer.Abstract
     public interface ICampaignSurveyService:IGenericService<CampaignSurvey>
     {
         List<CampaignSurvey> GetAllWithStore();
+        CampaignSurvey GetBySurveyId(int id);
     }
 }

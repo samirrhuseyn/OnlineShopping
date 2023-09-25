@@ -10,5 +10,6 @@ namespace DataAccessLayer.Abstract
     public interface ICampaignSurveyDal:IGenericDal<CampaignSurvey>
     {
         List<CampaignSurvey> GetAll();
+        CampaignSurvey GetSurveyById(int id);
     }
 }

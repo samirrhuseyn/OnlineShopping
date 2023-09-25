@@ -23,5 +23,15 @@ namespace DataAccessLayer.EntityFramework
                     .ToList();
             }
         }
-    }
+
+		public CampaignSurvey GetSurveyById(int id)
+		{
+			using(Context context = new Context())
+            {
+                return context.CampaignSurveys
+                    .Include(x => x.Store)
+                    .FirstOrDefault(x=>x.CampaignID == id);
+            }
+		}
+	}
 }

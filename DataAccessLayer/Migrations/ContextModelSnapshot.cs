@@ -113,6 +113,42 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Campaign", b =>
+                {
+                    b.Property<int>("CampaignID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CampaignID"), 1L, 1);
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsExpired")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("StoreID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("CampaignID");
+
+                    b.HasIndex("StoreID");
+
+                    b.ToTable("Campaigns");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.CampaignSurvey", b =>
                 {
                     b.Property<int>("CampaignID")
@@ -452,6 +488,17 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Store");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Campaign", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Store", "Store")
+                        .WithMany("Campaignss")
+                        .HasForeignKey("StoreID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Store");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.CampaignSurvey", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Store", "Store")
@@ -578,6 +625,8 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("AppUsers");
 
                     b.Navigation("Campaigns");
+
+                    b.Navigation("Campaignss");
 
                     b.Navigation("Products");
                 });
