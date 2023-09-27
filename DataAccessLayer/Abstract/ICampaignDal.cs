@@ -11,5 +11,6 @@ namespace DataAccessLayer.Abstract
 	{
 		List<Campaign> Campaigns();
 		Campaign GetCampaign(int id);
+		List<Campaign> GetCampaignListByStore(int id);
 	}
 }

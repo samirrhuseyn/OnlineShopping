@@ -1,0 +1,36 @@
+﻿@model EntityLayer.Concrete.Campaign
+@{
+    ViewData["Title"] = Model.Title;
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="col-xl-12">
+    <div style="padding-left:50px; padding-right:50px; padding-top:50px; padding-bottom:50px;" class="card" id="bootstrap-table5">
+        <img src="@Model.Image" />
+        <br />
+        <h3>@Model.Title</h3>
+        <div>
+            @if (Model.IsExpired)
+            {
+
+                <span class="badge badge-danger">Vaxtı bitib</span>
+            }
+            else
+            {
+                <span class="badge badge-success">Davam edir</span>
+            }
+        </div>
+        
+        <br />
+        <div>
+            <i class="fa fa-calendar-check"></i>
+            <span style="margin-left:5px;">@(((DateTime)Model.StartDate).ToString("MMMM dd, yyyy")) - @(((DateTime)Model.EndDate).ToString("MMMM dd, yyyy"))</span>
+        </div>
+        <div>
+            <i class="fa fa-store"></i>
+            <span style="margin-left:5px;">@Model.Store.Name</span>
+        </div>
+        
+        <p>@Html.Raw(Model.Content)</p>
+    </div>
+</div>

@@ -35,55 +35,6 @@
 </div>
 <div class="row">
     @await Component.InvokeAsync("ProductListInDetails")
-    <div class="col-xl-8">
-        <div class="card h-auto">
-            <div class="card-body">
-                <div class="profile-tab">
-                    <div class="custom-tab-1">
-                        <div class="tab-content">
-                            <div id="my-posts" class="tab-pane fade active show">
-                                <h3>Aktiv kompaniyalar</h3>
-                                <div class="my-post-content pt-3">
-                                    <div class="profile-uoloaded-post border-bottom-1 pb-5">
-                                        <img src="~/Akademi/xhtml/images/profile/9.jpg" alt="" class="img-fluid w-100 rounded">
-                                        <a class="post-title" href="post-details.html"><h3 class="text-black">How To Win Clients And Influence Markets with EDUCATION</h3></a>
-                                        <p>
-                                            A wonderful serenity has take possession of my entire soul like these sweet morning of spare which enjoy whole heart.A wonderful serenity has take possession of my entire soul like these sweet morning
-                                            of spare which enjoy whole heart.
-                                        </p>
-                                        <button class="btn btn-primary me-2">
-                                            <span class="me-2">
-                                                <i class="fa fa-heart"></i>
-                                            </span>Like
-                                        </button>
-                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#replyModal">
-                                            <span class="me-2">
-                                                <i class="fa fa-reply"></i>
-                                            </span>Reply
-                                        </button>
-                                    </div>
-                                    <div class="profile-uoloaded-post pb-3">
-                                        <img src="~/Akademi/xhtml/images/profile/8.jpg" alt="" class="img-fluid w-100 rounded">
-                                        <a class="post-title" href="post-details.html"><h3 class="text-black">What Can Instagramm Teach You About EDUCATION</h3></a>
-                                        <p>There are various types of education like formal, informal, and non-formal. All of them aim to educate you and change your way of thinking. Academic studies are necessary for us to gain some global knowledge.</p>
-                                        <button class="btn btn-primary me-2">
-                                            <span class="me-2">
-                                                <i class="fa fa-heart"></i>
-                                            </span>Like
-                                        </button>
-                                        <button class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#replyModal">
-                                            <span class="me-2">
-                                                <i class="fa fa-reply"></i>
-                                            </span>Reply
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @await Component.InvokeAsync("CampaignListInDetails")
+    
 </div>

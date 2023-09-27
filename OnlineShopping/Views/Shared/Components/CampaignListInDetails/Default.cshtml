@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Campaign>
+<div class="col-xl-8">
+    <div class="card h-auto">
+        <div class="card-body">
+            <div class="profile-tab">
+                <div class="custom-tab-1">
+                    <div class="tab-content">
+                        <div id="my-posts" class="tab-pane fade active show">
+                            <h3>Aktiv kompaniyalar</h3>
+                            @foreach(var campaign in Model)
+                            {
+                                <div class="my-post-content pt-3">
+                                <div class="profile-uoloaded-post border-bottom-1 pb-5">
+                                    <img src="@campaign.Image" alt="" class="img-fluid w-100 rounded">
+                                    <a class="post-title"><h3 class="text-black">@campaign.Title</h3></a>
+                                        @if (campaign.IsExpired)
+                                        {
+                                            <span class="badge badge-danger">Vaxtı bitib</span>
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-success">Davam edir</span>
+                                        }
+
+                                        @if (campaign.Content.Length < 235)
+                                        {
+                                            <p>@Html.Raw(campaign.Content)</p>
+                                        }
+                                        else
+                                        {
+                                            <p>@Html.Raw(campaign.Content.Substring(0, 235)) ...</p>
+                                        }
+                                        <a href="/Admin/Campaign/CompaignDetails/@campaign.CampaignID" class="btn btn-primary me-2">
+                                        <span class="me-2">
+                                            <i class="fa fa-info-circle"></i>
+                                        </span>Ətraflı bax
+                                    </a>
+                                </div>
+                            </div>
+                            }
+                            
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -5,44 +5,57 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using EntityLayer.Concrete;
+using DataAccessLayer.Abstract;
 
 namespace BusinessLayer.Concrete
 {
 	public class CampaignManager : ICampaignService
 	{
-		public Campaign GetCampaign(int id)
+		ICampaignDal _campaignDal;
+
+		public CampaignManager(ICampaignDal campaignDal)
 		{
-			throw new NotImplementedException();
+			_campaignDal = campaignDal;
 		}
 
-		public List<Campaign> GetCampaigns()
+		public Campaign GetCampaign(int id)
 		{
-			throw new NotImplementedException();
+			return _campaignDal.GetCampaign(id);
+		}
+
+        public List<Campaign> GetCampaignListByStoreID(int id)
+        {
+            return _campaignDal.GetCampaignListByStore(id);
+        }
+
+        public List<Campaign> GetCampaigns()
+		{
+			return _campaignDal.Campaigns();
 		}
 
 		public void TAdd(Campaign t)
 		{
-			throw new NotImplementedException();
+			_campaignDal.Insert(t);
 		}
 
 		public void TDelete(Campaign t)
 		{
-			throw new NotImplementedException();
+			_campaignDal.Delete(t);
 		}
 
 		public Campaign TGetByID(int id)
 		{
-			throw new NotImplementedException();
+			return _campaignDal.GetByID(id);
 		}
 
 		public List<Campaign> TGetList()
 		{
-			throw new NotImplementedException();
+			return _campaignDal.GetList();
 		}
 
 		public void TUpdate(Campaign t)
 		{
-			throw new NotImplementedException();
+			_campaignDal.Update(t);
 		}
 	}
 }

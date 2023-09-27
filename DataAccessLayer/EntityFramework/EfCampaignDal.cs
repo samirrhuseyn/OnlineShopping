@@ -33,5 +33,17 @@ namespace DataAccessLayer.EntityFramework
 					.FirstOrDefault(x=>x.CampaignID == id);
 			}
 		}
-	}
+
+        public List<Campaign> GetCampaignListByStore(int id)
+        {
+            using (var context = new Context())
+            {
+                return context.Campaigns
+                    .Where(x => x.StoreID == id)
+                    .Take(3)
+                    .OrderByDescending(x => x.StartDate)
+                    .ToList();
+            }
+        }
+    }
 }

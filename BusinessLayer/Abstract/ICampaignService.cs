@@ -11,5 +11,6 @@ namespace BusinessLayer.Abstract
 	{
 		List<Campaign> GetCampaigns();
 		Campaign GetCampaign(int id);
-	}
+        List<Campaign> GetCampaignListByStoreID(int id);
+    }
 }
