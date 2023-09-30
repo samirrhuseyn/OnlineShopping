@@ -4,64 +4,105 @@
     Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
 
-<div class="col-xl-6">
-    <div class="card">
-        <div class="card-body p-3">
-            <div id="lightgallery-1" class="row g-2">
-                <a href="@Model.Image1" data-exthumbimage="@Model.Image1" data-src="@Model.Image1" class="col-lg-4  col-4">
-                    <img src="@Model.Image1" alt="" style="width:100%;">
-                </a>
-                <a href="@Model.Image2" data-exthumbimage="@Model.Image2" data-src="@Model.Image2" class="col-lg-4  col-4">
-                    <img src="@Model.Image2" alt="" style="width:100%;">
-                </a>
-                <a href="@Model.Image3" data-exthumbimage="@Model.Image3" data-src="@Model.Image3" class="col-lg-4  col-4 ">
-                    <img src="@Model.Image3" alt="" style="width:100%;">
-                </a>
-            </div>
-        </div>
-        <div style="padding:15px;">
-            <h3>@Model.ProductName</h3>
-            <br />
-            <div>
-                <div>
-                    <h6>Xüsusiyyətlər:</h6>
-                    <span style="height:30px; width:30px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-calendar-day"></i></span>  <span style="margin-left:5px; color:black">@(((DateTime)Model.CreatedDate).ToString("MMMM dd, yyy"))</span>
-                    <br />
-                    <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; font-size:15px; margin-top:3px;" class="fa fa-manat-sign"></i></span> <span style="margin-left:5px; color:black" @if (Model.DiscountedPrice != null)
-                    {
-                       <del>@Model.Price ₼</del>  <strong>@Model.DiscountedPrice ₼</strong>
-                    }
-                    else
-                    {
-                       <strong>@Model.Price ₼</strong>
-                    } 
-                    </span>
-                    <br />
-                    <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-sitemap"></i></span> <span style="margin-left:5px; color:black">@Model.Category.Name</span>
-                    <br />
-                    <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-store"></i></span> <span style="margin-left:5px; color:black">@Model.Store.Name</span>
-                    @if (Model.Color != null)
-                    {
-                        <br />
-                        <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-paintbrush"></i></span> <span style="margin-left:5px; color:black">@Model.Color</span>
-                    }
-                    else
-                    {
+<div class="row">
+	<div class="col-lg-12">
+		<div class="card">
+			<div class="card-body">
+				<div class="row">
+					<div class="col-xl-3 col-lg-6  col-md-6 col-xxl-5 ">
+						<!-- Tab panes -->
+						<div class="tab-content" id="myTabContent">
+							<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+								<img class="img-fluid rounded  " src="@Model.Image1" alt="">
+							</div>
+							<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+								<img class="img-fluid rounded " src="@Model.Image2" alt="">
+							</div>
+							<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+								<img class="img-fluid rounded" src="@Model.Image3" alt="">
+							</div>
+							
 
-                    }
-                    @if (Model.Size != null)
-                    {
-                        <br />
-                        <span style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-ruler"></i></span> <span style="margin-left:5px; color:black">@Model.Size</span>
-                    }
-                    else
-                    {
+						</div>
+						<ul class="nav nav-tabs slide-item-list mt-3" id="myTab" role="tablist">
+							<li class="nav-item" role="presentation">
+								<a href="#first" class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" role="tab" aria-controls="home-tab-pane" aria-selected="true"><img class="img-fluid me-2 rounded" src="@Model.Image1" alt="" width="80"></a>
+							</li>
+							<li class="nav-item" role="presentation">
+								<a href="#second" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><img class="img-fluid me-2 rounded" src="@Model.Image2" alt="" width="80"></a>
+							</li>
+							<li class="nav-item" role="presentation">
+								<a href="#third" class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><img class="img-fluid me-2 rounded" src="@Model.Image3" alt="" width="80"></a>
+							</li>
+							
 
-                    }
-                </div>
-                <br />
-                <span style="-webkit-text-fill-color:black">@Html.Raw(Model.ProductDescription)</span>
-            </div>
-        </div>
-    </div>
+						</ul>
+					</div>
+					<!--Tab slider End-->
+					<div class="col-xl-9 col-lg-6  col-md-6 col-xxl-7 col-sm-12">
+						<div class="product-detail-content">
+							<!--Product details-->
+							<div class="new-arrival-content">
+								<h4>@Model.ProductName</h4>
+								<div class="comment-review star-rating d-flex">
+									<ul>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+										<li><i class="fa fa-star"></i></li>
+
+									</ul>
+								</div>
+								<div class="d-table mb-2">
+									<p class="price float-start d-block">@Model.Price ₼</p>
+								</div>
+								@if (Model.InStock)
+								{
+									<p><span class="item fs-14">Mövcudluq:</span> Stokda var <i class="fa fa-check-circle text-success"></i></p>
+								}
+								else
+								{
+									<p><span class="item fs-14">Mövcudluq:</span> Stokda yoxdur <i class="fa fa-circle-xmark text-danger"></i></p>
+								}
+								<p><span class="item fs-14">Product code:</span>	 @Model.ProductCode</p>
+								<p><span class="item fs-14">Brand:</span> @Model.Store.Name</p>
+								<p class="text-content">
+									@Html.Raw(Model.ProductDescription)
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<div class="col-xl-4 col-xxl-12 col-lg-12">
+		<div class="card  pb-0">
+			<div class="card-header border-0">
+				<h4 class="card-title">Rəylər</h4>
+			</div>
+			<div class="card-body p-0">
+				<div id="DZ_W_Todo3" class="widget-media dlab-scroll my-4 px-4">
+					<ul class="timeline">
+						<li>
+							<div class="timeline-panel">
+								<div class="media me-3">
+									<img alt="image" width="50" src="~/Akademi/xhtml/images/avatar/1.jpg">
+								</div>
+								<div class="media-body">
+									<h5 class="mb-1">Alfie Mason <small class="text-muted">29 July 2020</small></h5>
+									<p class="mb-1">I shared this on my fb wall a few months back..</p>
+									<a href="#" class="btn btn-primary btn-xxs shadow">Reply</a>
+									<a href="#" class="btn btn-outline-danger btn-xxs">Delete</a>
+								</div>
+							</div>
+						</li>
+						
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

@@ -274,6 +274,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<bool>("InStock")
                         .HasColumnType("bit");
 
+                    b.Property<int>("Interest")
+                        .HasColumnType("int");
+
                     b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 

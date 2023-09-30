@@ -1,0 +1,68 @@
+﻿@using EntityLayer.Concrete
+@model List<Complaint>
+@{
+    ViewData["Title"] = "Şikayətlər";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="col-xl-12">
+    <div class="card">
+        <!-- tab-content -->
+        <div class="tab-content" id="myTabContent-4">
+            <div class="tab-pane fade show active" id="leftPosition" role="tabpanel" aria-labelledby="home-tab-4">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-responsive-sm">
+                            <thead>
+                                <tr>
+                                    <th>Şikayətçi</th>
+                                    <th>Məhsul kodu</th>
+                                    <th>Satış kodu</th>
+                                    <th>Göndərilmə tarixi</th>
+                                    <th>Vəziyyət</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var complaint in Model)
+                                {
+                                    <tr>
+                                        <td><img style="border-radius:30%" src="@complaint.User.ProfileImage" height="40" width="40" /> @complaint.User.Name @complaint.User.Surname</td>
+                                        <td>
+                                            <a href="/Admin/Product/Details/@complaint.Product.ProductID">
+                                                @complaint.Product.ProductCode
+                                            </a>
+                                            
+                                        </td>
+                                        <td>@complaint.SalesCode</td>
+                                        <td>
+                                            @(((DateTime)complaint.DateTime).ToString("MMMM dd, yyyy HH:mm"))
+                                        </td>
+                                        <td>
+                                            @if (complaint.IsLooked)
+                                            {
+                                                <span class="badge badge-success">Baxılıb</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge badge-danger">Gözləmədə</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            <div style="padding:10px">
+                                                <a href="/Admin/Complaint/Details/@complaint.ComplaintID"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Ətraflı məlumat" class="bg-success bi-info"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /tab-content -->
+
+    </div>
+</div>

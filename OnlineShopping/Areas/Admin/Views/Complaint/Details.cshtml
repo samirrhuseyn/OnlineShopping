@@ -1,0 +1,41 @@
+﻿@model EntityLayer.Concrete.Complaint
+@{
+    ViewData["Title"] = "Şikayət haqqında ətraflı məlumat";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="col-xl-6">
+    <div class="card">
+        <div class="card-body p-3">
+            <div id="lightgallery-1" class="row g-2">
+                <a href="@Model.Image1" data-exthumbimage="@Model.Image1" data-src="@Model.Image1" class="col-lg-4  col-4">
+                    <img src="@Model.Image1" alt="" style="width:100%;">
+                </a>
+                <a href="@Model.Image2" data-exthumbimage="@Model.Image2" data-src="@Model.Image2" class="col-lg-4  col-4">
+                    <img src="@Model.Image2" alt="" style="width:100%;">
+                </a>
+            </div>
+        </div>
+        <div style="padding:15px;">
+            <br />
+            <div>
+                <div>
+                    <span title="Göndərilmə tarixi" style="height:30px; width:30px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-calendar-day"></i></span>  <span style="margin-left:5px; color:black">@(((DateTime)Model.DateTime).ToString("MMMM dd, yyy"))</span>
+                    <br />
+                    <span title="Satış kodu" style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-receipt"></i></span>  <span style="margin-left:5px; color:black">@Model.SalesCode</span>
+                    <br />
+                    <a href="/Admin/Product/Details/@Model.Product.ProductID" title="Məhsul Kodu" style="height:30px; width:30px; margin-top:5px;" class="badge badge-pill badge-primary"><i style="font-size:15px; margin-top:3px;" class="fa fa-barcode"></i></a>  <a href="/Admin/Product/Details/@Model.Product.ProductID" style="margin-left:5px; color:black">@Model.Product.ProductCode</a> <p class="text-success">Məhsulu görmək üçün kodun üzərinə click edin :)</p>
+                    <br />
+                    <br />
+                    <div style="display:flex;">
+                        <img style="border-radius:30%" src="@Model.User.ProfileImage" height="40" width="40" /> <p style="margin-top:10px; margin-left:5px; -webkit-text-fill-color:black">@Model.User.Name @Model.User.Surname</p>
+                    </div>
+                    
+                </div>
+                <br />
+                <span style="-webkit-text-fill-color:black">@Html.Raw(Model.Reason)</span>
+            </div>
+        </div>
+    </div>
+</div>
+

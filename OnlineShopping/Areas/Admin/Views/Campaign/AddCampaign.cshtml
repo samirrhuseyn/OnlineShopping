@@ -17,7 +17,7 @@
                     <form method="post" enctype="multipart/form-data" asp-controller="Campaign" asp-action="AddCampaign">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="col-xl-3 col-lg-4">
-                            <label class="form-label text-primary">Profil şəkli<span class="required">*</span></label>
+                            <label class="form-label text-primary">Afişa:<span class="required">*</span></label>
                             <div class="avatar-upload">
                                 <div class="avatar-preview">
                                     <div id="imagePreview" style="height:150px; width:900px; background-image: url(/3927-200.png);">
@@ -44,7 +44,7 @@
                                         <input asp-for="StartDate" type="date" class="form-control" id="exampleFormControlInput3">
                                     </div>
                                     <div class="mb-3">
-                                        <label for="exampleFormControlInput5" class="form-label text-primary">Şifrə təkrarı:<span class="required">*</span></label>
+                                        <label for="exampleFormControlInput5" class="form-label text-primary">Kompaniya haqqında ətraflı məlumat:<span class="required">*</span></label>
                                         <textarea asp-for="Content" type="text" class="form-control" id="editor"></textarea>
                                         <span asp-validation-for="Content" class="text-danger"></span>
                                     </div>

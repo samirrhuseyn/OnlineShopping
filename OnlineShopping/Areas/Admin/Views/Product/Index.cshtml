@@ -5,91 +5,56 @@
     Layout = "~/Views/Shared/_adminLayout.cshtml";
 }
 
-<div class="card">
-	<div class="card-body">
-		<div class="tab-content" id="myTabContent">
-			<div class="tab-pane fade show active" >
-				<div class="table-responsive">
-					<table class="table table-details">
-						<tbody>
-							@foreach(var product in Model)
-							{
-								<tr>
-								<td Style="width:100px;">
-									<div class="food-menu">
-										<img class="me-3 rounded avatar avatar-xl" src="@product.Image1" alt="DexignZone">
-										<div class="food-info">
-												@if (product.InStock)
-												{
-													<span class=" badge badge-sm badge-primary mb-2">Stokda var</span>
-												}
-												else
-												{
-													<span class=" badge badge-sm badge-danger mb-2">Stokda yoxdur</span>
-                                                }  <br/>
-												<span style="color:darkblue"><i class="fa-solid fa-barcode"></i> @product.ProductCode</span>
-                                                <h5><a href="/Admin/Product/Details/@product.ProductID">@product.ProductName</a></h5>
-											<span style="color:black; font-weight:bold">@product.Category.Name</span>
-										</div>
-									</div>
-								</td>
-								<td>
-									<ul class="food-review">
-										<li><i class="fa fa-star"></i></li>
-										<li><h5 class="font-w700">4.9</h5></li>
-									</ul>
-
-								</td>
-								<td>
-									<ul class="d-flex">
-										<li>
-											<svg class="me-3" width="62" height="53" viewBox="0 0 62 53" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M8 31.7387C8 30.1102 6.20914 28.7901 4 28.7901C1.79086 28.7901 0 30.1102 0 31.7387V50.0515C0 51.6799 1.79086 53 4 53C6.20914 53 8 51.6799 8 50.0515V31.7387Z" fill="var(--primary)" />
-												<path d="M26 21.2318C26 19.6242 24.2091 18.321 22 18.321C19.7909 18.321 18 19.6242 18 21.2318V50.0892C18 51.6968 19.7909 53 22 53C24.2091 53 26 51.6968 26 50.0892V21.2318Z" fill="var(--primary)" />
-												<path d="M44 2.96576C44 1.32781 42.2091 0 40 0C37.7909 0 36 1.32782 36 2.96576V50.0342C36 51.6722 37.7909 53 40 53C42.2091 53 44 51.6722 44 50.0342V2.96576Z" fill="var(--primary)" />
-												<path d="M62 26.5054C62 24.8762 60.2091 23.5556 58 23.5556C55.7909 23.5556 54 24.8762 54 26.5054V50.0502C54 51.6793 55.7909 53 58 53C60.2091 53 62 51.6793 62 50.0502V26.5054Z" fill="var(--primary)" />
-											</svg>
-										</li>
-										<li>
-											<h3 class="mb-0 font-w500 fs-22">1.456</h3>
-											<span>Satın alınma sayı</span>
-										</li>
-									</ul>
-								</td>
-								<td>
-									<ul class="d-flex align-items-center">
-										<li>
-											<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-												<path d="M39.9411 3.05888C39.9411 1.40202 38.598 0.0588751 36.9411 0.0588751H9.94113C8.28427 0.0588751 6.94113 1.40202 6.94113 3.05888C6.94113 4.71573 8.28427 6.05888 9.94113 6.05888H33.9411V30.0589C33.9411 31.7157 35.2843 33.0589 36.9411 33.0589C38.598 33.0589 39.9411 31.7157 39.9411 30.0589V3.05888ZM5.12132 39.1213L39.0624 5.1802L34.8198 0.937555L0.87868 34.8787L5.12132 39.1213Z" fill="var(--primary)" />
-											</svg>
-										</li>
-										<li class="ms-3">
-											<h3 class="mb-0 font-w500 fs-22">26%</h3>
-											<span>Endirim</span>
-										</li>
-									</ul>
-								</td>
-								<td>
-									<ul class="d-flex align-items-center">
-										<li>
-											<svg xmlns="http://www.w3.org/2000/svg" id="Outline" viewBox="0 0 24 24" width="40" height="40">
-												<path d="M24,10a.988.988,0,0,0-.024-.217l-1.3-5.868A4.968,4.968,0,0,0,17.792,0H6.208a4.968,4.968,0,0,0-4.88,3.915L.024,9.783A.988.988,0,0,0,0,10v1a3.984,3.984,0,0,0,1,2.643V19a5.006,5.006,0,0,0,5,5H18a5.006,5.006,0,0,0,5-5V13.643A3.984,3.984,0,0,0,24,11ZM2,10.109l1.28-5.76A2.982,2.982,0,0,1,6.208,2H7V5A1,1,0,0,0,9,5V2h6V5a1,1,0,0,0,2,0V2h.792A2.982,2.982,0,0,1,20.72,4.349L22,10.109V11a2,2,0,0,1-2,2H19a2,2,0,0,1-2-2,1,1,0,0,0-2,0,2,2,0,0,1-2,2H11a2,2,0,0,1-2-2,1,1,0,0,0-2,0,2,2,0,0,1-2,2H4a2,2,0,0,1-2-2ZM18,22H6a3,3,0,0,1-3-3V14.873A3.978,3.978,0,0,0,4,15H5a3.99,3.99,0,0,0,3-1.357A3.99,3.99,0,0,0,11,15h2a3.99,3.99,0,0,0,3-1.357A3.99,3.99,0,0,0,19,15h1a3.978,3.978,0,0,0,1-.127V19A3,3,0,0,1,18,22Z" fill="var(--primary)" />
-											</svg>
-										</li>
-										<li class="ms-3">
-											<h3 class="mb-0 font-w500 fs-22">@product.Store.Name</h3>
-											<span>Mağaza</span>
-										</li>
-									</ul>
-								</td>
-							</tr>
-							}
-							
-						</tbody>
-					</table>
-				</div>
-			</div>
-			
-		</div>
-	</div>
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-lg-12 col-xl-6 col-xxl-4">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row m-b-30">
+                        <div class="col-md-5 col-xxl-12">
+                            <div class="new-arrival-product mb-4 mb-xxl-4 mb-md-0">
+                                <div class="new-arrivals-img-contnent">
+                                    <img style="height:400px; width:350px;" class="img-fluid" src="@product.Image1" alt="">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-7 col-xxl-12">
+                            <div class="new-arrival-content position-relative">
+                                <h4><a href="/Admin/Product/Details/@product.ProductID">@product.ProductName</a></h4>
+                                <div class="comment-review star-rating">
+                                    <ul>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
+                                        <li><i class="fa-solid fa-star-half-stroke"></i></li>
+                                    </ul>
+                                    <p class="price">@product.Price ₼</p>
+                                </div>
+                                @if (product.InStock)
+                                {
+                                    <p><span class="item fs-14">Mövcudluq:</span> Stokda var <i class="fa fa-check-circle text-success"></i></p>
+                                }
+                                else
+                                {
+                                    <p><span class="item fs-14">Mövcudluq:</span> Stokda yoxdur <i class="fa fa-circle-xmark text-danger"></i></p>
+                                }
+                                <p><span class="item fs-14">Məhsul Kodu:</span> @product.ProductCode </p>
+                                <p><span class="item fs-14">Mağaza: </span>@product.Store.Name</p>
+                                @if (product.ProductDescription.Length < 161)
+                                {
+                                    <span>@Html.Raw(product.ProductDescription)</span>
+                                }
+                                else
+                                {
+                                    <span>@Html.Raw(product.ProductDescription.Substring(0, 161)) ...</span>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
 </div>

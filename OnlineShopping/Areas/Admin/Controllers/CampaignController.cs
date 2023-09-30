@@ -102,7 +102,7 @@ namespace OnlineShopping.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult EditCampaign(EditCampaignViewModel editCampaign)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var value = campaignManager.TGetByID(editCampaign.CampaignID);
                 value.Title = editCampaign.Title;
