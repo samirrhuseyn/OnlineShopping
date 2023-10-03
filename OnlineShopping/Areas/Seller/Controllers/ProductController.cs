@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Mvc;
@@ -13,6 +14,7 @@ namespace OnlineShopping.Areas.Seller.Controllers
 	{
 		ProductManager productManager = new ProductManager(new EfProductDal());
 		CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
+		Context context = new Context();
 		public IActionResult Index()
 		{
 			var value = productManager.GetListAllWithCategory();
@@ -140,11 +142,33 @@ namespace OnlineShopping.Areas.Seller.Controllers
 			return "/ImagesFiles/ProductImagesFiles/" + file.FileName;
 		}
 
-		public IActionResult ApplyDisscount()
+		[HttpGet]
+        public IActionResult ApplyDisscount()
 		{
-
-			return View();
+            List<SelectListItem> categoryvalues = (from x in categoryManager.TGetList()
+                                                   select new SelectListItem
+                                                   {
+                                                       Text = x.Name,
+                                                       Value = x.CategoryID.ToString()
+                                                   }).ToList();
+            ViewBag.cv = categoryvalues;
+            return View();
 		}
 
+		[HttpPost]
+        public IActionResult ApplyDisscount(ApplyDisscountViewModel applyDisscount)
+		{
+			
+                productManager.ApplyDisscount(applyDisscount.CategoryID, applyDisscount.Interest);
+            
+
+            return RedirectToAction("Index");
+		}
+
+		public IActionResult Interests()
+		{
+			var value = productManager.GetListAllWithCategory().DistinctBy(x=>x.CategoryID);
+			return View(value);
+		}
     }
 }

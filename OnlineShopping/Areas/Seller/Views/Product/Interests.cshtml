@@ -1,0 +1,40 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Product>
+@{
+    ViewData["Title"] = "Endirimlər";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+    ViewData["AD"] = "active";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="table-light">
+                    <tr>
+                        <th>Kateqoriya</th>
+                        <th>Endirim faizi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var product in Model)
+                    {
+                        @if(product.Interest != 0)
+                        {
+                            <tr>
+                                <td>@product.Category.Name</td>
+                                <td>@product.Interest%</td>
+                            </tr>
+                        }
+                        else
+                        {
+                            
+                        }
+                    }
+                   
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

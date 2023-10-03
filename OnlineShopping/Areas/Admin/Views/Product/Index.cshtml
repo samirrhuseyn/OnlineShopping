@@ -21,7 +21,16 @@
                         </div>
                         <div class="col-md-7 col-xxl-12">
                             <div class="new-arrival-content position-relative">
-                                <h4><a href="/Admin/Product/Details/@product.ProductID">@product.ProductName</a></h4>
+                                <h4><a href="/Admin/Product/Details/@product.ProductID">
+                                        @product.ProductName  @if(product.Interest != 0)
+                                        {
+                                            <span class="text-danger"> -@product.Interest%</span>
+                                        }
+                                        else
+                                        {
+                                            
+                                        }
+                                    </a></h4>
                                 <div class="comment-review star-rating">
                                     <ul>
                                         <li><i class="fa fa-star"></i></li>
@@ -30,7 +39,15 @@
                                         <li><i class="fa-solid fa-star-half-stroke"></i></li>
                                         <li><i class="fa-solid fa-star-half-stroke"></i></li>
                                     </ul>
-                                    <p class="price">@product.Price ₼</p>
+                                    @if(product.DiscountedPrice != null)
+                                    {
+                                         <p class="price"><del>@product.Price ₼</del> @product.DiscountedPrice ₼</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="price">@product.Price ₼</p>
+                                    }
+                                   
                                 </div>
                                 @if (product.InStock)
                                 {

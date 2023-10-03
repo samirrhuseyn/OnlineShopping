@@ -1,6 +1,6 @@
-﻿@using EntityLayer.Concrete
+﻿@using OnlineShopping.Areas.Seller.Models
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
-@model Product
+@model ApplyDisscountViewModel
 @{
     ViewData["Title"] = "Endirim tətbiq edin";
     Layout = "~/Views/Shared/_sellerLayout.cshtml";
@@ -12,14 +12,13 @@
         <div class="card-body">
             <div class="basic-form">
                 <form asp-controller="Product" asp-action="ApplyDisscount">
-                    <input asp-for="ProductID" hidden/>
                     <div class="mb-3">
                         <label class="form-label">Kateqoriyanı seçin:</label>
-                        <select asp-items="ViewBag.cv" asp-for="CategoryID" class="default-select  form-control wide"></select>
+                        <select asp-items="@ViewBag.cv" asp-for="CategoryID" class="default-select  form-control wide"></select>
                         <br />
                         <div class="mb-3">
                             <label class="form-label">Faiz:</label>
-                            <input asp-for="DiscountedPrice" type="text" class="form-control input-default " placeholder="XX%">
+                            <input asp-for="Interest" type="text" class="form-control input-default " placeholder="XX%">
                         </div>
 
                         <button class="btn btn-success" type="submit">

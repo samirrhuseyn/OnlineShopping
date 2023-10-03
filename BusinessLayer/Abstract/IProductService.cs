@@ -12,5 +12,6 @@ namespace BusinessLayer.Abstract
         List<Product> GetListAllWithCategory();
         Product GetByIdWIthCategory(int id);
         List<Product> GetProductListByStoreID(int id);
+        void ApplyDisscount(int categoryID, int interest);
     }
 }
