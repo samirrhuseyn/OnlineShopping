@@ -68,9 +68,24 @@ namespace DataAccessLayer.EntityFramework
                     context.SaveChanges();
 
                 }
-
-
             }
+        }
+
+        public void UpdateByProductCode(string productCode, int interest)
+        {
+            using (var context = new Context())
+            {
+                var entity = context.Products.Where(item => item.ProductCode == productCode).ToList();
+
+                foreach(var item in entity)
+                {
+                    item.Interest = interest;
+                    context.Products.Update(item);
+                    context.SaveChanges();
+                }
+                
+            }
+
         }
     }
 }

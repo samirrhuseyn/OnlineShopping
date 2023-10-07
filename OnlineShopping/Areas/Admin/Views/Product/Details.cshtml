@@ -43,7 +43,16 @@
 						<div class="product-detail-content">
 							<!--Product details-->
 							<div class="new-arrival-content">
-								<h4>@Model.ProductName</h4>
+								<h4>
+									@Model.ProductName @if (Model.Interest != 0)
+									{
+										<span class="text-success"> -@Model.Interest%</span>
+									}
+									else
+									{
+
+									}
+								</h4>
 								<div class="comment-review star-rating d-flex">
 									<ul>
 										<li><i class="fa fa-star"></i></li>
@@ -55,7 +64,14 @@
 									</ul>
 								</div>
 								<div class="d-table mb-2">
-									<p class="price float-start d-block">@Model.Price ₼</p>
+									@if (Model.DiscountedPrice != null)
+									{
+										<p class="price float-start d-block"><del>@Model.Price ₼</del> @Model.DiscountedPrice ₼</p>
+									}
+									else
+									{
+										<p class="price float-start d-block">@Model.Price ₼</p>
+									}
 								</div>
 								@if (Model.InStock)
 								{

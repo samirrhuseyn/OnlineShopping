@@ -23,7 +23,12 @@ namespace BusinessLayer.Concrete
             _productDal.UpdateByCategoryID(categoryID, interest);
         }
 
-        public Product GetByIdWIthCategory(int id)
+		public void ApplyDisscountByCode(string productCode, int interest)
+		{
+			_productDal.UpdateByProductCode(productCode, interest);
+		}
+
+		public Product GetByIdWIthCategory(int id)
         {
             return _productDal.GetByIdWithCategory(id);
         }

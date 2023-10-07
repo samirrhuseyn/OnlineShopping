@@ -1,0 +1,35 @@
+﻿@using OnlineShopping.Areas.Seller.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model DisscountByCodeViewModel
+@{
+    ViewData["Title"] = "Bir məhsul üçün endirim tətbiq et!";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+    ViewData["AD"] = "active";
+}
+
+<div class="col-xl-6 col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="basic-form">
+                <form asp-controller="Product" asp-action="ApplyDisscountByProductCode">
+                    <div asp-validation-summary="ModelOnly"></div>
+                    <div class="mb-3">
+                        <label class="form-label">Məhsul Kodu</label>
+                        <input asp-for="ProductCode" type="text" class="form-control input-default" >
+                        <span class="text-danger" asp-validation-for="ProductCode"></span>
+                        <br />
+                        <div class="mb-3">
+                            <label class="form-label">Faiz:</label>
+                            <input asp-for="Interest" type="text" class="form-control input-default " placeholder="XX%">
+                        </div>
+
+                        <button class="btn btn-success" type="submit">
+                            <i class="bi bi-check2-circle"></i> Təsdiqlə!
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

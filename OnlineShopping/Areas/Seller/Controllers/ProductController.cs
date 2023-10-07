@@ -159,10 +159,28 @@ namespace OnlineShopping.Areas.Seller.Controllers
         public IActionResult ApplyDisscount(ApplyDisscountViewModel applyDisscount)
 		{
 			
-                productManager.ApplyDisscount(applyDisscount.CategoryID, applyDisscount.Interest);
-            
+			productManager.ApplyDisscount(applyDisscount.CategoryID, applyDisscount.Interest);
+            return RedirectToAction("Interests");
+		}
 
-            return RedirectToAction("Index");
+		[HttpGet]
+		public IActionResult ApplyDisscountByProductCode()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		public IActionResult ApplyDisscountByProductCode(DisscountByCodeViewModel disscountByCode)
+		{
+			if (ModelState.IsValid)
+			{
+                productManager.ApplyDisscountByCode(disscountByCode.ProductCode, disscountByCode.Interest);
+                return RedirectToAction("Index");
+            }
+			else
+			{
+				return View(disscountByCode);
+			}
 		}
 
 		public IActionResult Interests()

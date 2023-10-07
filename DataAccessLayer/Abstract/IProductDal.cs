@@ -13,5 +13,6 @@ namespace DataAccessLayer.Abstract
         Product GetByIdWithCategory(int id);
         List<Product> GetProductListByStore(int ID);
         void UpdateByCategoryID(int categoryID, int interest);
+        void UpdateByProductCode(string productCode, int interest);
     }
 }

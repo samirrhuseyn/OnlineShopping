@@ -5,7 +5,10 @@
     Layout = "~/Views/Shared/_sellerLayout.cshtml";
     ViewData["ActiveP"] = "active";
 }
-<a style="margin-left:900px;" href="/Seller/Product/AddProduct/" class="btn btn-success">+ Məhsul əlavə et!</a>
+<div style="margin-left:720px;" class="btn-group" role="group" aria-label="Basic example">
+    <a href="/Seller/Product/AddProduct/" class="btn btn-success">+ Məhsul əlavə et!</a>
+    <a href="#" class="btn btn-success"><i class="bi bi-file-earmark-excel-fill"></i> Excel hesabatı</a>
+</div>
 <div class="table-responsive">
     <table class="table table-custom table-lg mb-0" id="products">
         <thead>
@@ -14,7 +17,7 @@
                 <th>Kateqoriya</th>
                 <th>Vəziyyət</th>
                 <th>Qiymət</th>
-                <th>Yaradılma tarixi</th>
+                <th>Məhsul kodu</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -25,7 +28,14 @@
                     <td>
                         <a href="/Seller/Product/ProductDetails/@product.ProductID">
                             <img style="margin-right:10px" src="@product.Image1" class="rounded" width="40">
-                            @product.ProductName
+                            @product.ProductName @if (product.Interest != 0)
+                            {
+                                <span class="text-success"> -@product.Interest%<i class="bi bi-arrow-down"></i></span>
+                            }
+                            else
+                            {
+
+                            }
                         </a>
                     </td>
                     <td>@product.Category.Name</td>
@@ -40,9 +50,18 @@
                         }
                         
                     </td>
-                    <td>@product.Price ₼</td>
+                    <td>
+                        @if (product.DiscountedPrice != null)
+                        {
+                            <p class="price"><del>@product.Price ₼</del> @product.DiscountedPrice ₼</p>
+                        }
+                        else
+                        {
+                            <p class="price">@product.Price ₼</p>
+                        }
+                    </td>
                     
-                    <td>@(((DateTime)product.CreatedDate).ToString("MMMM dd, yyy"))</td>
+                    <td>@product.ProductCode</td>
                     <td>
                         <div class="dropdown">
                             <a href="#" data-bs-toggle="dropdown"
