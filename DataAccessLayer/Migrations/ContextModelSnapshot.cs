@@ -201,6 +201,35 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
+                {
+                    b.Property<int>("CommentID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CommentID"), 1L, 1);
+
+                    b.Property<DateTime>("CommentDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Content")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CommentID");
+
+                    b.HasIndex("ProductID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Complaint", b =>
                 {
                     b.Property<int>("ComplaintID")
@@ -302,6 +331,32 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("StoreID");
 
                     b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Reply", b =>
+                {
+                    b.Property<int>("ReplyId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReplyId"), 1L, 1);
+
+                    b.Property<int>("CommentID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReplyContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ReplyId");
+
+                    b.HasIndex("CommentID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Replies");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Sale", b =>
@@ -513,6 +568,23 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Store");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Product", "Product")
+                        .WithMany("Comments")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany("Comments")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Complaint", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Product", "Product")
@@ -547,6 +619,23 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Reply", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Comment", "Comment")
+                        .WithMany("Reply")
+                        .HasForeignKey("CommentID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany("Reply")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Sale", b =>
@@ -611,13 +700,27 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
+                {
+                    b.Navigation("Comments");
+
+                    b.Navigation("Reply");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
                 {
                     b.Navigation("Products");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
+                {
+                    b.Navigation("Reply");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
                 {
+                    b.Navigation("Comments");
+
                     b.Navigation("Complaints");
 
                     b.Navigation("Sale");

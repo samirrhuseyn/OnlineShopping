@@ -1,0 +1,301 @@
+﻿@model EntityLayer.Concrete.Product
+@{
+    ViewData["Title"] = Model.ProductName;
+    Layout = "~/Views/Shared/_publicLayout.cshtml";
+    ViewData["ID"] = Model.ProductID;
+}
+
+<main class="page-content">
+
+    <!-- Product Details Area -->
+    <div class="product-details-area bg-white ptb-30">
+        <div class="container">
+
+            <div class="pdetails">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="pdetails-images">
+                            <div class="pdetails-largeimages pdetails-imagezoom">
+                                <div class="pdetails-singleimage" data-src="@Model.Image1">
+                                    <img src="@Model.Image1" alt="@Model.ProductName">
+                                </div>
+                                <div class="pdetails-singleimage" data-src="@Model.Image2">
+                                    <img src="@Model.Image2" alt="@Model.ProductName">
+                                </div>
+                                <div class="pdetails-singleimage" data-src="@Model.Image3">
+                                    <img src="@Model.Image3" alt="@Model.ProductName">
+                                </div>
+                            </div>
+
+                            <div class="pdetails-thumbs">
+                                <div class="pdetails-singlethumb">
+                                    <img src="@Model.Image1" alt="product thumb">
+                                </div>
+                                <div class="pdetails-singlethumb">
+                                    <img src="@Model.Image2" alt="product thumb">
+                                </div>
+                                <div class="pdetails-singlethumb">
+                                    <img src="@Model.Image3" alt="product thumb">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="pdetails-content">
+
+                            <div class="rattingbox">
+                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                                <span class="active"><i class="ion ion-ios-star"></i></span>
+                            </div>
+                            <h3>@Model.ProductName</h3>
+                            <div class="pdetails-pricebox">
+                                @if(Model.DiscountedPrice != null)
+                                {
+                                    <del class="oldprice">@Model.Price ₼</del>
+                                    <span class="price">@Model.DiscountedPrice ₼</span>
+                                    <span class="badge">@Model.Interest% Endirim</span>
+                                }
+                                else
+                                {
+                                    <span class="price">@Model.Price ₼</span>
+                                }
+                            </div>
+                            <div class="pdetails-quantity">
+                                <div class="quantity-select">
+                                    <input type="text" value="1">
+                                    <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
+                                    <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
+                                </div>
+                                <a href="shop-rightsidebar.html" class="ho-button">
+                                    <i class="lnr lnr-cart"></i>
+                                    <span>Səbətə əlavə et!</span>
+                                </a>
+                            </div>
+                            <div class="pdetails-categories">
+                                <span>Məhsul kodu :</span>
+                                <ul>
+                                    <li>@Model.ProductCode</li>
+                                </ul>
+                            </div>
+                            <div class="pdetails-categories">
+                                <span>Kategoriya :</span>
+                                <ul>
+                                    <li>@Model.Category.Name</li>
+                                </ul>
+                            </div>
+                            <div class="pdetails-categories">
+                                <span>Mağaza :</span>
+                                <ul>
+                                    <li><a href="#">@Model.Store.Name</a></li>
+                                </ul>
+                            </div>
+                            @if(Model.Color != null)
+                            {
+                                <div class="pdetails-tags">
+                                    <span>Rəng :</span>
+                                    <ul>
+                                        <li>@Model.Color</li>
+                                    </ul>
+                                </div>
+                            }
+                            else
+                            {
+                                
+                            }
+
+                            @if (Model.Size != null)
+                            {
+                                <div class="pdetails-tags">
+                                    <span>Ölçüsü :</span>
+                                    <ul>
+                                        <li>@Model.Size</li>
+                                    </ul>
+                                </div>
+                            }
+                            else
+                            {
+
+                            }
+                            <div class="pdetails-tags">
+                                <span>Mövcudluğu :</span>
+                                @if(Model.InStock)
+                                {
+                                    <ul>
+                                        <li><span style="-webkit-text-fill-color:limegreen">Stokda var!</span></li>
+                                    </ul>
+                                }
+                                else
+                                {
+                                    <ul>
+                                        <li><span style="-webkit-text-fill-color:red">Stokda yoxdur!</span></li>
+                                    </ul>
+                                }
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pdetails-allinfo">
+
+                <ul class="nav pdetails-allinfotab justify-content-center" id="product-details" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" id="product-details-area1-tab" data-bs-toggle="tab" href="#product-details-area1"
+                           role="tab" aria-controls="product-details-area1" aria-selected="true">Description</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" id="product-details-area3-tab" data-bs-toggle="tab" href="#product-details-area3"
+                           role="tab" aria-controls="product-details-area3" aria-selected="false">Reviews (1)</a>
+                    </li>
+                </ul>
+
+                <div class="tab-content" id="product-details-ontent">
+                    <div class="tab-pane fade show active" id="product-details-area1" role="tabpanel"
+                         aria-labelledby="product-details-area1-tab">
+                        <div class="pdetails-description">
+                            <p>
+                                @Html.Raw(Model.ProductDescription)
+                            </p>
+                            
+                            
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane fade" id="product-details-area3" role="tabpanel" aria-labelledby="product-details-area3-tab">
+                        <div class="pdetails-reviews">
+                            <div class="product-review">
+                                
+                                @await Component.InvokeAsync("CommentListInDetails")
+                                <div class="commentbox mt-5">
+                                    <h5>Rəy əlavə et!</h5>
+                                    <form method="post" action="/Comment/AddComment/" class="ho-form">
+                                        <div class="ho-form-inner">
+                                            <div class="single-input">
+                                                <label>Your Rating</label>
+                                                <div class="rattingbox hover-action">
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                                    <span><i class="ion ion-ios-star"></i></span>
+                                                    <span><i class="ion ion-ios-star"></i></span>
+                                                </div>
+                                            </div>
+                                            <input name="ProductID" value="@ViewBag.ID" hidden />
+                                            <div class="single-input">
+                                                <label for="new-review-textbox">Your Review</label>
+                                                <textarea name="Content" id="new-review-textbox" cols="30" rows="5"></textarea>
+                                            </div>
+                                            <div class="single-input">
+                                                
+                                                <button class="ho-button" type="submit"><span>SUBMIT</span></button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!--// Product Details Area -->
+    <!-- Related Product Area -->
+    <div class="ho-section related-product-area pb-30">
+        <div class="container">
+            <div class="section-title">
+                <h3>RELATED PRODUCTS</h3>
+            </div>
+            <div class="product-slider new-best-featured-slider slider-navigation-2">
+                <div class="product-slider-col">
+                    <!-- Single Product -->
+                    <article class="hoproduct">
+                        <div class="hoproduct-image">
+                            <a class="hoproduct-thumb" href="product-details.html">
+                                <img class="hoproduct-frontimage" src="~/haltico/images/product/product-image-1.jpg" alt="product image">
+                                <img class="hoproduct-backimage" src="~/haltico/images/product/product-image-22.jpg" alt="product image">
+                            </a>
+                            <ul class="hoproduct-actionbox">
+                                <li><a href="#"><i class="lnr lnr-cart"></i></a></li>
+                                <li><a href="#" class="quickview-trigger"><i class="lnr lnr-eye"></i></a></li>
+                                <li><a href="#"><i class="lnr lnr-heart"></i></a></li>
+                            </ul>
+                            <ul class="hoproduct-flags">
+                                <li class="flag-pack">New</li>
+                                <li class="flag-discount">-15%</li>
+                            </ul>
+                        </div>
+                        <div class="hoproduct-content">
+                            <h5 class="hoproduct-title">
+                                <a href="product-details.html">
+                                    SonicFuel
+                                    Wireless Over-Ear Headphones
+                                </a>
+                            </h5>
+                            <div class="hoproduct-rattingbox">
+                                <div class="rattingbox">
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                    <span class="active"><i class="ion ion-ios-star"></i></span>
+                                </div>
+                            </div>
+                            <div class="hoproduct-pricebox">
+                                <div class="pricebox">
+                                    <del class="oldprice">$35.11</del>
+                                    <span class="price">$34.11</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    <!--// Single Product -->
+                </div>
+
+               
+            </div>
+        </div>
+    </div>
+    <!--// Related Product Area -->
+    <!-- Newsletter Area -->
+    <div class="ho-section newsletter-area bg-grey ptb-50">
+        <div class="container">
+            <div class="newsletter">
+                <div class="newsletter-title">
+                    <h2>Subscribe to our <span>Newsletter!</span></h2>
+
+                </div>
+                <div class="newsletter-content">
+                    <form id="mc-form" class="newsletter-form">
+                        <input id="mc-email" type="email" autocomplete="off" placeholder="Your email address...">
+                        <button id="mc-submit" type="submit">Subscribe</button>
+                    </form>
+                    <!-- mailchimp-alerts start -->
+                    <div class="mailchimp-alerts text-centre">
+                        <div class="mailchimp-submitting"></div><!-- mailchimp-submitting end -->
+                        <div class="mailchimp-success"></div><!-- mailchimp-success end -->
+                        <div class="mailchimp-error"></div><!-- mailchimp-error end -->
+                    </div><!-- mailchimp-alerts end -->
+                </div>
+                <div class="newsletter-socialicons socialicons socialicons-radial">
+                    <ul>
+                        <li><a href="#"><i class="ion ion-logo-facebook"></i></a></li>
+                        <li><a href="#"><i class="ion ion-logo-twitter"></i></a></li>
+                        <li><a href="#"><i class="ion ion-logo-youtube"></i></a></li>
+                        <li><a href="#"><i class="ion ion-logo-google"></i></a></li>
+                        <li><a href="#"><i class="ion ion-logo-instagram"></i></a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--// Newsletter Area -->
+
+</main>

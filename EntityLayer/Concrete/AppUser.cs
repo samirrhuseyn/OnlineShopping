@@ -18,5 +18,7 @@ namespace EntityLayer.Concrete
         public bool IsAdmin { get; set; }
         public bool IsActive { get; set; }
         public string? Phone { get; set; }
+        public List<Comment>? Comments { get; set; }
+        public List<Reply>? Reply { get; set; }
     }
 }

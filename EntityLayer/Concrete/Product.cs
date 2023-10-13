@@ -29,6 +29,7 @@ namespace EntityLayer.Concrete
         public string? ProductCode { get; set; }
         public int Interest { get; set; }
         public List<Sale>? Sale { get; set; }
+        public List<Comment>? Comments { get; set; }
         public List<Complaint>? Complaints { get; set; }
     }
 

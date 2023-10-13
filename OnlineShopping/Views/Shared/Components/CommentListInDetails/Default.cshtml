@@ -1,0 +1,36 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Comment>
+<div class="commentlist">
+    <h5>Rəylər:</h5>
+    @foreach(var comment in Model)
+    {
+        <div class="single-comment">
+            <div class="single-comment-thumb">
+                <img src="@comment.User.ProfileImage" alt="hastech logo">
+            </div>
+            <div class="single-comment-content">
+                <div class="single-comment-content-top">
+                    <h6>@comment.User.Name @comment.User.Surname – @(((DateTime)comment.CommentDateTime).ToString("MMMM dd, yyyy HH:mm"))</h6>
+                    
+                </div>
+                <p>
+                    @comment.Content
+                </p>
+            </div>
+        </div>
+        <div style="margin-left:100px;" class="single-comment">
+            <div class="single-comment-thumb">
+                
+                <img src="~/haltico/images/team/team-member-2.jpg">
+            </div>
+            <div class="single-comment-content">
+                <div class="single-comment-content-top">
+                    <h6>Samir Huseynli <img style="margin-bottom:3px;width:15px; height:15px;" src="~/mavi-tik.png" /> - 12.05.2023 14:55</h6>
+                </div>
+                <p>
+                    Salam
+                </p>
+            </div>
+        </div>
+        
+    }
+</div>
