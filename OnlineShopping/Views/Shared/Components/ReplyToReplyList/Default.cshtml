@@ -1,0 +1,19 @@
+﻿@model IEnumerable<EntityLayer.Concrete.ReplyToReply>
+
+@foreach (var reply in Model)
+{
+    <div style="margin-left:100px;" class="single-comment">
+        <div class="single-comment-thumb">
+
+            <img src="@reply.User.ProfileImage">
+        </div>
+        <div class="single-comment-content">
+            <div class="single-comment-content-top">
+                <h6>@reply.User.Name @reply.User.Surname – @(((DateTime)reply.ReplyToReplyDateTime).ToString("MMMM dd, yyyy HH:mm"))</h6>
+            </div>
+            <p>
+                @reply.ReplyToReplyContent
+            </p>
+        </div>
+    </div>
+}

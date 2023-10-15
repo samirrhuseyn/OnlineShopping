@@ -12,10 +12,11 @@ namespace EntityLayer.Concrete
         [Key]
         public int ReplyId { get; set; }
         public string? ReplyContent { get; set; }
+        public DateTime ReplyDateTime { get; set; }
         public int CommentID { get; set; }
         public Comment? Comment { get; set; }
         public string? UserID { get; set; }
         public AppUser? User { get; set; }
-
+        public List<ReplyToReply>? ReplyToReply { get; set; }
     }
 }

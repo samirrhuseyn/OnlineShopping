@@ -172,7 +172,7 @@
                                 @await Component.InvokeAsync("CommentListInDetails")
                                 <div class="commentbox mt-5">
                                     <h5>Rəy əlavə et!</h5>
-                                    <form method="post" action="/Comment/AddComment/" class="ho-form">
+                                    <form onsubmit="return validateForm1()" name="myForm1" method="post" action="/Comment/AddComment/" class="ho-form">
                                         <div class="ho-form-inner">
                                             <div class="single-input">
                                                 <label>Your Rating</label>
@@ -187,7 +187,7 @@
                                             <input name="ProductID" value="@ViewBag.ID" hidden />
                                             <div class="single-input">
                                                 <label for="new-review-textbox">Your Review</label>
-                                                <textarea name="Content" id="new-review-textbox" cols="30" rows="5"></textarea>
+                                                <textarea name="Content" id="new-review-textbox" cols="30" rows="5" required></textarea>
                                             </div>
                                             <div class="single-input">
                                                 
@@ -299,3 +299,12 @@
     <!--// Newsletter Area -->
 
 </main>
+<script>
+    function validateForm1() {
+        var x = document.forms["myForm1"]["Content"].value;
+        if (x == null) {
+            alert("Bu sahə boş buraxıla bilməz!");
+            return false;
+        }
+    }
+</script>

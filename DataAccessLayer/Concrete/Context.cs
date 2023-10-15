@@ -26,5 +26,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<Campaign>? Campaigns { get; set; }
         public DbSet<Comment>? Comments { get; set; }
         public DbSet<Reply>? Replies { get; set; }
+        public DbSet<ReplyToReply>? ReplyToReplies { get; set; }
     }
 }

@@ -20,5 +20,6 @@ namespace EntityLayer.Concrete
         public string? Phone { get; set; }
         public List<Comment>? Comments { get; set; }
         public List<Reply>? Reply { get; set; }
+        public List<ReplyToReply>? ReplyToReply { get; set; }
     }
 }

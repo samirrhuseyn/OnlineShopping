@@ -347,6 +347,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("ReplyContent")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<DateTime>("ReplyDateTime")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("UserID")
                         .HasColumnType("nvarchar(450)");
 
@@ -357,6 +360,35 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Replies");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.ReplyToReply", b =>
+                {
+                    b.Property<int>("ReplyToReplyID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ReplyToReplyID"), 1L, 1);
+
+                    b.Property<int>("ReplyID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("ReplyToReplyContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("ReplyToReplyDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ReplyToReplyID");
+
+                    b.HasIndex("ReplyID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("ReplyToReplies");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Sale", b =>
@@ -638,6 +670,23 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.ReplyToReply", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Reply", "Reply")
+                        .WithMany("ReplyToReply")
+                        .HasForeignKey("ReplyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany("ReplyToReply")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("Reply");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Sale", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Product", "Product")
@@ -705,6 +754,8 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Reply");
+
+                    b.Navigation("ReplyToReply");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
@@ -724,6 +775,11 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Complaints");
 
                     b.Navigation("Sale");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Reply", b =>
+                {
+                    b.Navigation("ReplyToReply");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Store", b =>

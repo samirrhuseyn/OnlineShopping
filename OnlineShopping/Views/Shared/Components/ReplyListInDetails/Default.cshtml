@@ -1,0 +1,32 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Reply>
+
+@foreach(var reply in Model)
+{
+    <div style="margin-left:100px;" class="single-comment">
+        <div class="single-comment-thumb">
+            @{
+                ViewData["ReplyID"] = reply.ReplyId;
+            }
+            
+            <img src="@reply.User.ProfileImage">
+        </div>
+        <div class="single-comment-content">
+            <div class="single-comment-content-top">
+                <h6>@reply.User.Name @reply.User.Surname – @(((DateTime)reply.ReplyDateTime).ToString("MMMM dd, yyyy HH:mm"))</h6>
+                <button class="@reply.ReplyContent" onclick="document.getElementsByClassName('@reply.ReplyDateTime')[0].style.display = 'block'; document.getElementsByClassName('@reply.ReplyContent')[0].style.display = 'none';" type="button">Cavab yaz</button>
+            </div>
+            <form action="/ReplyToReply/AddReply/" style="display:none;" id="welcomeDiv" class="@reply.ReplyDateTime" method="POST" class="reply-form1 d-none" id="comment-2-reply-form">
+                <input name="ReplyID" value="@reply.ReplyId" hidden>
+                <input name="ProductId" value="@ViewBag.ID" hidden>
+                <textarea name="Content" placeholder="Cavaba fikrini bildir" rows="4" required></textarea>
+                <button type="submit">Göndər</button>
+                <button type="button" onclick="document.getElementsByClassName('@reply.ReplyDateTime')[0].style.display = 'none'; document.getElementsByClassName('@reply.ReplyContent')[0].style.display = 'block';">Ləğv et</button>
+            </form>
+            <p>
+                @reply.ReplyContent
+            </p>
+        </div>
+        
+    </div>
+    @await Component.InvokeAsync("ReplyToReplyList")
+}

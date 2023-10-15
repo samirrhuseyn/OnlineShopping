@@ -1,36 +1,43 @@
 ﻿@model IEnumerable<EntityLayer.Concrete.Comment>
 <div class="commentlist">
     <h5>Rəylər:</h5>
-    @foreach(var comment in Model)
+    
+
+    
+    <br />
+    @foreach (var comment in Model)
     {
+
         <div class="single-comment">
             <div class="single-comment-thumb">
                 <img src="@comment.User.ProfileImage" alt="hastech logo">
             </div>
+            @{
+                ViewData["commentID"] = comment.CommentID;
+            }
+            
+            
             <div class="single-comment-content">
                 <div class="single-comment-content-top">
                     <h6>@comment.User.Name @comment.User.Surname – @(((DateTime)comment.CommentDateTime).ToString("MMMM dd, yyyy HH:mm"))</h6>
-                    
+                    <button type="button" class="@comment.Content" onclick="document.getElementsByClassName('@comment.CommentDateTime')[0].style.display = 'block'; document.getElementsByClassName('@comment.Content')[0].style.display = 'none';">Cavab yaz</button>
+                    <form method="POST" id="welcomeDiv" class="@comment.CommentDateTime" action="/Reply/AddReply/" style="display:none;">
+                        <input name="ProductId" value="@ViewBag.ID" hidden />
+                        <input name="CommentId" value="@comment.CommentID" hidden />
+
+                        <textarea name="Content" placeholder="Rəyə cavab yaz" rows="4" required></textarea>
+                        <button type="submit">Göndər</button>
+                        <button type="button" onclick="document.getElementsByClassName('@comment.CommentDateTime')[0].style.display = 'none'; document.getElementsByClassName('@comment.Content')[0].style.display = 'block';">Ləğv et</button>
+                    </form>
                 </div>
                 <p>
                     @comment.Content
                 </p>
             </div>
+           
         </div>
-        <div style="margin-left:100px;" class="single-comment">
-            <div class="single-comment-thumb">
-                
-                <img src="~/haltico/images/team/team-member-2.jpg">
-            </div>
-            <div class="single-comment-content">
-                <div class="single-comment-content-top">
-                    <h6>Samir Huseynli <img style="margin-bottom:3px;width:15px; height:15px;" src="~/mavi-tik.png" /> - 12.05.2023 14:55</h6>
-                </div>
-                <p>
-                    Salam
-                </p>
-            </div>
-        </div>
-        
+        @await Component.InvokeAsync("ReplyListInDetails")
+
+
     }
 </div>
