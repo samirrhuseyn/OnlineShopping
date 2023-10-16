@@ -32,7 +32,7 @@
         <!-- Header -->
         <header class="header">
 
-            
+
             <!-- Header Middle Area -->
             <div class="header-middle bg-theme">
                 <div class="container">
@@ -50,7 +50,7 @@
                                     <option value="2">ELektronika əşyaları</option>
                                     <option value="3">Ev əşyaları</option>
                                     <option value="4">Aksesuarlar</option>
-                                    
+
                                 </select>
                                 <input type="text" placeholder="Məhsul axtar ...">
                                 <button type="submit"><i class="lnr lnr-magnifier"></i></button>
@@ -70,60 +70,16 @@
                                         <li>
                                             <a href="#">Çıxış</a>
                                         </li>
-                                        
+
                                     </ul>
                                 </div>
-                                <div class="header-cart">
-                                    <a class="header-carticon" href="cart.html"><i class="lnr lnr-cart"></i><span class="count">2</span></a>
 
-                                    <!-- Minicart -->
-                                    <div class="header-minicart minicart">
-                                        <div class="minicart-header">
-                                            <div class="minicart-product">
-                                                <div class="minicart-productimage">
-                                                    <a href="product-details.html">
-                                                        <img src="~/haltico/images/product/thumbnail/product-image-1.jpg" alt="product image">
-                                                    </a>
-                                                    <span class="minicart-productquantity">1x</span>
-                                                </div>
-                                                <div class="minicart-productcontent">
-                                                    <h6><a href="product-details.html">P-Series 4K UHD Dolby Vision HDR Roku Smart TV</a></h6>
-                                                    <span class="minicart-productprice">$43.00</span>
-                                                </div>
-                                                <button class="minicart-productclose"><i class="ion ion-ios-close-circle"></i></button>
-                                            </div>
-                                            <div class="minicart-product">
-                                                <div class="minicart-productimage">
-                                                    <a href="product-details.html">
-                                                        <img src="~/haltico/images/product/thumbnail/product-image-2.jpg" alt="product image">
-                                                    </a>
-                                                    <span class="minicart-productquantity">1x</span>
-                                                </div>
-                                                <div class="minicart-productcontent">
-                                                    <h6><a href="product-details.html">HD Video Recording PJ Handycam Camcorder</a></h6>
-                                                    <span class="minicart-productprice">$43.00</span>
-                                                </div>
-                                                <button class="minicart-productclose"><i class="ion ion-ios-close-circle"></i></button>
-                                            </div>
-                                        </div>
-                                        <ul class="minicart-pricing">
-                                            <li>Subtotal <span>$24.12</span></li>
-                                            <li>Shipping <span>$7.00</span></li>
-                                            <li>Taxes <span>$0.00</span></li>
-                                            <li>Total <span>$31.12</span></li>
-                                        </ul>
-                                        <div class="minicart-footer">
-                                            <a href="cart.html" class="ho-button ho-button-fullwidth">
-                                                <span>Cart</span>
-                                            </a>
-                                            <a href="checkout.html" class="ho-button ho-button-dark ho-button-fullwidth">
-                                                <span>Checkout</span>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <!--// Minicart -->
 
-                                </div>
+                                <!-- Minicart -->
+                                @await Component.InvokeAsync("CartLayoutDropDown")
+
+                                <!--// Minicart -->
+
                             </div>
                         </div>
                     </div>
@@ -135,7 +91,7 @@
 
         </header>
         @RenderBody()
-        
+
         <footer class="footer bg-white">
 
             <!-- Footer Top Area -->

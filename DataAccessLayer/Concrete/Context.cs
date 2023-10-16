@@ -27,5 +27,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<Comment>? Comments { get; set; }
         public DbSet<Reply>? Replies { get; set; }
         public DbSet<ReplyToReply>? ReplyToReplies { get; set; }
+        public DbSet<Cart>? Cart { get; set; }
     }
 }

@@ -1,0 +1,49 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Cart>
+<div class="header-cart">
+    <a class="header-carticon" href="cart.html"><i class="lnr lnr-cart"></i><span class="count">@ViewBag.Count</span></a>
+    <div class="header-minicart minicart">
+        <div class="minicart-header">
+            @foreach (var cart in Model)
+            {
+                <div class="minicart-product">
+                    <div class="minicart-productimage">
+                        <a href="Product/ProductDetails/@cart.Product.ProductID">
+                            <img src="@cart.Product.Image1" alt="product image">
+                        </a>
+                        @if (cart.Product.DiscountedPrice != null)
+                        {
+                            <span class="minicart-productquantity">-@cart.Product.Interest%</span>
+                        }
+                        else
+                        {
+
+                        }
+
+                    </div>
+                    <div class="minicart-productcontent">
+                        <h6><a href="/Product/ProductDetails/@cart.Product.ProductID">@cart.Product.ProductName</a></h6>
+                        @if (cart.Product.DiscountedPrice != null)
+                        {
+                            <del>@cart.Product.Price ₼</del>
+                            <span class="minicart-productprice">@cart.Product.DiscountedPrice ₼</span>
+                        }
+                        else
+                        {
+                            <span class="minicart-productprice">@cart.Product.Price ₼</span>
+                        }
+                    </div>
+                    <a href="/Cart/DeleteCart/@cart.CartID" class="minicart-productclose"><i class="ion ion-ios-close-circle"></i></a>
+                </div>
+            }
+
+        </div>
+        <div class="minicart-footer">
+            <a href="/Cart/CartList" class="ho-button ho-button-fullwidth">
+                <span>Cart</span>
+            </a>
+            <a href="checkout.html" class="ho-button ho-button-dark ho-button-fullwidth">
+                <span>Checkout</span>
+            </a>
+        </div>
+    </div>
+</div>

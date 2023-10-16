@@ -31,6 +31,7 @@ namespace EntityLayer.Concrete
         public List<Sale>? Sale { get; set; }
         public List<Comment>? Comments { get; set; }
         public List<Complaint>? Complaints { get; set; }
+        public List<Cart>? Cart { get; set; }
     }
 
     

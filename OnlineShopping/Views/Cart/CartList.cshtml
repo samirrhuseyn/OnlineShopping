@@ -1,0 +1,70 @@
+﻿@using EntityLayer.Concrete
+@model List<Cart>
+@{
+    ViewData["Title"] = "Səbət";
+    Layout = "~/Views/Shared/_publicLayout.cshtml";
+}
+
+<div class="cart-page-area ptb-30 bg-white">
+    <div class="container">
+
+        <!-- Cart Products -->
+        <div class="cart-table table-responsive">
+            <table class="table table-bordered table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th class="cart-column-image" scope="col">Şəkil</th>
+                        <th class="cart-column-productname" scope="col">Məhsul</th>
+                        <th class="cart-column-price" scope="col">Qiymət</th>
+                        <th class="cart-column-quantity" scope="col">Say</th>
+                        <th class="cart-column-remove" scope="col">Hərəkətlər</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach(var cart in Model)
+                    {
+                        <tr>
+                        <td>
+                            <a href="product-details-right-sidebar.html" class="product-image">
+                                <img src="@cart.Product.Image1" alt="product image">
+                            </a>
+                        </td>
+                        <td>
+                                <a href="/Product/ProductDetails/@cart.Product.ProductID" class="product-title">
+                                    @cart.Product.ProductName
+                            </a>
+                        </td>
+                            <td>
+                                
+                                @if (cart.Product.DiscountedPrice != null)
+                                {
+                                    <del>@cart.Product.Price ₼</del> <span>@cart.Product.DiscountedPrice ₼</span>
+                                }
+                                else
+                                {
+                                    <span>@cart.Product.DiscountedPrice ₼</span>
+                                }
+
+                        </td>
+                        <td>
+                            <div class="quantity-select">
+                                @cart.Count
+                            </div>
+                        </td>
+                        
+                        <td>
+                                <a href="/Cart/DeleteCart/@cart.CartID" class="remove-product"><i class="ion ion-ios-close"></i></a>
+                                <a href="#" class="remove-product"><i class="ion ion-ios-wallet"></i></a>
+                        </td>
+                    </tr>
+                    }
+                    
+
+                    
+
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</div>

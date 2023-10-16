@@ -63,17 +63,18 @@
                                     <span class="price">@Model.Price ₼</span>
                                 }
                             </div>
-                            <div class="pdetails-quantity">
-                                <div class="quantity-select">
-                                    <input type="text" value="1">
-                                    <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
-                                    <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
+                            <form method="post" action="/Cart/AddCart/">
+                                <div class="pdetails-quantity">
+                                    <div class="quantity-select">
+                                        <input name="Count" value="1" required>
+                                        <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
+                                        <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
+                                        <input name="ProductID" value="@ViewBag.ID" hidden/>
+                                    </div>
+                                    <button class="btn btn-primary" type="submit">Səbətə əlavə et!</button>
                                 </div>
-                                <a href="shop-rightsidebar.html" class="ho-button">
-                                    <i class="lnr lnr-cart"></i>
-                                    <span>Səbətə əlavə et!</span>
-                                </a>
-                            </div>
+                            </form>
+                            
                             <div class="pdetails-categories">
                                 <span>Məhsul kodu :</span>
                                 <ul>

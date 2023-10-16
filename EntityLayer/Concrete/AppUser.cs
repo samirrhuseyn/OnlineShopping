@@ -21,5 +21,6 @@ namespace EntityLayer.Concrete
         public List<Comment>? Comments { get; set; }
         public List<Reply>? Reply { get; set; }
         public List<ReplyToReply>? ReplyToReply { get; set; }
+        public List<Cart>? Cart { get; set; }
     }
 }
