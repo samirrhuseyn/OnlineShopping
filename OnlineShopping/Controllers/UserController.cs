@@ -1,6 +1,8 @@
-﻿using EntityLayer.Concrete;
+﻿using DataAccessLayer.Concrete;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using OnlineShopping.Models;
 
 namespace OnlineShopping.Controllers
@@ -8,7 +10,7 @@ namespace OnlineShopping.Controllers
     public class UserController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
-
+        
         public UserController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -37,8 +39,10 @@ namespace OnlineShopping.Controllers
                 IsActive = true
             };
             var result = await _userManager.CreateAsync(appUser, addUser.Password);
+            
             if (result.Succeeded)
             {
+                await _userManager.AddToRoleAsync(appUser, "GUEST");
                 return RedirectToAction("Index", "Home");
             }
             else

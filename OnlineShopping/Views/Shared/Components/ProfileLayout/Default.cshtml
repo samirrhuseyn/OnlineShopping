@@ -1,12 +1,13 @@
-﻿<div class="dropdown">
+﻿@model EntityLayer.Concrete.AppUser
+
+<div class="dropdown">
     <a href="#" class="d-flex align-items-center" data-bs-toggle="dropdown">
         <div class="avatar me-3">
-            <img src="~/vetra/assets/images/user/man_avatar3.jpg"
+            <img src="@Model.ProfileImage"
                  class="rounded-circle" alt="image">
         </div>
         <div>
-            <div class="fw-bold">Timotheus Bendan</div>
-            <small class="text-muted">Sales Manager</small>
+            <div class="fw-bold">@Model.Name @Model.Surname</div>
         </div>
     </a>
     <div class="dropdown-menu dropdown-menu-end">

@@ -43,6 +43,7 @@ namespace OnlineShopping.Areas.Admin.Controllers
                 var result = await _userManager.CreateAsync(appUser, addAdmin.Password);
                 if (result.Succeeded)
                 {
+                    await _userManager.AddToRoleAsync(appUser, "ADMIN");
                     return RedirectToAction("Index");
                 }
                 else
