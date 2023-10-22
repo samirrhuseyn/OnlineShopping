@@ -48,13 +48,13 @@ namespace DataAccessLayer.EntityFramework
             }
         }
 
-        public void UpdateByCategoryID(int categoryID, int interest)
+        public void UpdateByCategoryID(int categoryID, int interest, int storyID)
         {
             using (var context = new Context())
             {
                 // Retrieve entity by id
                 // Answer for question #1
-                var entity = context.Products.Where(item => item.CategoryID == categoryID).ToList();
+                var entity = context.Products.Where(item => item.CategoryID == categoryID).Where(item => item.StoreID == storyID).ToList();
 
                 // Validate entity is not null
 
@@ -71,20 +71,28 @@ namespace DataAccessLayer.EntityFramework
             }
         }
 
-        public void UpdateByProductCode(string productCode, int interest)
+        public void UpdateByProductCode(string productCode, int interest, int storyID)
         {
             using (var context = new Context())
             {
-                var entity = context.Products.Where(item => item.ProductCode == productCode).ToList();
+                //var pc = context.Products.Where(x=>x.ProductCode == productCode).Select(x => x.StoreID).FirstOrDefault();
+                //if(pc == storyID)
+                //{
+                    var entity = context.Products.Where(item => item.ProductCode == productCode).ToList();
+                    foreach (var item in entity)
+                    {
+                        item.Interest = interest;
+                        context.Products.Update(item);
+                        context.SaveChanges();
+                    }
+                //}
+                //else
+                //{
 
-                foreach(var item in entity)
-                {
-                    item.Interest = interest;
-                    context.Products.Update(item);
-                    context.SaveChanges();
-                }
-                
+                //}
             }
+
+
 
         }
     }

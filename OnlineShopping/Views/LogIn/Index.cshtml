@@ -1,0 +1,40 @@
+﻿@using OnlineShopping.Models
+@model LoginViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+@{
+    ViewData["Title"] = "Giriş";
+    Layout = "~/Views/Shared/_publicLayout.cshtml";
+}
+<div style="margin-left:400px;" class="my-account-area ptb-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="login-form-wrapper">
+                    <form method="post" asp-action="Index" asp-controller="Login" class="ho-form ho-form-boxed">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="ho-form-inner">
+                            <div class="single-input">
+                                <label for="login-form-email">İstifadəçi adı<span class="text-danger">*</span></label>
+                                <input type="text" asp-for="Username" type="text" id="login-form-email">
+                            </div>
+                            <div class="single-input">
+                                <label for="login-form-password">Şifrə<span class="text-danger">*</span></label>
+                                <input asp-for="Password" type="password" id="login-form-password">
+                            </div>
+                            <div class="single-input">
+                                <button type="submit" class="ho-button ho-button-dark mr-3">
+                                    <span>Giriş</span>
+                                </button>
+                                
+                            </div>
+                            <div class="single-input">
+                                <a href="#">Şifrəni unutmusunuz?</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

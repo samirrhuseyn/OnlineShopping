@@ -2,22 +2,34 @@
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json.Linq;
 using OnlineShopping.Areas.Seller.Models;
+using System.Data;
 
 namespace OnlineShopping.Areas.Seller.Controllers
 {
 	[Area("Seller")]
-	public class ProductController : Controller
+    [Authorize(Roles = "Seller")]
+    public class ProductController : Controller
 	{
-		ProductManager productManager = new ProductManager(new EfProductDal());
+        private readonly UserManager<AppUser> _userManager;
+        ProductManager productManager = new ProductManager(new EfProductDal());
 		CategoryManager categoryManager = new CategoryManager(new EfCategoryDal());
 		Context context = new Context();
-		public IActionResult Index()
+
+        public ProductController(UserManager<AppUser> userManager)
+        {
+            _userManager = userManager;
+        }
+
+        public async Task<IActionResult> Index()
 		{
-			var value = productManager.GetListAllWithCategory();
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            var value = productManager.GetListAllWithCategory().Where(x=>x.StoreID == values.StoreID).ToList();
 			return View(value);
 		}
 
@@ -35,9 +47,10 @@ namespace OnlineShopping.Areas.Seller.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult AddProduct(AddProductViewModel addProduct)
+		public async Task<IActionResult> AddProduct(AddProductViewModel addProduct)
 		{
-			if (ModelState.IsValid)
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (ModelState.IsValid)
 			{
 				Product product = new Product()
 				{
@@ -53,7 +66,8 @@ namespace OnlineShopping.Areas.Seller.Controllers
 					Color = addProduct.Color,
 					InStock = true,
 					Price = addProduct.Price,
-					StoreID = 1
+					StoreID = values.StoreID,
+					ProductCode = addProduct.ProductCode
 				};
 				productManager.TAdd(product);
 				return RedirectToAction("Index");
@@ -156,10 +170,12 @@ namespace OnlineShopping.Areas.Seller.Controllers
 		}
 
 		[HttpPost]
-        public IActionResult ApplyDisscount(ApplyDisscountViewModel applyDisscount)
+        public async Task<IActionResult> ApplyDisscount(ApplyDisscountViewModel applyDisscount)
 		{
-			
-			productManager.ApplyDisscount(applyDisscount.CategoryID, applyDisscount.Interest);
+
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+			applyDisscount.StoreID = values.StoreID;
+			productManager.ApplyDisscount(applyDisscount.CategoryID, applyDisscount.Interest, applyDisscount.StoreID);
             return RedirectToAction("Interests");
 		}
 
@@ -170,22 +186,35 @@ namespace OnlineShopping.Areas.Seller.Controllers
 		}
 
 		[HttpPost]
-		public IActionResult ApplyDisscountByProductCode(DisscountByCodeViewModel disscountByCode)
+		public async Task<IActionResult> ApplyDisscountByProductCode(DisscountByCodeViewModel disscountByCode)
 		{
-			if (ModelState.IsValid)
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            var pc = context.Products.Where(x => x.ProductCode == disscountByCode.ProductCode).Select(x => x.StoreID).FirstOrDefault();
+			if (pc == values.StoreID)
 			{
-                productManager.ApplyDisscountByCode(disscountByCode.ProductCode, disscountByCode.Interest);
-                return RedirectToAction("Index");
-            }
+				
+				if (ModelState.IsValid)
+				{
+                    disscountByCode.StoreID = values.StoreID;
+                    productManager.ApplyDisscountByCode(disscountByCode.ProductCode, disscountByCode.Interest, disscountByCode.StoreID);
+					return RedirectToAction("Index");
+				}
+				else
+				{
+					return View(disscountByCode);
+				}
+			}
 			else
 			{
-				return View(disscountByCode);
+				return Content("Başqa mağazanın məhsuluna endirim tətbiq edə bilməzsiniz!");
 			}
 		}
 
-		public IActionResult Interests()
+		public async Task<IActionResult> Interests()
 		{
-			var value = productManager.GetListAllWithCategory().DistinctBy(x=>x.CategoryID);
+
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            var value = productManager.GetListAllWithCategory().DistinctBy(x=>x.CategoryID).Where(x=>x.StoreID == values.StoreID);
 			return View(value);
 		}
     }

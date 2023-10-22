@@ -58,30 +58,19 @@
                         </div>
                         <div class="col-lg-3 col-md-6 col-sm-6 order-2 order-lg-3">
                             <div class="header-icons">
-                                <div class="header-account">
-                                    <button class="header-accountbox-trigger"><img style="margin-right:5px;border-radius:50%; height:40px; width:40px;" src="~/haltico/images/team/team-member-1.jpg" />  Samir Hüseynli <i class="ion ion-ios-arrow-down"></i></button>
-                                    <ul class="header-accountbox dropdown-list">
-                                        <li>
-                                            <a href="#">Mənim kabinetim</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Parametrlər</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Çıxış</a>
-                                        </li>
-
-                                    </ul>
-                                </div>
-
-
-                                <!-- Minicart -->
-                                @await Component.InvokeAsync("CartLayoutDropDown")
-
-                                <!--// Minicart -->
-
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    @await Component.InvokeAsync("ProfileIdentity")
+                                    @await Component.InvokeAsync("CartLayoutDropDown")
+                                }
+                                else
+                                {
+                                    <a class="btn btn-success" href="/LogIn/Index">Giriş</a>
+                                }
                             </div>
                         </div>
+                        
+                        
                     </div>
                 </div>
             </div>

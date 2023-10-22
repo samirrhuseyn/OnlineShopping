@@ -1,4 +1,5 @@
 ﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OnlineShopping.Models;
@@ -6,6 +7,7 @@ using OnlineShopping.Models;
 namespace OnlineShopping.Areas.Seller.Controllers
 {
     [Area("Seller")]
+    [AllowAnonymous]
     public class LoginController : Controller
     {
         private readonly SignInManager<AppUser> _signInManager;
@@ -31,6 +33,12 @@ namespace OnlineShopping.Areas.Seller.Controllers
                 return LocalRedirect("/Seller/Product/Index/");
             }
             return View();
+        }
+
+        public async Task<IActionResult> LogOut()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index");
         }
     }
 }

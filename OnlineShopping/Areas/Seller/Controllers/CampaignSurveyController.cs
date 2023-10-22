@@ -3,18 +3,29 @@ using BusinessLayer.ValidationRules;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using FluentValidation.Results;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace OnlineShopping.Areas.Seller.Controllers
 {
     [Area("Seller")]
+    [Authorize(Roles = "Seller")]
     public class CampaignSurveyController : Controller
     {
+        private readonly UserManager<AppUser> _userManager;
         CampaignSurveyManager campaignSurveyManager = new CampaignSurveyManager(new EfCampaignSurveyDal());
-        public IActionResult Index()
+
+        public CampaignSurveyController(UserManager<AppUser> userManager)
         {
-            var value = campaignSurveyManager.GetAllWithStore();
+            _userManager = userManager;
+        }
+
+        public async Task<IActionResult> Index()
+        {
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            var value = campaignSurveyManager.GetAllWithStore().Where(x => x.StoreID == values.StoreID).ToList();
             return View(value);
         }
 
@@ -31,15 +42,16 @@ namespace OnlineShopping.Areas.Seller.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddSurvey(CampaignSurvey campaignSurvey) 
+        public async Task<IActionResult> AddSurvey(CampaignSurvey campaignSurvey)
         {
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
             CompaignSurveyValidator surveyValidator = new CompaignSurveyValidator();
             ValidationResult result = surveyValidator.Validate(campaignSurvey);
             if (result.IsValid)
             {
                 campaignSurvey.SendDate = DateTime.Parse(DateTime.Now.ToShortTimeString());
                 campaignSurvey.IsApproved = false;
-                campaignSurvey.StoreID = 2;
+                campaignSurvey.StoreID = values.StoreID;
                 campaignSurveyManager.TAdd(campaignSurvey);
                 return RedirectToAction("Index");
             }

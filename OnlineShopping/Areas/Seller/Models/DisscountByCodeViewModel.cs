@@ -7,5 +7,6 @@ namespace OnlineShopping.Areas.Seller.Models
         [Required(ErrorMessage = "Məhsul kodu daxil edin!")]
         public string? ProductCode { get; set; }
         public int Interest { get; set; }
+        public int StoreID { get; set; }
     }
 }

@@ -18,14 +18,14 @@ namespace BusinessLayer.Concrete
             _productDal = productDal;
         }
 
-        public void ApplyDisscount(int categoryID, int interest)
+        public void ApplyDisscount(int categoryID, int interest, int storyID)
         {
-            _productDal.UpdateByCategoryID(categoryID, interest);
+            _productDal.UpdateByCategoryID(categoryID, interest, storyID);
         }
 
-		public void ApplyDisscountByCode(string productCode, int interest)
+		public void ApplyDisscountByCode(string productCode, int interest, int storyID)
 		{
-			_productDal.UpdateByProductCode(productCode, interest);
+			_productDal.UpdateByProductCode(productCode, interest, storyID);
 		}
 
 		public Product GetByIdWIthCategory(int id)

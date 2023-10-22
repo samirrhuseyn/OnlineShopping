@@ -144,6 +144,8 @@
     <None Include="wwwroot\Akademi\xhtml\vendor\toastr\js\toastr.min.js" />
     <None Include="wwwroot\Akademi\xhtml\vendor\wnumb\wNumb.js" />
     <None Include="wwwroot\Akademi\xhtml\vendor\wow-master\dist\wow.min.js" />
+    <None Include="wwwroot\Error\js\index.js" />
+    <None Include="wwwroot\Error\js\lottie.min.js" />
     <None Include="wwwroot\ckeditor5-build-classic\ckeditor.js" />
     <None Include="wwwroot\ckeditor5-build-classic\ckeditor.js.map" />
     <None Include="wwwroot\ckeditor5-build-classic\LICENSE.md" />

@@ -23,6 +23,10 @@ namespace OnlineShopping.Areas.Seller.Models
 
         public string? Color { get; set; }
 
+        [Required(ErrorMessage = "Məhsul kodu boş buraxa bilməzsiniz!")]
+        [MaxLength(2000, ErrorMessage = "Məhsul kodu 20 simvoldan çox ola bilməz!")]
+        [MinLength(3, ErrorMessage = "Məhsul kodu 3 simvoldan az ola bilməz!")]
+        public string? ProductCode { get; set; }
         public string? Size { get; set; }
 
         [Required(ErrorMessage = "Məhsulun qiymətini boş buraxa bilməzsiniz!")]

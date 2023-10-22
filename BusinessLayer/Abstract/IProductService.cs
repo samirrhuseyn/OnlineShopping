@@ -12,7 +12,7 @@ namespace BusinessLayer.Abstract
         List<Product> GetListAllWithCategory();
         Product GetByIdWIthCategory(int id);
         List<Product> GetProductListByStoreID(int id);
-        void ApplyDisscount(int categoryID, int interest);
-        void ApplyDisscountByCode(string productCode, int interest);
+        void ApplyDisscount(int categoryID, int interest, int storyID);
+        void ApplyDisscountByCode(string productCode, int interest, int storyID);
     }
 }

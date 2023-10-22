@@ -64,13 +64,30 @@
                                 <p>
                                     @Html.Raw(Model.ProductDescription)
                                 </p>
-                                <div class="avatar flex-shrink-0 me-3">
-                                    <span class="avatar-text bg-orange rounded-circle"><i class="bi bi-paint-bucket"></i></span>
-                                </div>@Model.Color
+                                @if(Model.Color != null)
+                                {
+                                    <div class="avatar flex-shrink-0 me-3">
+                                        <span class="avatar-text bg-orange rounded-circle"><i class="bi bi-paint-bucket"></i></span>
+                                    </div>
+
+                                    @Model.Color
+                                }
+                                else
+                                {
+                                    
+                                }
                                 <br />
-                                <div style="margin-top:10px;" class="avatar flex-shrink-0 me-3">
-                                    <span class="avatar-text bg-orange rounded-circle"><i class="bi bi-rulers"></i></i></span>
-                                </div>@Model.Size
+                                @if(Model.Size != null)
+                                {
+                                    <div style="margin-top:10px;" class="avatar flex-shrink-0 me-3">
+                                        <span class="avatar-text bg-orange rounded-circle"><i class="bi bi-rulers"></i></span>
+                                    </div>@Model.Size
+                                }
+                                else
+                                {
+                                    
+                                }
+
                                 <br />
                                 <div style="margin-top:10px;" class="avatar flex-shrink-0 me-3">
                                     <span class="avatar-text bg-orange rounded-circle"><i class="bi bi-wallet"></i></span>

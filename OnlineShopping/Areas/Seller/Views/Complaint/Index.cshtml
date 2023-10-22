@@ -22,18 +22,25 @@
                 <tbody>
                     @foreach (var complaint in Model)
                     {
-                        <tr>
-                            <td><img style="border-radius:30%" src="@complaint.User.ProfileImage" height="40" width="40" /> @complaint.User.Name @complaint.User.Surname</td>
-                            <td>@complaint.Product.ProductCode</td>
-                            <td>@complaint.SalesCode</td>
-                            <td>@(((DateTime)complaint.DateTime).ToString("MMMM dd, yyyy HH:mm"))</td>
-                            <td>
-                                <div style="padding:10px">
-                                    <a href="/Seller/Complaint/Details/@complaint.ComplaintID"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Ətraflı məlumat" class="bg-success bi-info"></i></a>
-                                    <a href="/Seller/Complaint/Delete/@complaint.ComplaintID"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Silmək" class="bg-danger bi-trash"></i></a>
-                                </div>
-                            </td>
-                        </tr>
+                        @if (complaint.Product.StoreID == ViewBag.StoryID)
+                        {
+                            <tr>
+                                <td><img style="border-radius:30%" src="@complaint.User.ProfileImage" height="40" width="40" /> @complaint.User.Name @complaint.User.Surname</td>
+                                <td>@complaint.Product.ProductCode</td>
+                                <td>@complaint.SalesCode</td>
+                                <td>@(((DateTime)complaint.DateTime).ToString("MMMM dd, yyyy HH:mm"))</td>
+                                <td>
+                                    <div style="padding:10px">
+                                        <a href="/Seller/Complaint/Details/@complaint.ComplaintID"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Ətraflı məlumat" class="bg-success bi-info"></i></a>
+                                        <a href="/Seller/Complaint/Delete/@complaint.ComplaintID"><i style="font-size:15px; padding:10px; color:white; border-radius:20%" title="Silmək" class="bg-danger bi-trash"></i></a>
+                                    </div>
+                                </td>
+                            </tr>
+                        }
+                        else
+                        {
+                            
+                        }
                     }
                 </tbody>
             </table>

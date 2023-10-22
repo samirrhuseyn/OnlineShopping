@@ -4,5 +4,6 @@
     {
         public int CategoryID { get; set; }
         public int Interest { get; set; }
+        public int StoreID { get; set; }
     }
 }
