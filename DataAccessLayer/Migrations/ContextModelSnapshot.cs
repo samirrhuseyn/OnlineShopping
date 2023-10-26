@@ -300,6 +300,48 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Complaints");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Message", b =>
+                {
+                    b.Property<int>("MessageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageID"), 1L, 1);
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("MessageDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MessageDetails")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReceiverID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("SenderID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageID");
+
+                    b.HasIndex("ReceiverID");
+
+                    b.HasIndex("SenderID");
+
+                    b.ToTable("Messages");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
                 {
                     b.Property<int>("ProductID")
@@ -680,6 +722,23 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Message", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.AppUser", "RecieverUser")
+                        .WithMany("Reciever")
+                        .HasForeignKey("ReceiverID")
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.AppUser", "SenderUser")
+                        .WithMany("Sender")
+                        .HasForeignKey("SenderID")
+                        .IsRequired();
+
+                    b.Navigation("RecieverUser");
+
+                    b.Navigation("SenderUser");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Category", "Category")
@@ -801,9 +860,13 @@ namespace DataAccessLayer.Migrations
 
                     b.Navigation("Comments");
 
+                    b.Navigation("Reciever");
+
                     b.Navigation("Reply");
 
                     b.Navigation("ReplyToReply");
+
+                    b.Navigation("Sender");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>

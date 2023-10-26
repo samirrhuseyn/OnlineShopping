@@ -1,0 +1,144 @@
+﻿@using EntityLayer.Concrete
+@model List<Message>
+@{
+    ViewData["Title"] = "Zibil qutusu (Gələn mesajlar)";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="container-fluid p-0">
+	<div class="card p-0 rounded-0 mb-0">
+		<div class="row gx-0">
+			<!--column-->
+			<div class="col-xl-2 col-xxl-3 col-lg-3">
+				<div class="email-left-box dlab-scroll" id="email-left">
+					<div class="p-0">
+						<a href="/Admin/Message/Compose" class="btn text-white btn-block"><i class="fa-solid fa-plus me-2"></i>Mesaj göndər</a>
+					</div>
+					<div class="mail-list rounded ">
+						<a href="/Admin/Message/Inbox" class="list-group-item ">
+							<i class="fa-regular fa-envelope align-middle"></i>Sizə gələn mesajlar
+							@if (ViewBag.CountMessage == 0)
+							{
+
+							}
+							else
+							{
+								<span class="badge badge-primary">@ViewBag.CountMessage</span>
+							}
+						</a>
+						<a href="/Admin/Message/Sentbox" class="list-group-item"><i class="fa-regular fa-paper-plane align-middle"></i>Göndərdiyiniz mesajlar</a>
+						<a href="/Admin/Message/DeletedMessages" class="list-group-item active"><i class="fa-regular fa-trash-can"></i>Zibil qutusu</a>
+					</div>
+
+				</div>
+			</div>
+			<!--/column-->
+			<!--column-->
+			<div class="col-xl-10 col-xxl-9 col-lg-9">
+				<div class="email-right-box">
+					<div role="toolbar" class="toolbar ms-1 ms-sm-0">
+						<div class="saprat">
+							<div class="d-flex align-items-center">
+								<div class="btn-group ">
+									<div class="form-check custom-checkbox">
+										<input type="checkbox" class="form-check-input" id="checkAll">
+										<label class="form-check-label" for="checkAll"></label>
+									</div>
+								</div>
+								<h5 style="margin-top:15px;">Hamısını işarələ</h5>
+							</div>
+							<div class="mail-tools">
+
+								<a href="javascrip:void(0);">
+									<svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+										<path d="M18.1667 25.5C18.4098 25.5 18.6429 25.4035 18.8148 25.2316C18.9868 25.0596 19.0833 24.8265 19.0833 24.5834V19.0834C19.0833 18.8403 18.9868 18.6071 18.8148 18.4352C18.6429 18.2633 18.4098 18.1667 18.1667 18.1667C17.9236 18.1667 17.6904 18.2633 17.5185 18.4352C17.3466 18.6071 17.25 18.8403 17.25 19.0834V24.5834C17.25 24.8265 17.3466 25.0596 17.5185 25.2316C17.6904 25.4035 17.9236 25.5 18.1667 25.5ZM27.3333 14.5H23.6667V13.5834C23.6667 12.854 23.3769 12.1546 22.8612 11.6388C22.3455 11.1231 21.646 10.8334 20.9167 10.8334H19.0833C18.354 10.8334 17.6545 11.1231 17.1388 11.6388C16.6231 12.1546 16.3333 12.854 16.3333 13.5834V14.5H12.6667C12.4236 14.5 12.1904 14.5966 12.0185 14.7685C11.8466 14.9404 11.75 15.1736 11.75 15.4167C11.75 15.6598 11.8466 15.893 12.0185 16.0649C12.1904 16.2368 12.4236 16.3334 12.6667 16.3334H13.5833V26.4167C13.5833 27.1461 13.8731 27.8455 14.3888 28.3612C14.9045 28.877 15.604 29.1667 16.3333 29.1667H23.6667C24.396 29.1667 25.0955 28.877 25.6112 28.3612C26.1269 27.8455 26.4167 27.1461 26.4167 26.4167V16.3334H27.3333C27.5764 16.3334 27.8096 16.2368 27.9815 16.0649C28.1534 15.893 28.25 15.6598 28.25 15.4167C28.25 15.1736 28.1534 14.9404 27.9815 14.7685C27.8096 14.5966 27.5764 14.5 27.3333 14.5ZM18.1667 13.5834C18.1667 13.3403 18.2632 13.1071 18.4352 12.9352C18.6071 12.7633 18.8402 12.6667 19.0833 12.6667H20.9167C21.1598 12.6667 21.3929 12.7633 21.5648 12.9352C21.7368 13.1071 21.8333 13.3403 21.8333 13.5834V14.5H18.1667V13.5834ZM24.5833 26.4167C24.5833 26.6598 24.4868 26.893 24.3148 27.0649C24.1429 27.2368 23.9098 27.3334 23.6667 27.3334H16.3333C16.0902 27.3334 15.8571 27.2368 15.6852 27.0649C15.5132 26.893 15.4167 26.6598 15.4167 26.4167V16.3334H24.5833V26.4167ZM21.8333 25.5C22.0764 25.5 22.3096 25.4035 22.4815 25.2316C22.6534 25.0596 22.75 24.8265 22.75 24.5834V19.0834C22.75 18.8403 22.6534 18.6071 22.4815 18.4352C22.3096 18.2633 22.0764 18.1667 21.8333 18.1667C21.5902 18.1667 21.3571 18.2633 21.1852 18.4352C21.0132 18.6071 20.9167 18.8403 20.9167 19.0834V24.5834C20.9167 24.8265 21.0132 25.0596 21.1852 25.2316C21.3571 25.4035 21.5902 25.5 21.8333 25.5Z" fill="var(--primary)" />
+									</svg>
+								</a>
+
+							</div>
+						</div>
+					</div>
+
+					<!--tab-content-->
+					<div class="tab-content" id="pills-tabContent">
+						<div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+							<div class="email-list dlab-scroll" id="emails">
+								@foreach (var message in Model)
+								{
+									<div class="message">
+										<div>
+											<div class="d-flex message-single">
+												<div class="ps-1 align-self-center">
+													<div class="form-check custom-checkbox">
+														<input type="checkbox" class="form-check-input" id="checkbox2">
+														<label class="form-check-label" for="checkbox2"></label>
+													</div>
+												</div>
+												<div class="ms-2">
+													<img style="border-radius:50%;height:30px; width:30px;" src="@message.SenderUser.ProfileImage">
+												</div>
+											</div>
+											<a href="/Admin/Message/MessageDetails/@message.MessageID" class="col-mail col-mail-2">
+												<div class="hader">
+													@message.SenderUser.Name @message.SenderUser.Surname
+													@if (message.SenderUser.IsAdmin == false && message.SenderUser.IsSeller == true)
+													{
+														<img style="margin-bottom:2px;height:15px; width:15px;" src="~/3718330.png" />
+													}
+													else
+													{
+
+													}
+												</div>
+												<div class="subject">@message.Subject<span>   @message.MessageDetails</span><span class="badge badge-rounded badge-outline-primary"></span></div>
+												<div class="date">@(((DateTime)message.MessageDate).ToString("MMMM dd, yyyy HH:mm"))</div>
+											</a>
+											<div class="icon">
+
+
+												<a href="/Admin/Message/UnDeleteInMessage/@message.MessageID" class="ms-2">
+													<img style="height:20px; width:20px;" src="~/akademi/xhtml/images/svg/refresh.svg" />
+												</a>
+											</div>
+										</div>
+									</div>
+								}
+
+							</div>
+						</div>
+
+					</div>
+                    <!--tab-content-->
+					<!-- panel -->
+					<!--column-->
+
+					<div class="table-pagenation px-3">
+						<p class="mb-0">Showing <span>1-5</span>from <span>100</span>data</p>
+						<nav>
+							<ul class="pagination pagination-gutter pagination-primary no-bg">
+								<li class="page-item page-indicator">
+									<a class="page-link" href="javascript:void(0)">
+										<i class="fa-solid fa-angle-left"></i>
+									</a>
+								</li>
+								<li class="page-item ">
+									<a class="page-link" href="javascript:void(0)">1</a>
+								</li>
+								<li class="page-item active"><a class="page-link" href="javascript:void(0)">2</a></li>
+								<li class="page-item"><a class="page-link" href="javascript:void(0)">3</a></li>
+								<li class="page-item page-indicator"><a class="page-link" href="javascript:void(0)"><i class="fa-solid fa-angle-right"></i></a></li>
+							</ul>
+						</nav>
+					</div>
+
+
+					<!--/column-->
+					<!-- panel -->
+				</div>
+			</div>
+			<!--/column-->
+		</div>
+	</div>
+
+</div>
+

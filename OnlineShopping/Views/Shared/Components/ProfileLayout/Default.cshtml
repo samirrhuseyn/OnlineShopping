@@ -8,22 +8,21 @@
         </div>
         <div>
             <div class="fw-bold">@Model.Name @Model.Surname</div>
-            <small class="text-muted">@Model.Email</small>
         </div>
     </a>
     <div class="dropdown-menu dropdown-menu-end">
         <a href="#" class="dropdown-item d-flex align-items-center">
-            <i class="bi bi-person dropdown-item-icon"></i> Profile
+            <i class="bi bi-person dropdown-item-icon"></i> Kabinetim
         </a>
-        <a href="#" class="dropdown-item d-flex align-items-center">
-            <i class="bi bi-envelope dropdown-item-icon"></i> Inbox
+        <a href="/Seller/Message/Inbox" class="dropdown-item d-flex align-items-center">
+            <i class="bi bi-envelope dropdown-item-icon"></i> Mesajlar
         </a>
         <a href="#" class="dropdown-item d-flex align-items-center" data-sidebar-target="#settings">
-            <i class="bi bi-gear dropdown-item-icon"></i> Settings
+            <i class="bi bi-gear dropdown-item-icon"></i> Tənzimləmələr
         </a>
-        <a href="login.html" class="dropdown-item d-flex align-items-center text-danger"
+        <a href="/Seller/Login/LogOut" class="dropdown-item d-flex align-items-center text-danger"
            target="_blank">
-            <i class="bi bi-box-arrow-right dropdown-item-icon"></i> Logout
+            <i class="bi bi-box-arrow-right dropdown-item-icon"></i> Çıxış
         </a>
     </div>
 </div>

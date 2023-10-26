@@ -1,0 +1,51 @@
+﻿@using EntityLayer.Concrete
+@model Tuple<Message, AppUser>
+@{
+    ViewData["Title"] = "Compose";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="container-fluid p-0">
+	<div class="card p-0 rounded-0 mb-0">
+		<div class="row gx-0">
+			<!--column-->
+			<div class="col-xl-2 col-xxl-3 col-lg-3">
+				<div class="email-left-box dlab-scroll" id="email-left">
+					<div class="p-0">
+						<a href="/Admin/Message/Compose" class="btn text-white btn-block"><i class="fa-solid fa-plus me-2"></i>Mesaj göndər</a>
+					</div>
+					<div class="mail-list rounded ">
+						<a href="/Admin/Message/Inbox" class="list-group-item"><i class="fa-regular fa-envelope align-middle"></i>Sizə gələn mesajlar <span class="badge badge-purple badge-sm float-end rounded">2</span> </a>
+						<a href="/Admin/Message/Sentbox" class="list-group-item"><i class="fa-regular fa-paper-plane align-middle"></i>Göndərdiyiniz mesajlar</a>
+					</div>
+
+				</div>
+			</div>
+
+			<div class="col-lg-9 col-xl-10 col-xxl-9">
+				<div class="email-right-box ms-0 mt-3 ">
+					<div class="compose-wrapper " id="compose-content">
+						<div class="compose-content">
+							<form method="post">
+								<div class="mb-3">
+									<input name="User.Email" type="text" class="form-control bg-transparent" placeholder=" Kimə:" required>
+								</div>
+								<div class="mb-3">
+									<input name="Message.Subject" type="text" class="form-control bg-transparent" placeholder=" Başlıq:" required>
+								</div>
+								<div class="mb-3">
+									<textarea name="Message.MessageDetails" id="email-compose-editor" class="textarea_editor form-control bg-transparent" rows="5" placeholder="Mesajını yaz ..." required></textarea>
+								</div>
+								<div class="text-start mt-4 mb-3">
+									<button class="btn btn-primary btn-sl-sm me-2" type="submit"><span class="me-2"><i class="fa fa-paper-plane"></i></span>Göndər</button>
+								</div>
+							</form>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</div>

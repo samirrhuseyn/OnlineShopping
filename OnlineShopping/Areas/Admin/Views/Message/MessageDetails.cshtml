@@ -1,0 +1,100 @@
+﻿@model EntityLayer.Concrete.Message
+@{
+    ViewData["Title"] = "Mesaja ətraflı bax";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="container-fluid p-0">
+    <!-- row -->
+    <div class="row gx-0">
+        <div class="col-xl-12">
+            <div class="card rounded-0 mb-0 h-auto">
+                <div class="card-body p-0">
+                    <div class="row gx-0">
+                        <!--column-->
+                        <div class="col-xl-2 col-xxl-3 col-lg-3">
+                            <div class="email-left-box dlab-scroll" id="email-left">
+                                <div class="p-0">
+                                    <a href="/Admin/Message/Compose" class="btn text-white btn-block"><i class="fa-solid fa-plus me-2"></i>Mesaj göndər</a>
+                                </div>
+                                <div class="mail-list rounded ">
+                                    <a href="/Admin/Message/Inbox" class="list-group-item active">
+                                        <i class="fa-regular fa-envelope align-middle"></i>Sizə gələn mesajlar
+                                        @if (ViewBag.CountMessage == 0)
+                                        {
+
+                                        }
+                                        else
+                                        {
+                                            <span class="badge badge-primary">@ViewBag.CountMessage</span>
+                                        }
+                                    </a>
+                                    <a href="/Admin/Message/Sentbox" class="list-group-item"><i class="fa-regular fa-paper-plane align-middle"></i>Göndərdiyiniz mesajlar</a>
+                                    <a href="/Admin/Message/DeletedMessages" class="list-group-item"><i class="fa-regular fa-trash-can"></i>Zibil qutusu</a>
+                                </div>
+
+                            </div>
+                        </div>
+                        <!--/column-->
+                        <div class="col-lg-10 col-xxl-9">
+                            <div class="email-right-box">
+
+                                <div class="col-12">
+                                    <div class="right-box-padding border-start p-0">
+                                        <div class="read-wapper dlab-scroll" id="read-content">
+                                            <div class="read-content">
+                                                <div class="media pt-3 d-sm-flex d-block justify-content-between">
+                                                    <div class="clearfix mb-3 d-flex">
+                                                        <img class="me-3 rounded" width="70" height="70" alt="image" src="@Model.SenderUser.ProfileImage">
+                                                        <div class="media-body me-2">
+                                                            <h5 class="text-primary mb-0 mt-1">@Model.SenderUser.Name @Model.SenderUser.Surname
+                                                                @if (Model.SenderUser.IsAdmin == false && Model.SenderUser.IsSeller == true)
+                                                                {
+                                                                    <img style="margin-bottom:2px;height:15px; width:15px;" src="~/3718330.png" />
+                                                                }
+                                                                else
+                                                                {
+
+                                                                }
+                                                            </h5>
+                                                            <p class="mb-0">@(((DateTime)Model.MessageDate).ToString("MMMM dd, yyyy HH:mm"))</p>
+                                                        </div>
+                                                    </div>
+                                                    <div class="clearfix mb-3">
+                                                        @if(Model.IsDelete == true)
+                                                        {
+                                                            <a href="/Admin/Message/UnDeleteInMessage/@Model.MessageID" class="btn btn-primary px-3 my-1 light me-2"><i class="fa fa-arrows-rotate"></i></a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a href="/Admin/Message/DeleteInMessage/@Model.MessageID" class="btn btn-primary px-3 my-1 light me-2"><i class="fa fa-trash"></i></a>
+
+                                                        }
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="read-content-body">
+                                                    <h5 class="mb-4">@Model.Subject</h5>
+                                                    <p class="mb-2">
+                                                        @Model.MessageDetails
+                                                    </p>
+                                                    
+                                                    <h5 class="pt-3">@Model.SenderUser.Name @Model.SenderUser.Surname</h5>
+                                                    <hr>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,0 +1,156 @@
+﻿@using EntityLayer.Concrete
+@model List<Message>
+@{
+    ViewData["Title"] = "Gələn mesajlar";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-9">
+        <div class="row mb-4">
+            <div class="col-md-7 d-flex gap-3">
+                <div>
+                    <div class="input-group">
+                        <div class="input-group-text bg-white">
+                            <input class="form-check-input mt-0 email-check-all" type="checkbox" value=""
+                                   aria-label="Checkbox for following text input">
+                            <span style="margin-left:10px;">Hamısını işarələ</span>
+                        </div>
+
+
+                    </div>
+                </div>
+                <a href="#" class="btn" style="background-color:red; -webkit-text-fill-color:white">
+                    <i class="bi bi-trash"></i>
+                </a>
+                <a href="/Seller/Message/Compose" class="btn" style="background-color:#ff6e40; -webkit-text-fill-color:white">
+                    + Mesaj göndər
+                </a>
+            </div>
+            <div class="col-md-5">
+                <form class="mt-4 mt-md-0">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Mesaj axtar...">
+                        <button class="btn btn-outline-light" type="button">
+                            <i class="bi bi-search"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="email-list">
+            <ul class="list-group">
+                @foreach(var message in Model)
+                {
+                    <li class="list-group-item text-success" data-detail-url="email-detail.html">
+                    <div class="flex-shrink-0">
+                        <input class="form-check-input me-3" type="checkbox">
+                    </div>
+                    <div class="d-none d-sm-block flex-shrink-0">
+                        <figure class="avatar me-3">
+                            <img src="@message.SenderUser.ProfileImage"
+                                 class="rounded-circle" alt="image">
+                        </figure>
+                        </div>
+                    <div class="flex-grow-1">
+                        <div class="mb-1 d-flex justify-content-between align-items-center">
+                                <h6 class="text-truncate mb-0">@message.SenderUser.Name @message.SenderUser.Surname 
+                                    @if(message.SenderUser.IsAdmin == true && message.SenderUser.IsSeller == false)
+                                    {
+                                        <img style="margin-bottom:2px;height:15px; width:15px;" src="~/mavi-tik.png" />
+                                    }
+                                    else
+                                    {
+                                        
+                                    }
+                                </h6>
+                            <div class="ps-3 d-flex">
+                                    <span class="text-nowrap text-muted">@(((DateTime)message.MessageDate).ToString("MMM dd, HH:mm"))</span>
+                                <div class="dropdown ms-3">
+                                    <a href="#" class="btn btn-floating btn-sm" data-bs-toggle="dropdown">
+                                        <i class="bi bi-three-dots"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-end">
+                                        <a class="dropdown-item" href="/Seller/Message/MessageDetails/@message.MessageID">Mesajı aç</a>
+                                            @if (message.IsRead)
+                                            {
+                                                <a class="dropdown-item" href="/Seller/Message/UnReadMessage/@message.MessageID">Oxunmamış kimi göstər</a>
+                                            }
+                                            else
+                                            {
+                                                <a class="dropdown-item" href="/Seller/Message/ReadMessage/@message.MessageID">Oxunmuş kimi göstər</a>
+                                            }
+                                            
+                                        
+                                            <a class="dropdown-item text-danger" href="/Seller/Message/DeleteInMessage/@message.MessageID">Sil</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="text-muted d-flex justify-content-between">
+                            <div class="text-truncate">
+                                    @message.Subject
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                }
+                
+            </ul>
+        </div>
+
+        <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center mt-4">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="col-lg-3">
+        <div class="card sticky-top">
+            <div class="card-body">
+                <ul class="nav nav-pills flex-column gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link active d-flex align-items-center" href="/Seller/Message/Inbox">
+                            <span class="bi bi-envelope me-3"></span>
+                            Gələn mesajlar
+                            @if (ViewBag.CountMessage == 0)
+                            {
+
+                            }
+                            else
+                            {
+                                <span class="badge bg-primary ms-auto">@ViewBag.CountMessage</span>
+                            }
+                            
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Seller/Message/Sentbox">
+                            <span class="bi bi-check2 me-3"></span> Göndərilənlər
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Seller/Message/DeletedMessages">
+                            <span class="bi bi-trash me-3"></span> Zibil qutusu
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+

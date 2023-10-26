@@ -1,0 +1,21 @@
+﻿@model IEnumerable<EntityLayer.Concrete.AppUser>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th><strong>Ad və soyad</strong></th>
+            <th><strong>Mağaza</strong></th>
+            <th><strong>Email</strong></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var admin in Model)
+        {
+            <tr>
+                <td><img style="border-radius:50% ;height:30px; width:30px;" src="@admin.ProfileImage" />  @admin.Name @admin.Surname</td>
+                <td>@admin.Store.Name</td>
+                <td>@admin.Email</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

@@ -1,0 +1,109 @@
+﻿@using EntityLayer.Concrete
+@model Tuple<Message, AppUser>
+@{
+    ViewData["Title"] = "Mesaj göndər";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+}
+
+<div class="row">
+    <div class="col-lg-9">
+        <div class="card">
+            <div class="card-body">
+                <form method="post">
+                    <div class="col-md-12">
+                        <label for="inputEmail4" class="form-label">Email</label>
+                        <input name="User.Email" type="email" class="form-control" id="inputEmail4" required>
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <label for="inputAddress" class="form-label">Başlıq</label>
+                        <input name="Message.Subject" type="text" class="form-control" id="inputAddress" required> 
+                    </div>
+                    <br />
+                    <div class="col-md-12">
+                        <label for="inputCity" class="form-label">Mesaj mətni</label>
+                        <textarea name="Message.MessageDetails" type="text" rows="15" class="form-control" id="inputCity" required></textarea>
+                    </div>
+                    <br />
+                    <div class="col-12">
+                        <button type="submit" class="btn btn-primary">Göndər</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModalLg">
+                            Kontaktlar
+                        </button>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+        
+    </div>
+    <div class="col-lg-3">
+        <div class="card sticky-top">
+            <div class="card-body">
+                <ul class="nav nav-pills flex-column gap-2">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="/Seller/Message/Inbox">
+                            <span class="bi bi-envelope me-3"></span>
+                            Gələn mesajlar
+                            @if (ViewBag.CountMessage == 0)
+                            {
+
+                            }
+                            else
+                            {
+                                <span class="badge bg-primary ms-auto">@ViewBag.CountMessage</span>
+                            }
+
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Seller/Message/Sentbox">
+                            <span class="bi bi-check2 me-3"></span> Göndərilənlər
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/Seller/Message/DeletedMessages">
+                            <span class="bi bi-trash me-3"></span> Zibil qutusu
+                        </a>
+                    </li>
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModalLg" tabindex="-1" aria-labelledby="exampleModalLgLabel"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title h4" id="exampleModalLgLabel">Kontaktlar</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" href="#pills-home"
+                           role="tab" aria-controls="pills-home" aria-selected="true">Adminlər</a>
+                    </li>
+                    <li class="nav-item" role="presentation">
+                        <a class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" href="#pills-profile"
+                           role="tab" aria-controls="pills-profile" aria-selected="false">Satıcılar</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                         aria-labelledby="pills-home-tab">
+                        @await Component.InvokeAsync("AdminList")
+                    </div>
+                    <div class="tab-pane fade" id="pills-profile" role="tabpanel"
+                         aria-labelledby="pills-profile-tab">
+                        @await Component.InvokeAsync("SellerList")
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

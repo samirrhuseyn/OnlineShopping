@@ -17,7 +17,25 @@ namespace DataAccessLayer.Concrete
 
         }
 
-        public DbSet<Store>? Stores { get; set; }
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+			modelBuilder.Entity<Message>()
+				.HasOne(x => x.SenderUser)
+				.WithMany(y => y.Sender)
+				.HasForeignKey(z => z.SenderID)
+				.OnDelete(DeleteBehavior.ClientSetNull);
+
+			modelBuilder.Entity<Message>()
+				.HasOne(x => x.RecieverUser)
+				.WithMany(y => y.Reciever)
+				.HasForeignKey(z => z.ReceiverID)
+				.OnDelete(DeleteBehavior.ClientSetNull);
+
+
+			base.OnModelCreating(modelBuilder);
+		}
+
+		public DbSet<Store>? Stores { get; set; }
         public DbSet<Category>? Categories { get; set; }
         public DbSet<Product>? Products { get; set; }
         public DbSet<Sale>? Sales { get; set; }
@@ -28,5 +46,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<Reply>? Replies { get; set; }
         public DbSet<ReplyToReply>? ReplyToReplies { get; set; }
         public DbSet<Cart>? Cart { get; set; }
+        public DbSet<Message>? Messages { get; set; }
     }
 }
