@@ -1,7 +1,7 @@
 ﻿@using EntityLayer.Concrete
 @model List<Message>
 @{
-    ViewData["Title"] = "Gələn mesajlar";
+    ViewData["Title"] = "Gələn mesajlar("+@ViewBag.CountMessage+")";
     Layout = "~/Views/Shared/_sellerLayout.cshtml";
 }
 
@@ -43,7 +43,7 @@
             <ul class="list-group">
                 @foreach(var message in Model)
                 {
-                    <li class="list-group-item text-success" data-detail-url="email-detail.html">
+                    <li class="list-group-item text-success">
                     <div class="flex-shrink-0">
                         <input class="form-check-input me-3" type="checkbox">
                     </div>
