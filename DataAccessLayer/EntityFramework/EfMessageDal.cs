@@ -45,6 +45,7 @@ namespace DataAccessLayer.EntityFramework
 			{
 				return context.Messages
 					.Include(x => x.SenderUser)
+					.Include(x=>x.SenderUser.Store)
 					.FirstOrDefault(x => x.MessageID == id);
 			}
 		}
