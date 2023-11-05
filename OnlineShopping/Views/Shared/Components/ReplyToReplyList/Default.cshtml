@@ -9,7 +9,20 @@
         </div>
         <div class="single-comment-content">
             <div class="single-comment-content-top">
-                <h6>@reply.User.Name @reply.User.Surname – @(((DateTime)reply.ReplyToReplyDateTime).ToString("MMMM dd, yyyy HH:mm"))</h6>
+                <h6>@reply.User.Name @reply.User.Surname
+                    @if (reply.User.IsAdmin == true && reply.User.IsSeller == false)
+                    {
+                        <img style="margin-bottom:2px;height:15px; width:15px;" src="~/mavi-tik.png" />
+                    }
+                    else if (reply.User.IsAdmin == false && reply.User.IsSeller == true)
+                    {
+                        <img style="margin-bottom:2px;height:15px; width:15px;" src="~/3718330.png" />
+                    }
+                    else
+                    {
+
+                    }
+                    – @(((DateTime)reply.ReplyToReplyDateTime).ToString("MMMM dd, yyyy HH:mm"))</h6>
             </div>
             <p>
                 @reply.ReplyToReplyContent

@@ -1,17 +1,20 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using NuGet.Protocol.Plugins;
 using OnlineShopping.Models;
 
 namespace OnlineShopping.Controllers
 {
     public class ReplyController : Controller
     {
+        NotificationManager notificationManager = new NotificationManager(new EfNotificationDal());
         ReplyManager replyManager = new ReplyManager(new EfReplyDal());
         private readonly UserManager<AppUser> _userManager;
-
+        Context context = new Context(); 
         public ReplyController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -29,6 +32,15 @@ namespace OnlineShopping.Controllers
                 ReplyDateTime = DateTime.Parse(DateTime.Now.ToShortTimeString())
             };
             replyManager.TAdd(reply);
+            Notification notification = new Notification()
+            {
+                NotificationTitle = values.Name + " " + values.Surname + " sənə cavab verdi!",
+                NotificationContent = addReply.Content,
+                NotificationTypeTypeID = 3,
+                NotificationDate = Convert.ToDateTime(DateTime.Now.ToShortTimeString()),
+                UserID = context.Comments.Where(x => x.CommentID == addReply.CommentId).Select(x => x.UserID).FirstOrDefault()
+            };
+            notificationManager.TAdd(notification);
             return LocalRedirect("/Product/ProductDetails/" + addReply.ProductId);
         }
     }

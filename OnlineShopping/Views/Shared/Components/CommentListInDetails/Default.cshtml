@@ -19,7 +19,20 @@
             
             <div class="single-comment-content">
                 <div class="single-comment-content-top">
-                    <h6>@comment.User.Name @comment.User.Surname – @(((DateTime)comment.CommentDateTime).ToString("MMMM dd, yyyy HH:mm"))</h6>
+                    <h6>@comment.User.Name @comment.User.Surname
+                        @if (comment.User.IsAdmin == true && comment.User.IsSeller == false)
+                        {
+                            <img style="margin-bottom:2px;height:15px; width:15px;" src="~/mavi-tik.png" />
+                        }
+                        else if (comment.User.IsAdmin == false && comment.User.IsSeller == true)
+                        {
+                            <img style="margin-bottom:2px;height:15px; width:15px;" src="~/3718330.png" />
+                        }
+                        else
+                        {
+                            
+                        }
+                        – @(((DateTime)comment.CommentDateTime).ToString("MMMM dd, yyyy HH:mm"))</h6>
                     <button type="button" class="@comment.Content" onclick="document.getElementsByClassName('@comment.CommentDateTime')[0].style.display = 'block'; document.getElementsByClassName('@comment.Content')[0].style.display = 'none';">Cavab yaz</button>
                     <form method="POST" id="welcomeDiv" class="@comment.CommentDateTime" action="/Reply/AddReply/" style="display:none;">
                         <input name="ProductId" value="@ViewBag.ID" hidden />

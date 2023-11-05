@@ -1,0 +1,33 @@
+﻿@using EntityLayer.Concrete
+@model List<Notification>
+@{
+    ViewData["Title"] = "Bildirişlər";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="col-xl-12 col-xxl-12 col-lg-12">
+    <div class="card">
+        <div class="card-body p-0">
+            <div id="DZ_W_TimeLine11" class="widget-timeline dlab-scroll style-1 my-4 px-4">
+                <ul class="timeline">
+                    @foreach (var notification in Model)
+                    {
+
+                        <li>
+                            <div class="timeline-badge @notification.NotificationType.Color"></div>
+                            <a class="timeline-panel text-muted" >
+                                <span>@(((DateTime)notification.NotificationDate).ToString("dddd, MMMM dd, yyyy HH:mm"))</span>
+                                <h6 class="mb-0">@notification.NotificationTitle</h6>
+                                <p>@Html.Raw(notification.NotificationContent)</p>
+                            </a>
+                        </li>
+                    }
+
+
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+

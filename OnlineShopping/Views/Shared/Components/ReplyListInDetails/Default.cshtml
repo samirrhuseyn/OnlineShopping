@@ -12,7 +12,20 @@
         </div>
         <div class="single-comment-content">
             <div class="single-comment-content-top">
-                <h6>@reply.User.Name @reply.User.Surname – @(((DateTime)reply.ReplyDateTime).ToString("MMMM dd, yyyy HH:mm"))</h6>
+                <h6>@reply.User.Name @reply.User.Surname
+                    @if (reply.User.IsAdmin == true && reply.User.IsSeller == false)
+                    {
+                        <img style="margin-bottom:2px;height:15px; width:15px;" src="~/mavi-tik.png" />
+                    }
+                    else if (reply.User.IsAdmin == false && reply.User.IsSeller == true)
+                    {
+                        <img style="margin-bottom:2px;height:15px; width:15px;" src="~/3718330.png" />
+                    }
+                    else
+                    {
+
+                    }– @(((DateTime)reply.ReplyDateTime).ToString("MMMM dd, yyyy HH:mm"))
+                </h6>
                 <button class="@reply.ReplyContent" onclick="document.getElementsByClassName('@reply.ReplyDateTime')[0].style.display = 'block'; document.getElementsByClassName('@reply.ReplyContent')[0].style.display = 'none';" type="button">Cavab yaz</button>
             </div>
             <form action="/ReplyToReply/AddReply/" style="display:none;" id="welcomeDiv" class="@reply.ReplyDateTime" method="POST" class="reply-form1 d-none" id="comment-2-reply-form">

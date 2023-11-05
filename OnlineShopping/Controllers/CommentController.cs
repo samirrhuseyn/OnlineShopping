@@ -9,6 +9,8 @@ namespace OnlineShopping.Controllers
 {
     public class CommentController : Controller
     {
+        NotificationManager notificationManager = new NotificationManager(new EfNotificationDal());
+
         CommentManager commentManager = new CommentManager(new EfCommentDal());
         private readonly UserManager<AppUser> _userManager;
 

@@ -11,7 +11,7 @@ namespace OnlineShopping.Areas.Seller.Controllers
     public class MessageController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
-
+        NotificationManager notificationManager = new NotificationManager(new EfNotificationDal());
         MessageManager messageManager = new MessageManager(new EfMessageDal());
         Context context = new Context();
         public MessageController(UserManager<AppUser> userManager)
@@ -60,6 +60,15 @@ namespace OnlineShopping.Areas.Seller.Controllers
             message.IsDelete = false;
             message.IsRead = false;
             messageManager.TAdd(message);
+            Notification notification = new Notification()
+            {
+                NotificationTitle = sender.Name + " " + sender.Surname + " sənə mesaj göndərdi!",
+                NotificationContent = null,
+                NotificationTypeTypeID = 1,
+                NotificationDate = Convert.ToDateTime(DateTime.Now.ToShortTimeString()),
+                UserID = receiver.Id
+            };
+            notificationManager.TAdd(notification);
             return RedirectToAction("SentBox");
         }
 

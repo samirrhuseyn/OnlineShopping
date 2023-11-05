@@ -1,0 +1,56 @@
+﻿@using EntityLayer.Concrete
+@model List<Notification>
+@{
+    ViewData["Title"] = "Bildirişlər";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+}
+<div class="card">
+    <div class="sidebar-content">
+        <div class="tab-content">
+            <div class="tab-pane active" id="activities">
+                <div class="tab-pane-body">
+                    <ul class="list-group list-group-flush">
+                        @foreach (var notification in Model)
+                        {
+                            <li class="px-0 list-group-item">
+                                <a data-bs-toggle="collapse" href="#@notification.NotificationType.Icon@notification.NotificationID" role="button" class="d-flex">
+                                    <div class="flex-shrink-0">
+                                        <figure class="avatar avatar-@notification.NotificationType.Color me-3">
+                                            <span class="avatar-text rounded-circle">
+                                                <i class="bi bi-@notification.NotificationType.Icon"></i>
+                                            </span>
+                                        </figure>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <p class="mb-0 fw-bold d-flex justify-content-between">
+                                            @notification.NotificationTitle
+                                        </p>
+                                        <span class="text-muted small">
+                                            <i class="bi bi-clock me-1"></i> @(((DateTime)notification.NotificationDate).ToString("dd-MMMM-yyyy HH:mm"))
+                                        </span>
+                                    </div>
+                                </a>
+                                <br />
+                                @if (notification.NotificationContent != null)
+                                {
+                                    <div class="collapse" id="@notification.NotificationType.Icon@notification.NotificationID">
+                                        <div class="card card-body">
+                                            @Html.Raw(notification.NotificationContent)
+                                        </div>
+                                    </div>
+                                }
+                                else
+                                {
+                                    
+                                }
+
+                            </li>
+                        }
+
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

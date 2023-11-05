@@ -1,30 +1,51 @@
-﻿<div class="tab-pane active" id="activities">
+﻿@model IEnumerable<EntityLayer.Concrete.Notification>
+<div class="tab-pane active" id="activities">
     <div class="tab-pane-body">
         <ul class="list-group list-group-flush">
-            <li class="px-0 list-group-item">
-                <a href="#" class="d-flex">
-                    <div class="flex-shrink-0">
-                        <figure class="avatar avatar-info me-3">
-                            <span class="avatar-text rounded-circle">
-                                <img style="border-radius:50%" src="~/vetra/assets/images/user/man_avatar3.jpg" />
+            @foreach (var message in Model)
+            {
+                <li class="px-0 list-group-item">
+                    <a href="#" class="d-flex">
+                        <div class="flex-shrink-0">
+                            <figure class="avatar avatar-@message.NotificationType.Color me-3">
+                                <span class="avatar-text rounded-circle">
+                                    <i class="bi bi-@message.NotificationType.Icon"></i>
+                                </span>
+                            </figure>
+                        </div>
+                        <div class="flex-grow-1">
+                            <p class="mb-0 fw-bold d-flex justify-content-between">
+                                @message.NotificationTitle
+                            </p>
+                            @if (message.NotificationContent != null)
+                            {
+                                @if (message.NotificationContent.Length < 30)
+                                {
+                                    <span style="-webkit-text-fill-color:black">@Html.Raw(message.NotificationContent)</span>
+                                }
+                                else
+                                {
+                                    <span style="-webkit-text-fill-color:black">@Html.Raw(message.NotificationContent.Substring(0, 30))...</span>
+                                }
+                                <br />
+                            }
+                            else
+                            {
+
+                            }
+                            <span class="text-muted small">
+                                <i class="bi bi-clock me-1"></i> @(((DateTime)message.NotificationDate).ToString("MMMM dd, HH:mm"))
                             </span>
-                        </figure>
-                    </div>
-                    <div class="flex-grow-1">
-                        <p class="mb-0 fw-bold d-flex justify-content-between">
-                            Samir sənə bir mesaj göndərdi!
-                        </p>
-                        <span class="text-muted small">
-                            <i class="bi bi-clock me-1"></i> September 06, 2023
-                        </span>
-                    </div>
-                </a>
-            </li>
+                        </div>
+                    </a>
+                </li>
+            }
+
         </ul>
     </div>
     <div class="tab-pane-footer">
-        <a href="#" class="btn btn-primary">
-            All Messages
+        <a href="/Seller/Notification/Index" class="btn btn-primary btn-block">
+            Bütün bildirimlərə bax
         </a>
     </div>
 </div>

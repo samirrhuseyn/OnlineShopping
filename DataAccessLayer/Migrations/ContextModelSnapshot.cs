@@ -342,6 +342,61 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Notification", b =>
+                {
+                    b.Property<int>("NotificationID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NotificationID"), 1L, 1);
+
+                    b.Property<string>("NotificationContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NotificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NotificationTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NotificationTypeTypeID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("NotificationID");
+
+                    b.HasIndex("NotificationTypeTypeID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Notifications");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.NotificationType", b =>
+                {
+                    b.Property<int>("TypeID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("TypeID"), 1L, 1);
+
+                    b.Property<string>("Color")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Icon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("TypeName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TypeID");
+
+                    b.ToTable("NotificationTypes");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
                 {
                     b.Property<int>("ProductID")
@@ -739,6 +794,25 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("SenderUser");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Notification", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.NotificationType", "NotificationType")
+                        .WithMany("Notification")
+                        .HasForeignKey("NotificationTypeTypeID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany("Notification")
+                        .HasForeignKey("UserID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("NotificationType");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Category", "Category")
@@ -860,6 +934,8 @@ namespace DataAccessLayer.Migrations
 
                     b.Navigation("Comments");
 
+                    b.Navigation("Notification");
+
                     b.Navigation("Reciever");
 
                     b.Navigation("Reply");
@@ -877,6 +953,11 @@ namespace DataAccessLayer.Migrations
             modelBuilder.Entity("EntityLayer.Concrete.Comment", b =>
                 {
                     b.Navigation("Reply");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.NotificationType", b =>
+                {
+                    b.Navigation("Notification");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
