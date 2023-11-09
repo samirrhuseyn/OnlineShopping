@@ -1,0 +1,61 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Reply>
+
+
+<div style="margin-left:100px;" id="DZ_W_Todo3" class="widget-media dlab-scroll my-4 px-4">
+    <ul class="timeline">
+        @foreach (var reply in Model)
+        {
+            <li>
+                @{
+                    ViewData["replyID"] = reply.ReplyId;
+                }
+                <div class="timeline-panel">
+                    <div class="media me-3">
+                        <img alt="image" width="50" src="@reply.User.ProfileImage">
+                    </div>
+                    <div class="media-body">
+                        <h5 class="mb-1">
+                            @reply.User.Name @reply.User.Surname
+                            @if (reply.User.IsAdmin == true && reply.User.IsSeller == false)
+                            {
+                                <img style="margin-bottom:2px;height:15px; width:15px;" src="~/mavi-tik.png" />
+                            }
+                            else if (reply.User.IsAdmin == false && reply.User.IsSeller == true)
+                            {
+                                <img style="margin-bottom:2px;height:15px; width:15px;" src="~/3718330.png" />
+                            }
+                            else
+                            {
+
+                            }
+                            <small class="text-muted">@(((DateTime)reply.ReplyDateTime).ToString("MMMM dd, yyyy HH:mm"))</small>
+                        </h5>
+                        <p class="mb-1">@reply.ReplyContent</p>
+                        <button type="button" onclick="document.getElementsByClassName('@reply.ReplyDateTime')[0].style.display = 'block'; document.getElementsByClassName('@reply.ReplyContent')[0].style.display = 'none';" class="btn btn-primary btn-xxs shadow @reply.ReplyContent">Cavab ver</button>
+                        @if (reply.UserID == ViewBag.UserID)
+                        {
+                            <a href="/Admin/Reply/DeleteReply/@reply.ReplyId" class="btn btn-outline-danger btn-xxs">Sil</a>
+                        }
+                        else
+                        {
+
+                        }
+
+                        <form style="display:none;" class="@reply.ReplyDateTime" method="post" action="/Admin/ReplyToReply/AddReply">
+                            <input name="ProductID" value="@ViewBag.ID" hidden />
+                            <input name="ReplyID" value="@reply.ReplyId" hidden>
+                            <div class="mb-3">
+                                <textarea name="Content" class="form-control" rows="7" id="comment" required></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-success">Göndər</button>
+                            <button type="button" onclick="document.getElementsByClassName('@reply.ReplyDateTime')[0].style.display = 'none'; document.getElementsByClassName('@reply.ReplyContent')[0].style.display = 'block';" class="btn btn-danger">Ləğv et</button>
+                        </form>
+                    </div>
+                </div>
+            </li>
+            @await Component.InvokeAsync("ReplyToReplyListAdmin")
+        }
+
+    </ul>
+    
+</div>

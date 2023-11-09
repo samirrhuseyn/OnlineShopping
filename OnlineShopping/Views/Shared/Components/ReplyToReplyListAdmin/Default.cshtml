@@ -1,0 +1,46 @@
+﻿@model IEnumerable<EntityLayer.Concrete.ReplyToReply>
+
+<div style="margin-left:80px;" id="DZ_W_Todo3" class="widget-media dlab-scroll my-4 px-4">
+    <ul class="timeline">
+        @foreach (var reply in Model)
+        {
+            <li>
+                
+                <div class="timeline-panel">
+                    <div class="media me-3">
+                        <img alt="image" width="50" src="@reply.User.ProfileImage">
+                    </div>
+                    <div class="media-body">
+                        <h5 class="mb-1">
+                            @reply.User.Name @reply.User.Surname
+                            @if (reply.User.IsAdmin == true && reply.User.IsSeller == false)
+                            {
+                                <img style="margin-bottom:2px;height:15px; width:15px;" src="~/mavi-tik.png" />
+                            }
+                            else if (reply.User.IsAdmin == false && reply.User.IsSeller == true)
+                            {
+                                <img style="margin-bottom:2px;height:15px; width:15px;" src="~/3718330.png" />
+                            }
+                            else
+                            {
+
+                            }
+                            <small class="text-muted">@(((DateTime)reply.ReplyToReplyDateTime).ToString("MMMM dd, yyyy HH:mm"))</small>
+                        </h5>
+                        <p class="mb-1">@reply.ReplyToReplyContent</p>
+                        @if (reply.UserID == ViewBag.UserID)
+                        {
+                            <a href="/Admin/ReplyToReply/DeleteReply/@reply.ReplyToReplyID" class="btn btn-outline-danger btn-xxs">Sil</a>
+                        }
+                        else
+                        {
+
+                        }
+
+                    </div>
+                </div>
+            </li>
+        }
+
+    </ul>
+</div>

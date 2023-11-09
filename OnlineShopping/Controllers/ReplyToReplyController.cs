@@ -42,5 +42,12 @@ namespace OnlineShopping.Controllers
             notificationManager.TAdd(notification);
             return LocalRedirect("/Product/ProductDetails/" + addReplyToReply.ProductId);
         }
+
+        public IActionResult DeleteReply(int id)
+        {
+            var value = replyManager.TGetByID(id);
+            replyManager.TDelete(value);
+            return LocalRedirect("/Home/Index/");
+        }
     }
 }

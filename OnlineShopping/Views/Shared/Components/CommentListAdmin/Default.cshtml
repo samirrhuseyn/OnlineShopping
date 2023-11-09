@@ -1,0 +1,63 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Comment>
+
+
+<div  class="card-body p-0">
+    
+    <div id="DZ_W_Todo3" class="widget-media dlab-scroll my-4 px-4">
+        <ul class="timeline">
+            @foreach (var comment in Model)
+            {
+                <li>
+                    @{
+                        ViewData["commentID"] = comment.CommentID;
+                    }
+                    <div class="timeline-panel">
+                        <div class="media me-3">
+                            <img alt="image" width="50" src="@comment.User.ProfileImage">
+                        </div>
+                        <div class="media-body">
+                            <h5 class="mb-1">@comment.User.Name @comment.User.Surname
+                                @if (comment.User.IsAdmin == true && comment.User.IsSeller == false)
+                                {
+                                    <img style="margin-bottom:2px;height:15px; width:15px;" src="~/mavi-tik.png" />
+                                }
+                                else if (comment.User.IsAdmin == false && comment.User.IsSeller == true)
+                                {
+                                    <img style="margin-bottom:2px;height:15px; width:15px;" src="~/3718330.png" />
+                                }
+                                else
+                                {
+
+                                }
+                                <small class="text-muted">@(((DateTime)comment.CommentDateTime).ToString("MMMM dd, yyyy HH:mm"))</small></h5>
+                            <p class="mb-1">@comment.Content</p>
+                            <button type="button" onclick="document.getElementsByClassName('@comment.CommentDateTime')[0].style.display = 'block'; document.getElementsByClassName('@comment.Content')[0].style.display = 'none';" class="btn btn-primary btn-xxs shadow @comment.Content">Cavab ver</button>
+                            @if (comment.UserID == ViewBag.UserID)
+                            {
+                                <a href="/Admin/Comment/DeleteComment/@comment.CommentID" class="btn btn-outline-danger btn-xxs">Sil</a>
+                            }
+                            else
+                            {
+
+                            }
+
+                            <form style="display:none;" class="@comment.CommentDateTime" method="post" action="/Admin/Reply/AddReply">
+                                <input name="ProductID" value="@ViewBag.ID" hidden />
+                                <input name="CommentId" value="@comment.CommentID" hidden />
+                                <div class="mb-3">
+                                    <textarea name="Content" class="form-control" rows="7" id="comment" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-success">Göndər</button>
+                                <button type="button" onclick="document.getElementsByClassName('@comment.CommentDateTime')[0].style.display = 'none'; document.getElementsByClassName('@comment.Content')[0].style.display = 'block';" class="btn btn-danger">Ləğv et</button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+                @await Component.InvokeAsync("ReplyListAdmin")
+            }
+            
+        </ul>
+    </div>
+    
+</div>
+

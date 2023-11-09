@@ -1,0 +1,79 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Comment>
+
+<div class="card">
+    <div class="card-body">
+        <div class="tab-content">
+            <div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="list-group list-group-flush mb-4">
+                            @foreach (var comment in Model)
+                            {
+
+                                <div class="list-group-item d-flex px-0">
+                                    <div class="avatar flex-shrink-0 me-3">
+                                        <span class="avatar-text rounded-circle"><img style="border-radius:50%" src="@comment.User.ProfileImage"></span>
+                                    </div>
+                                    @{
+                                        ViewData["commentID"] = comment.CommentID;
+                                    }
+                                    <div>
+                                        <h5 class="mb-1">
+                                            @comment.User.Name @comment.User.Surname
+                                            @if (comment.User.IsAdmin == true && comment.User.IsSeller == false)
+                                            {
+                                                <img style="margin-bottom:2px;height:15px; width:15px;" src="~/mavi-tik.png" />
+                                            }
+                                            else if (comment.User.IsAdmin == false && comment.User.IsSeller == true)
+                                            {
+                                                <img style="margin-bottom:2px;height:15px; width:15px;" src="~/3718330.png" />
+                                            }
+                                            else
+                                            {
+
+                                            }
+                                        </h5>
+                                        <span style="-webkit-text-fill-color:gray">@(((DateTime)comment.CommentDateTime).ToString("MMMM dd, yyyy HH:mm"))
+                                            @if (comment.UserID == ViewBag.UserID)
+                                            {
+                                                <a style="color:red" href="/Seller/Comment/DeleteComment/@comment.CommentID">
+                                                    <svg style="margin-left:50px;" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                        <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                    </svg>
+                                                </a>
+                                            }
+                                            else
+                                            {
+
+                                            }
+                                        </span>
+                                        <div>
+                                            @comment.Content
+                                        </div>
+                                        <form method="POST" id="welcomeDiv" class="@comment.CommentDateTime" action="/Seller/Reply/ReplyAdd/" style="display:none;">
+                                            <input name="ProductId" value="@ViewBag.ID" hidden />
+                                            <input name="CommentId" value="@comment.CommentID" hidden />
+                                            <br>
+                                            <div class="mb-3">
+                                                <textarea name="Content" class="form-control" id="exampleFormControlTextarea1" rows="3" required></textarea>
+                                            </div>
+                                            <button type="submit" class="btn btn-success">Göndər</button>
+                                            <button onclick="document.getElementsByClassName('@comment.CommentDateTime')[0].style.display = 'none'; document.getElementsByClassName('@comment.Content')[0].style.display = 'block';" type="button" class="btn btn-danger">Ləğv et</button>
+                                            <br>
+                                        </form>
+                                        <a onclick="document.getElementsByClassName('@comment.CommentDateTime')[0].style.display = 'block'; document.getElementsByClassName('@comment.Content')[0].style.display = 'none';" class="btn btn-link @comment.Content">Cavab ver</a>
+                                    </div>
+
+                                </div>
+                                @await Component.InvokeAsync("SellerReply")
+
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

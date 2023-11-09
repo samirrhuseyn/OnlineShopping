@@ -9,7 +9,6 @@ namespace OnlineShopping.Controllers
 {
     public class CommentController : Controller
     {
-        NotificationManager notificationManager = new NotificationManager(new EfNotificationDal());
 
         CommentManager commentManager = new CommentManager(new EfCommentDal());
         private readonly UserManager<AppUser> _userManager;
@@ -33,6 +32,13 @@ namespace OnlineShopping.Controllers
             };
             commentManager.TAdd(comment);
             return LocalRedirect("/Product/ProductDetails/" + comment.ProductID);
+        }
+
+        public IActionResult DeleteComment(int id)
+        {
+            var value = commentManager.TGetByID(id);
+            commentManager.TDelete(value);
+            return LocalRedirect("/Product/ProductDetails/" + value.ProductID);
         }
     }
 }

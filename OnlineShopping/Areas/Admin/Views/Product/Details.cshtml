@@ -1,124 +1,139 @@
 ﻿@model EntityLayer.Concrete.Product
+@using DataAccessLayer.Concrete
+
 @{
     ViewData["Title"] = "Model:" + " " + Model.ProductCode;
     Layout = "~/Views/Shared/_adminLayout.cshtml";
+    ViewData["ID"] = Model.ProductID;
 }
 
 <div class="row">
-	<div class="col-lg-12">
-		<div class="card">
-			<div class="card-body">
-				<div class="row">
-					<div class="col-xl-3 col-lg-6  col-md-6 col-xxl-5 ">
-						<!-- Tab panes -->
-						<div class="tab-content" id="myTabContent">
-							<div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-								<img class="img-fluid rounded  " src="@Model.Image1" alt="">
-							</div>
-							<div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-								<img class="img-fluid rounded " src="@Model.Image2" alt="">
-							</div>
-							<div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
-								<img class="img-fluid rounded" src="@Model.Image3" alt="">
-							</div>
-							
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-xl-3 col-lg-6  col-md-6 col-xxl-5 ">
+                        <!-- Tab panes -->
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                                <img class="img-fluid rounded  " src="@Model.Image1" alt="">
+                            </div>
+                            <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                                <img class="img-fluid rounded " src="@Model.Image2" alt="">
+                            </div>
+                            <div class="tab-pane fade" id="contact-tab-pane" role="tabpanel" aria-labelledby="contact-tab" tabindex="0">
+                                <img class="img-fluid rounded" src="@Model.Image3" alt="">
+                            </div>
 
-						</div>
-						<ul class="nav nav-tabs slide-item-list mt-3" id="myTab" role="tablist">
-							<li class="nav-item" role="presentation">
-								<a href="#first" class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" role="tab" aria-controls="home-tab-pane" aria-selected="true"><img class="img-fluid me-2 rounded" src="@Model.Image1" alt="" width="80"></a>
-							</li>
-							<li class="nav-item" role="presentation">
-								<a href="#second" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><img class="img-fluid me-2 rounded" src="@Model.Image2" alt="" width="80"></a>
-							</li>
-							<li class="nav-item" role="presentation">
-								<a href="#third" class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><img class="img-fluid me-2 rounded" src="@Model.Image3" alt="" width="80"></a>
-							</li>
-							
 
-						</ul>
-					</div>
-					<!--Tab slider End-->
-					<div class="col-xl-9 col-lg-6  col-md-6 col-xxl-7 col-sm-12">
-						<div class="product-detail-content">
-							<!--Product details-->
-							<div class="new-arrival-content">
-								<h4>
-									@Model.ProductName @if (Model.Interest != 0)
-									{
-										<span class="text-success"> -@Model.Interest%</span>
-									}
-									else
-									{
+                        </div>
+                        <ul class="nav nav-tabs slide-item-list mt-3" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <a href="#first" class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" role="tab" aria-controls="home-tab-pane" aria-selected="true"><img class="img-fluid me-2 rounded" src="@Model.Image1" alt="" width="80"></a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a href="#second" class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" role="tab" aria-controls="profile-tab-pane" aria-selected="false"><img class="img-fluid me-2 rounded" src="@Model.Image2" alt="" width="80"></a>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <a href="#third" class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact-tab-pane" role="tab" aria-controls="contact-tab-pane" aria-selected="false"><img class="img-fluid me-2 rounded" src="@Model.Image3" alt="" width="80"></a>
+                            </li>
 
-									}
-								</h4>
-								<div class="comment-review star-rating d-flex">
-									<ul>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
-										<li><i class="fa fa-star"></i></li>
 
-									</ul>
-								</div>
-								<div class="d-table mb-2">
-									@if (Model.DiscountedPrice != null)
-									{
-										<p class="price float-start d-block"><del>@Model.Price ₼</del> @Model.DiscountedPrice ₼</p>
-									}
-									else
-									{
-										<p class="price float-start d-block">@Model.Price ₼</p>
-									}
-								</div>
-								@if (Model.InStock)
-								{
-									<p><span class="item fs-14">Mövcudluq:</span> Stokda var <i class="fa fa-check-circle text-success"></i></p>
-								}
-								else
-								{
-									<p><span class="item fs-14">Mövcudluq:</span> Stokda yoxdur <i class="fa fa-circle-xmark text-danger"></i></p>
-								}
-								<p><span class="item fs-14">Product code:</span>	 @Model.ProductCode</p>
-								<p><span class="item fs-14">Brand:</span> @Model.Store.Name</p>
-								<p class="text-content">
-									@Html.Raw(Model.ProductDescription)
-								</p>
-							</div>
-						</div>
-					</div>
-				</div>
+                        </ul>
+                    </div>
+                    <!--Tab slider End-->
+                    <div class="col-xl-9 col-lg-6  col-md-6 col-xxl-7 col-sm-12">
+                        <div class="product-detail-content">
+                            <!--Product details-->
+                            <div class="new-arrival-content">
+                                <h4>
+                                    @Model.ProductName @if (Model.Interest != 0)
+                                    {
+                                        <span class="text-success"> -@Model.Interest%</span>
+                                    }
+                                    else
+                                    {
 
-			</div>
-		</div>
-	</div>
-	<div class="col-xl-4 col-xxl-12 col-lg-12">
-		<div class="card  pb-0">
-			<div class="card-header border-0">
-				<h4 class="card-title">Rəylər</h4>
-			</div>
-			<div class="card-body p-0">
-				<div id="DZ_W_Todo3" class="widget-media dlab-scroll my-4 px-4">
-					<ul class="timeline">
-						<li>
-							<div class="timeline-panel">
-								<div class="media me-3">
-									<img alt="image" width="50" src="~/Akademi/xhtml/images/avatar/1.jpg">
-								</div>
-								<div class="media-body">
-									<h5 class="mb-1">Alfie Mason <small class="text-muted">29 July 2020</small></h5>
-									<p class="mb-1">I shared this on my fb wall a few months back..</p>
-									<a href="#" class="btn btn-primary btn-xxs shadow">Reply</a>
-									<a href="#" class="btn btn-outline-danger btn-xxs">Delete</a>
-								</div>
-							</div>
-						</li>
-						
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
+                                    }
+                                </h4>
+                                <div class="comment-review star-rating d-flex">
+                                    <ul>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+                                        <li><i class="fa fa-star"></i></li>
+
+                                    </ul>
+                                </div>
+                                <div class="d-table mb-2">
+                                    @if (Model.DiscountedPrice != null)
+                                    {
+                                        <p class="price float-start d-block"><del>@Model.Price ₼</del> @Model.DiscountedPrice ₼</p>
+                                    }
+                                    else
+                                    {
+                                        <p class="price float-start d-block">@Model.Price ₼</p>
+                                    }
+                                </div>
+                                @if (Model.InStock)
+                                {
+                                    <p><span class="item fs-14">Mövcudluq:</span> Stokda var <i class="fa fa-check-circle text-success"></i></p>
+                                }
+                                else
+                                {
+                                    <p><span class="item fs-14">Mövcudluq:</span> Stokda yoxdur <i class="fa fa-circle-xmark text-danger"></i></p>
+                                }
+                                <p><span class="item fs-14">Product code:</span>	 @Model.ProductCode</p>
+                                <p><span class="item fs-14">Brand:</span> @Model.Store.Name</p>
+                                <p class="text-content">
+                                    @Html.Raw(Model.ProductDescription)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-4 col-xxl-12 col-lg-12">
+        <div class="card  pb-0">
+            <div class="card-header border-0">
+                <h4 class="card-title">Rəylər</h4>
+            </div>
+            @{
+                Context context = new Context();
+            }
+            @if (context.Comments.Where(x => x.ProductID == Model.ProductID).Count() != 0)
+            {
+                @await Component.InvokeAsync("CommentListAdmin")
+            }
+            else
+            {
+                <h6 style="text-align:center">Heç kim bu məhsula rəy bildirməyib,ilk rəy bildirən sən ol!</h6>
+                <br />
+                <br />
+                <br />
+            }
+        </div>
+    </div>
+</div>
+<div class="col-xl-12 col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">Rəy əlavə edin!</h4>
+        </div>
+        <div class="card-body">
+            <div class="basic-form">
+                <form  method="post" action="/Admin/Comment/AddComment">
+                    <input name="ProductID" value="@ViewBag.ID" hidden />
+                    <div class="mb-3">
+                        <textarea name="Content" class="form-control" rows="7" id="comment" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">Göndər</button>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
