@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
@@ -9,10 +10,10 @@ namespace OnlineShopping.Controllers
 {
     public class CommentController : Controller
     {
-
+        StoreNotificationManager notificationManager = new StoreNotificationManager(new EfStoreNotificationDal());
         CommentManager commentManager = new CommentManager(new EfCommentDal());
         private readonly UserManager<AppUser> _userManager;
-
+        Context context = new Context();
         public CommentController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -31,6 +32,18 @@ namespace OnlineShopping.Controllers
                 UserID = values.Id
             };
             commentManager.TAdd(comment);
+            StoreNotification storeNotification = new StoreNotification()
+            {
+                StoreNotificationTitle = values.Name + " " + values.Surname + " məhsula rəy yazdı!",
+                StoreNotificationContent = commentModel.Content,
+                IsRead = false,
+                StoreNotificationDate = Convert.ToDateTime(DateTime.Now.ToShortTimeString()),
+                StoreID = context.Products.Where(x => x.ProductID == commentModel.ProductID).Select(x => x.StoreID).FirstOrDefault(),
+                UserID = values.Id,
+                ProductID = comment.ProductID,
+                
+            };
+            notificationManager.TAdd(storeNotification);
             return LocalRedirect("/Product/ProductDetails/" + comment.ProductID);
         }
 

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<EntityLayer.Concrete.StoreNotification>
+
+<div class="tab-pane active" id="comments">
+    <div class="tab-pane-body">
+        <ul class="list-group list-group-flush">
+            @foreach (var storeNotification in Model)
+            {
+                <li class="px-0 list-group-item">
+                    <a href="/Seller/Product/ProductDetails/@storeNotification.ProductID" class="d-flex">
+                        <div class="flex-shrink-0">
+                            <figure class="avatar avatar-info me-3">
+                                <span class="avatar-text rounded-circle">
+                                    <img src="@storeNotification.User.ProfileImage" style="border-radius:50%;">
+                                </span>
+                            </figure>
+                        </div>
+                        <div class="flex-grow-1">
+                            <p class="mb-0 fw-bold d-flex justify-content-between">
+                                @storeNotification.StoreNotificationTitle
+                            </p>
+                            @if (storeNotification.StoreNotificationContent != null)
+                            {
+                                @if (storeNotification.StoreNotificationContent.Length < 30)
+                                {
+                                    <span style="-webkit-text-fill-color:black">@storeNotification.StoreNotificationContent</span>
+                                }
+                                else
+                                {
+                                    <span style="-webkit-text-fill-color:black">@storeNotification.StoreNotificationContent.Substring(0, 30)...</span>
+                                }
+                                <br />
+                            }
+                            else
+                            {
+
+                            }
+                            <span class="text-muted small">
+                                <i class="bi bi-clock me-1"></i> @(((DateTime)storeNotification.StoreNotificationDate).ToString("MMMM dd, HH:mm"))
+                            </span>
+                        </div>
+                    </a>
+                </li>
+            }
+
+        </ul>
+    </div>
+</div>

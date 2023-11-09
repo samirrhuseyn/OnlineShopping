@@ -560,6 +560,44 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Stores");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.StoreNotification", b =>
+                {
+                    b.Property<int>("StoreNotificationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("StoreNotificationId"), 1L, 1);
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StoreID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("StoreNotificationContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("StoreNotificationDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("StoreNotificationTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("StoreNotificationId");
+
+                    b.HasIndex("StoreID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("StoreNotifications");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -877,6 +915,23 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.StoreNotification", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Store", "Store")
+                        .WithMany("StoreNatification")
+                        .HasForeignKey("StoreID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany("StoreNotification")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("Store");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -943,6 +998,8 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("ReplyToReply");
 
                     b.Navigation("Sender");
+
+                    b.Navigation("StoreNotification");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>
@@ -985,6 +1042,8 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Campaignss");
 
                     b.Navigation("Products");
+
+                    b.Navigation("StoreNatification");
                 });
 #pragma warning restore 612, 618
         }
