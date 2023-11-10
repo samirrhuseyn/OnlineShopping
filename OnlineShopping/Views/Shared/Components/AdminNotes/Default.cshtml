@@ -1,0 +1,48 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Note>
+<div class="chatbox">
+    <div class="chatbox-close"></div>
+    <div class="custom-tab-1">
+        <div class="tab-content">
+
+            <div>
+                <div class="card mb-sm-3 mb-md-0 note_card">
+                    <div class="card-header chat-list-header text-center">
+                        <a data-bs-toggle="modal" data-bs-target="#exampleModalCenter" href="javascript:void(0);"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 24 24" version="1.1"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><rect fill="#000000" x="4" y="11" width="16" height="2" rx="1" /><rect fill="#000000" opacity="0.3" transform="translate(12.000000, 12.000000) rotate(-270.000000) translate(-12.000000, -12.000000) " x="4" y="11" width="16" height="2" rx="1" /></g></svg></a>
+                        <div>
+                            <h6 class="mb-1">Qeydlər</h6>
+                        </div>
+                        <a></a>
+                    </div>
+                    <div class="card-body contacts_body p-0 dlab-scroll" id="DLAB_W_Contacts_Body2">
+                        <ul class="contacts">
+                            @foreach (var note in Model)
+                            {
+                                <li class="active">
+                                    <a id="headingOne" data-bs-toggle="collapse" data-bs-target="#@note.CollapseText@note.NoteId" aria-controls="@note.CollapseText@note.NoteId" aria-expanded="true" role="button" href="#">
+                                        <div class="d-flex bd-highlight">
+                                            <div class="user_info">
+                                                <span>@note.NoteTitle</span>
+                                                <p>@(((DateTime)note.NoteDateTime).ToString("MMMM dd, yyyy HH:mm"))</p>
+                                            </div>
+                                            <div class="ms-auto">
+                                                <a href="/Admin/Note/DeleteNote/@note.NoteId" class="btn btn-danger btn-xs sharp"><i class="fa fa-trash"></i></a>
+                                            </div>
+                                        </div>
+                                    </a>
+
+                                </li>
+                                <div id="@note.CollapseText@note.NoteId" class="collapse" aria-labelledby="headingOne" data-bs-parent="#accordion-one">
+                                    <div class="accordion-body-text">
+                                        @note.NoteContent
+                                    </div>
+                                </div>
+                            }
+
+
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,6 +22,7 @@ namespace EntityLayer.Concrete
         public List<Reply>? Reply { get; set; }
         public List<ReplyToReply>? ReplyToReply { get; set; }
         public List<Cart>? Cart { get; set; }
+        public List<Note>? Note { get; set; }
         public List<Notification>? Notification { get; set; }
         public List<StoreNotification>? StoreNotification { get; set; }
         public virtual ICollection<Message> Sender { get; set; }

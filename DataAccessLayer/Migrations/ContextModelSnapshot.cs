@@ -342,6 +342,36 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Messages");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Note", b =>
+                {
+                    b.Property<int>("NoteId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NoteId"), 1L, 1);
+
+                    b.Property<string>("CollapseText")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NoteContent")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NoteDateTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NoteTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("NoteId");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Notes");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Notification", b =>
                 {
                     b.Property<int>("NotificationID")
@@ -832,6 +862,15 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("SenderUser");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Note", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany("Note")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Notification", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.NotificationType", "NotificationType")
@@ -988,6 +1027,8 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Cart");
 
                     b.Navigation("Comments");
+
+                    b.Navigation("Note");
 
                     b.Navigation("Notification");
 
