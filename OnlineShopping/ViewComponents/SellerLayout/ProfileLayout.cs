@@ -10,6 +10,7 @@ namespace OnlineShopping.ViewComponents.SellerLayout
 {
     public class ProfileLayout : ViewComponent
     {
+        Context context = new Context();
         private readonly UserManager<AppUser> _userManager;
         public ProfileLayout(UserManager<AppUser> userManager)
         {
@@ -19,6 +20,8 @@ namespace OnlineShopping.ViewComponents.SellerLayout
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            var value = context.Users.Include(x => x.Store).FirstOrDefault(x => x.Id == values.Id);
+            ViewBag.Store = value.Store.Name;
             return View(values);
         }
     }
