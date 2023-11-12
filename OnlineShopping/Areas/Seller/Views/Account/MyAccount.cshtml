@@ -1,0 +1,76 @@
+﻿@model EntityLayer.Concrete.AppUser
+@{
+    ViewData["Title"] = "Kabinetim";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+}
+
+<div class="content ">
+
+    <div class="profile-cover bg-image mb-4" data-image="/vetra/assets/images/profile-bg.jpg">
+        <div class="container d-flex align-items-center justify-content-center h-100 flex-column flex-md-row text-center text-md-start">
+            <div class="avatar avatar-xl me-3">
+                <img src="@Model.ProfileImage" class="rounded-circle"
+                     alt="...">
+            </div>
+            <div class="my-4 my-md-0">
+                <h3 class="mb-1">@Model.Name @Model.Surname</h3>
+                <small>@ViewBag.Store</small>
+            </div>
+            <div class="ms-md-auto">
+                <a href="/Seller/Account/EditAccount" class="btn btn-primary btn-lg btn-icon">
+                    <i class="bi bi-pencil small"></i> Hesabını redaktə et
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-12 col-md-12">
+
+            <div class="card mb-4">
+                <div style="display:flex" class="card-body">
+                    <div class="flex-shrink-0">
+                        <figure class="avatar avatar-primary me-3">
+                            <span class="avatar-text rounded-circle">
+                                <i class="bi bi-person"></i>
+                            </span>
+                        </figure>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p style="margin-top:15px;" class="mb-0 fw-bold d-flex justify-content-between">
+                            @Model.UserName
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <figure class="avatar avatar-primary me-3">
+                            <span class="avatar-text rounded-circle">
+                                <i class="bi bi-envelope"></i>
+                            </span>
+                        </figure>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p style="margin-top:15px;" class="mb-0 fw-bold d-flex justify-content-between">
+                            @Model.Email
+                        </p>
+                    </div>
+                    <div class="flex-shrink-0">
+                        <figure class="avatar avatar-primary me-3">
+                            <span class="avatar-text rounded-circle">
+                                <i class="bi bi-phone"></i>
+                            </span>
+                        </figure>
+                    </div>
+                    <div class="flex-grow-1">
+                        <p style="margin-top:15px;" class="mb-0 fw-bold d-flex justify-content-between">
+                            @Model.Phone
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+        
+    </div>
+
+</div>

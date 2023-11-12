@@ -1,0 +1,67 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model OnlineShopping.Areas.Admin.Models.EditAccountViewModel
+@{
+    ViewData["Title"] = "Hesab məlumatlarını redaktə et!";
+    Layout = "~/Views/Shared/_publicLayout.cshtml";
+}
+
+<div style="margin-left:400px;" class="contact-us-area ptb-30">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-7">
+                <div class="commentbox">
+                    <form id="contact-form" method="POST" enctype="multipart/form-data" asp-controller="Account" asp-action="EditAccount" class="ho-form contact-form">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="ho-form-inner">
+                            <div>
+                                <img style="border-radius:50%;" src="@Model.ImagePreview" id="blah" alt="your image" width="100" height="100" />
+                                <br />
+                                <input asp-for="Image" class="form-control" type="file"
+                                       onchange="document.getElementById('blah').src = window.URL.createObjectURL(this.files[0])">
+                            </div>
+                            <div class="single-input single-input-half">
+                                <label for="new-review-name">Ad <span class="text-danger">*</span></label>
+                                <input asp-for="Name" type="text" id="new-review-name">
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                            <div class="single-input single-input-half">
+                                <label for="new-review-email">Soyad <span class="text-danger">*</span></label>
+                                <input type="text" asp-for="Surname" id="new-review-email">
+                                <span asp-validation-for="Surname" class="text-danger"></span>
+                            </div>
+                            <div class="single-input single-input-half">
+                                <label for="new-review-subject">Telefon nömrəsi <span class="text-danger">*</span></label>
+                                <input type="text" asp-for="Phone" id="new-review-subject">
+                                <span asp-validation-for="Phone" class="text-danger"></span>
+                            </div>
+                            <div class="single-input single-input-half">
+                                <label for="new-review-subject">İstifadəçi adı <span class="text-danger">*</span></label>
+                                <input type="text" asp-for="Username" id="new-review-subject">
+                                <span asp-validation-for="Username" class="text-danger"></span>
+                            </div>
+                            <div class="single-input">
+                                <label for="new-review-subject">Elektron poçt ünvanı <span class="text-danger">*</span></label>
+                                <input type="email" asp-for="Email" id="new-review-subject">
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                            <div class="single-input single-input-half">
+                                <label for="new-review-name">Şifrə <span class="text-danger">*</span></label>
+                                <input type="password" asp-for="Password" id="new-review-name">
+                            </div>
+                            <div class="single-input single-input-half">
+                                <label for="new-review-email">Şifrə təkarı <span class="text-danger">*</span></label>
+                                <input type="password" asp-for="ConfirmPassword" id="new-review-email">
+                                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                            </div>
+                            <div class="single-input">
+                                <button class="ho-button ho-button-dark" type="submit"><span>Yadda saxla</span></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

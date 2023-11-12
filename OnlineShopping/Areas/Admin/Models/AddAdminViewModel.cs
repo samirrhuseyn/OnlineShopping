@@ -9,19 +9,19 @@ namespace OnlineShopping.Areas.Admin.Models
         public string? SellerId { get; set; }
 
         [Display(Name = "Name")]
-        [Required(ErrorMessage = "Satıcı adını əlavə edin!")]
+        [Required(ErrorMessage = "Admin adını əlavə edin!")]
         public string? Name { get; set; }
 
         [Display(Name = "Surname")]
-        [Required(ErrorMessage = "Satıcı soyadını əlavə edin!")]
+        [Required(ErrorMessage = "Admin soyadını əlavə edin!")]
         public string? Surname { get; set; }
 
         [Display(Name = "User Name")]
-        [Required(ErrorMessage = "Satıcı istifadəçi adını əlavə edin!")]
+        [Required(ErrorMessage = "Admin istifadəçi adını əlavə edin!")]
         public string? Username { get; set; }
 
         [Display(Name = "Mail")]
-        [Required(ErrorMessage = "Satıcı elektron poçtunu əlavə edin!")]
+        [Required(ErrorMessage = "Admin elektron poçtunu əlavə edin!")]
         public string? Email { get; set; }
 
         public IFormFile? Image { get; set; }
@@ -38,7 +38,7 @@ namespace OnlineShopping.Areas.Admin.Models
         public bool IsAdmin { get; set; }
 
         [Display(Name = "Phone")]
-        [Required(ErrorMessage = "Satıcı telefon nömrəsini əlavə edin!")]
+        [Required(ErrorMessage = "Admin telefon nömrəsini əlavə edin!")]
         public string? Phone { get; set; }
         public bool IsActive { get; set; }
     }

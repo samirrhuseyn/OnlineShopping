@@ -1,0 +1,82 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model OnlineShopping.Areas.Admin.Models.EditAccountViewModel
+@{
+    ViewData["Title"] = "Hesab məlumatlarını redaktə et!";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+}
+
+<div class="row flex-column-reverse flex-md-row">
+    <div class="col-md-12">
+        <div class="tab-content" id="myTabContent">
+            <form method="post" enctype="multipart/form-data" asp-controller="Account" asp-action="EditAccount">
+                <div class="tab-pane fade show active" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    <div class="mb-4">
+                        <div class="d-flex flex-column flex-md-row text-center text-md-start mb-3">
+                            <figure class="me-4 flex-shrink-0">
+                                <img id="blah2" width="100" class="rounded-pill"
+                                     src="@Model.ImagePreview" alt="...">
+                            </figure>
+                            <div class="flex-fill" >
+                                <h5 class="mb-3">@Model.Name @Model.Surname</h5>
+                                <input asp-for="Image" type="file" onchange="document.getElementById('blah2').src = window.URL.createObjectURL(this.files[0])" />
+                                
+                                
+                            </div>
+                        </div>
+                        <div class="card mb-12">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Ad</label>
+                                            <input asp-for="Name" type="text" class="form-control">
+                                            <span asp-validation-for="Name" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">İstifadəçi adı</label>
+                                            <input asp-for="Username" type="text" class="form-control" >
+                                            <span asp-validation-for="Username" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Telefon</label>
+                                            <input asp-for="Phone" type="tel" class="form-control">
+                                            <span asp-validation-for="Phone" class="text-danger"></span>
+                                        </div>
+                                        <br />
+                                        <div class="mb-3">
+                                            <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="mb-3">
+                                            <label class="form-label">Soyad</label>
+                                            <input asp-for="Surname" type="text" class="form-control">
+                                            <span asp-validation-for="Surname" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Elektron poçt ünvanı</label>
+                                            <input asp-for="Email" type="email" class="form-control">
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Şifrə</label>
+                                            <input asp-for="Password" type="password" class="form-control">
+
+                                        </div>
+                                        <div class="mb-3">
+                                            <label class="form-label">Şifrə təkrarı</label>
+                                            <input asp-for="ConfirmPassword" type="password" class="form-control">
+                                            <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
