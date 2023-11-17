@@ -60,9 +60,8 @@
                                 <div class="pdetails-quantity">
                                     <div class="quantity-select">
                                         <input name="Count" required>
-                                        <div class="inc qtybutton">+<i class="ion ion-ios-arrow-up"></i></div>
-                                        <div class="dec qtybutton">-<i class="ion ion-ios-arrow-down"></i></div>
-                                        <input name="ProductID" value="@ViewBag.ID" hidden/>
+                                        
+                                        <input name="ProductID" value="@Model.ProductID" hidden/>
                                     </div>
                                     <button class="btn btn-primary" type="submit">Səbətə əlavə et!</button>
                                 </div>
@@ -83,7 +82,7 @@
                             <div class="pdetails-categories">
                                 <span>Mağaza :</span>
                                 <ul>
-                                    <li><a href="#">@Model.Store.Name</a></li>
+                                    <li><a href="/Store/StoreDetails/@Model.StoreID">@Model.Store.Name</a></li>
                                 </ul>
                             </div>
                             @if(Model.Color != null)

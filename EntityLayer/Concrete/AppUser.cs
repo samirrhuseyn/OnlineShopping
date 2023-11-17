@@ -25,6 +25,7 @@ namespace EntityLayer.Concrete
         public List<Note>? Note { get; set; }
         public List<Notification>? Notification { get; set; }
         public List<StoreNotification>? StoreNotification { get; set; }
+        public List<StoreMessage>? StoreMessage { get; set; } 
         public virtual ICollection<Message> Sender { get; set; }
 		public virtual ICollection<Message> Reciever { get; set; }
 	}

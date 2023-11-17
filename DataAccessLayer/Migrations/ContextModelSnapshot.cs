@@ -590,6 +590,38 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Stores");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.StoreMessage", b =>
+                {
+                    b.Property<int>("MessageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageID"), 1L, 1);
+
+                    b.Property<string>("AppUserId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MessageBody")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MessageTitle")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("StoreID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MessageID");
+
+                    b.HasIndex("AppUserId");
+
+                    b.HasIndex("StoreID");
+
+                    b.ToTable("StoreMessages");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.StoreNotification", b =>
                 {
                     b.Property<int>("StoreNotificationId")
@@ -954,6 +986,23 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.StoreMessage", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
+                        .WithMany("StoreMessage")
+                        .HasForeignKey("AppUserId");
+
+                    b.HasOne("EntityLayer.Concrete.Store", "Store")
+                        .WithMany("StoreMessages")
+                        .HasForeignKey("StoreID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+
+                    b.Navigation("Store");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.StoreNotification", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Store", "Store")
@@ -1040,6 +1089,8 @@ namespace DataAccessLayer.Migrations
 
                     b.Navigation("Sender");
 
+                    b.Navigation("StoreMessage");
+
                     b.Navigation("StoreNotification");
                 });
 
@@ -1083,6 +1134,8 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Campaignss");
 
                     b.Navigation("Products");
+
+                    b.Navigation("StoreMessages");
 
                     b.Navigation("StoreNatification");
                 });

@@ -1,17 +1,23 @@
 ﻿@model IEnumerable<EntityLayer.Concrete.Store>
 <div class="ho-section brand-logos-area bg-grey">
-	<div class="container">
-		<div class="brand-logo-slider slider-navigation-3">
-			@foreach(var brand in Model)
-			{
-				<div class="brandlogo">
-					<a href="#">
-						<img src="@brand.LogoImage" alt="brand logo">
-					</a>
-				</div>
+    <div class="container">
+        <div class="brand-logo-slider slider-navigation-3">
+            @foreach (var brand in Model)
+            {
+                @if (brand.StoreID == 4)
+                {
 
-			}
+                }
+                else
+                {
+                    <div class="brandlogo">
+                        <a href="/Store/StoreDetails/@brand.StoreID">
+                            <img src="@brand.LogoImage" alt="brand logo">
+                        </a>
+                    </div>
+                }
+            }
 
-		</div>
-	</div>
+        </div>
+    </div>
 </div>

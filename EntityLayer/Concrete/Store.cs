@@ -19,6 +19,7 @@ namespace EntityLayer.Concrete
         public List<CampaignSurvey>? Campaigns { get; set; }
         public List<AppUser>? AppUsers { get; set; }
         public List<Campaign>? Campaignss { get; set; }
+        public List<StoreMessage>? StoreMessages { get; set; }
         public List<StoreNotification>? StoreNatification { get; set; }
     }
 }

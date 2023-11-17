@@ -51,5 +51,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<Notification>? Notifications { get; set; }
         public DbSet<StoreNotification>? StoreNotifications { get; set; }
         public DbSet<Note>? Notes { get; set; }
+        public DbSet<StoreMessage>? StoreMessages { get; set; }
     }
 }
