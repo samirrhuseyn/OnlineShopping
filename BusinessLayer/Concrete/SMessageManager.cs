@@ -18,6 +18,16 @@ namespace BusinessLayer.Concrete
             _sMessageDal = sMessageDal;
         }
 
+        public List<StoreMessage> GetListStoreMessages()
+        {
+            return _sMessageDal.GetListMessage();
+        }
+
+        public StoreMessage GetMessage(int id)
+        {
+            return _sMessageDal.GetMessageWithUser(id);
+        }
+
         public void TAdd(StoreMessage t)
         {
             _sMessageDal.Insert(t);

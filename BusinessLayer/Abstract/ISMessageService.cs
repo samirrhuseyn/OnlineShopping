@@ -9,5 +9,7 @@ namespace BusinessLayer.Abstract
 {
     public interface ISMessageService : IGenericService<StoreMessage>
     {
+        List<StoreMessage> GetListStoreMessages();
+        StoreMessage GetMessage(int id);
     }
 }

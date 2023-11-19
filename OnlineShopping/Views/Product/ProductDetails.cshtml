@@ -59,7 +59,7 @@
                             <form method="post" action="/Cart/AddCart/">
                                 <div class="pdetails-quantity">
                                     <div class="quantity-select">
-                                        <input name="Count" required>
+                                        <input name="Count" value="1" required>
                                         
                                         <input name="ProductID" value="@Model.ProductID" hidden/>
                                     </div>
@@ -138,11 +138,11 @@
                 <ul class="nav pdetails-allinfotab justify-content-center" id="product-details" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="product-details-area1-tab" data-bs-toggle="tab" href="#product-details-area1"
-                           role="tab" aria-controls="product-details-area1" aria-selected="true">Description</a>
+                           role="tab" aria-controls="product-details-area1" aria-selected="true">Məhsul haqqında</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="product-details-area3-tab" data-bs-toggle="tab" href="#product-details-area3"
-                           role="tab" aria-controls="product-details-area3" aria-selected="false">Reviews (1)</a>
+                           role="tab" aria-controls="product-details-area3" aria-selected="false">Rəylər</a>
                     </li>
                 </ul>
 
@@ -152,12 +152,13 @@
                         <div class="pdetails-description">
                             <p>
                                 @Html.Raw(Model.ProductDescription)
+                                <br />
+                                Məhsul barədə şikayətiniz varsa <a href="#">buradan</a> bizə şikayətinizi göndərə bilərsiniz :)
                             </p>
                             
                             
                         </div>
                     </div>
-                    
                     <div class="tab-pane fade" id="product-details-area3" role="tabpanel" aria-labelledby="product-details-area3-tab">
                         <div class="pdetails-reviews">
                             <div class="product-review">

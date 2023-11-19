@@ -9,5 +9,7 @@ namespace DataAccessLayer.Abstract
 {
     public interface ISMessageDal : IGenericDal<StoreMessage>
     {
+        List<StoreMessage> GetListMessage();
+        StoreMessage GetMessageWithUser(int id);
     }
 }

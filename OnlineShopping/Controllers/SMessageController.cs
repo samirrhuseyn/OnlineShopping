@@ -26,7 +26,8 @@ namespace OnlineShopping.Controllers
                 MessageTitle = addMessage.MessageTitle,
                 MessageBody = addMessage.MessageBody,
                 UserID = value.Id,
-                StoreID = value.StoreID
+                StoreID = addMessage.StoreID,
+                MessageDateTime = DateTime.Parse(DateTime.Now.ToShortTimeString())
             };
             sMessageManager.TAdd(storeMessage);
             return LocalRedirect("/Store/StoreDetails/" + storeMessage.StoreID);

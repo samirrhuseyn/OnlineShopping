@@ -1,0 +1,44 @@
+﻿@model EntityLayer.Concrete.StoreMessage
+@{
+    ViewData["Title"] = "Mesaja ətraflı bax";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-flex align-items-center my-4">
+            <div class="d-flex align-items-center">
+                <div class="avatar me-3">
+                    <img src="@Model.User.ProfileImage"
+                         class="rounded-circle"
+                         alt="image">
+                </div>
+                <div>
+                    <h6 class="mb-1">
+                        @Model.User.Name @Model.User.Surname
+                        <span class="d-sm-inline fw-normal d-none text-muted ms-2">&lt;@Model.User.Email&gt;</span>
+                    </h6>
+                </div>
+            </div>
+            <div class="ms-auto d-none d-md-flex align-items-center gap-3">
+                <span class="text-muted">@(((DateTime)Model.MessageDateTime).ToString("dddd, dd MMMM yyyy HH:mm tt"))</span>
+                <div class="dropdown">
+                    <a href="/Seller/StoreMessage/DeleteMessage/@Model.MessageID" class="btn btn-sm">
+                        <i class="bi bi-trash"></i>
+                    </a>
+                    
+                </div>
+            </div>
+        </div>
+        <div class="mb-4">
+            <p>
+                <strong>@Model.MessageTitle</strong>
+            </p>
+            <p>
+                @Model.MessageBody
+            </p>
+            
+        </div>
+        
+    </div>
+</div>

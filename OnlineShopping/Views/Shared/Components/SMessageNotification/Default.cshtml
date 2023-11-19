@@ -1,0 +1,33 @@
+﻿@model IEnumerable<EntityLayer.Concrete.StoreMessage>
+<li class="nav-item dropdown">
+
+    <a href="#" class="nav-link" data-bs-toggle="dropdown">
+        <i class="bi bi-chat-square-dots icon-lg"></i>
+    </a>
+
+    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0">
+        <h6 class="m-0 px-4 py-3 border-bottom">Mağaza mesajları</h6>
+        <div class="dropdown-menu-body">
+            @foreach (var smessage in Model)
+            {
+                <div class="list-group list-group-flush">
+                    <div class="list-group-item d-flex align-items-center">
+                        <a href="#" class="me-3 flex-shrink-0 ">
+                            <img src="@smessage.User.ProfileImage" class="rounded" width="40"
+                                 alt="...">
+                        </a>
+                        <div>
+                            <h6 style="margin-bottom:-1px;">@smessage.User.Name @smessage.User.Surname</h6>
+                            <div><small>@(((DateTime)smessage.MessageDateTime).ToString("MMM dd, HH:mm"))</small></div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </div>
+        <h6 style="text-align:center" class="m-0 px-4 py-3 border-top small">
+            <a href="/Seller/StoreMessage/Index/">Bütün mesajları gör</a>
+        </h6>
+    </div>
+</li>

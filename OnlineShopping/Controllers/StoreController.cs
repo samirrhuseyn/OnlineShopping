@@ -21,8 +21,6 @@ namespace OnlineShopping.Controllers
         public async Task<IActionResult> StoreDetails(int id)
         {
             var value = storeManager.TGetByID(id);
-            var user = await userManager.FindByNameAsync(User.Identity.Name);
-            ViewBag.userid = user.Id;
             return View(value);
         }
     }

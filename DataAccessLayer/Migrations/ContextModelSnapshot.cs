@@ -598,11 +598,11 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MessageID"), 1L, 1);
 
-                    b.Property<string>("AppUserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<string>("MessageBody")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("MessageDateTime")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("MessageTitle")
                         .HasColumnType("nvarchar(max)");
@@ -611,13 +611,13 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("UserID")
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("MessageID");
 
-                    b.HasIndex("AppUserId");
-
                     b.HasIndex("StoreID");
+
+                    b.HasIndex("UserID");
 
                     b.ToTable("StoreMessages");
                 });
@@ -988,19 +988,19 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.StoreMessage", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
-                        .WithMany("StoreMessage")
-                        .HasForeignKey("AppUserId");
-
                     b.HasOne("EntityLayer.Concrete.Store", "Store")
                         .WithMany("StoreMessages")
                         .HasForeignKey("StoreID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("AppUser");
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany("StoreMessage")
+                        .HasForeignKey("UserID");
 
                     b.Navigation("Store");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.StoreNotification", b =>
