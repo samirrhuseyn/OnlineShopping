@@ -23,6 +23,7 @@
     <Folder Include="wwwroot\ImagesFiles\CategoryImagesFiles\" />
     <Folder Include="wwwroot\ImagesFiles\CampaignImagesFiles\" />
     <Folder Include="wwwroot\ImagesFiles\AdminImagesFiles\" />
+    <Folder Include="wwwroot\ImagesFiles\ComplaintImageFiles\" />
     <Folder Include="wwwroot\ImagesFiles\UserImagesFiles\" />
     <Folder Include="wwwroot\ImagesFiles\StoreImagesFiles\" />
     <Folder Include="wwwroot\ImagesFiles\SellerImagesFiles\" />

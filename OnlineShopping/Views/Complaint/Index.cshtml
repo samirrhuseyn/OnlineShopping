@@ -1,0 +1,82 @@
+﻿@using EntityLayer.Concrete
+@model List<Complaint>
+
+@{
+    ViewData["Title"] = "Şikayətlərim";
+    Layout = "~/Views/Shared/_publicLayout.cshtml";
+}
+
+<div style="padding:50px;" class="cart-table table-responsive">
+    <table class="table table-bordered table-hover mb-0">
+        <thead>
+            <tr>
+                <th class="cart-column-image" scope="col">Məhsul</th>
+                <th class="cart-column-productname" scope="col">Satış kodu</th>
+                <th class="cart-column-price" scope="col">Şikayət mətni</th>
+                <th class="cart-column-total" scope="col">Tarix</th>
+                <th class="cart-column-total" scope="col">Vəziyyət</th>
+                <th class="cart-column-remove" scope="col">Şikayəti ləğv et</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var complaint in Model)
+            {
+                <tr>
+                    <td>
+                        <a href="/Product/ProductDetails/@complaint.Product.ProductID" class="product-image">
+                            <img src="@complaint.Product.Image1" alt="product image">
+                        </a>
+                        @complaint.Product.ProductName
+                    </td>
+                    <td>
+                        @complaint.SalesCode
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#@complaint.Product.ProductCode@complaint.ComplaintID">Ətraflı bax</button>
+                    </td>
+                    <td>
+                        <span class="total-price">@(((DateTime)complaint.DateTime).ToString("MMM dd, HH:mm"))</span>
+                    </td>
+                    <td>
+                        @if (complaint.IsLooked)
+                        {
+                            <span class="badge-success">Baxılıb</span>
+                        }
+                        else
+                        {
+                            <span class="badge-warning">Gözləmədə</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="/Complaint/DeleteComplaint/@complaint.ComplaintID" class="remove-product"><i class="ion ion-ios-close"></i></a>
+                    </td>
+                </tr>
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="@complaint.Product.ProductCode@complaint.ComplaintID">
+                    <div class="modal-dialog modal-dialog-centered" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            </div>
+                            <div style="margin-left:80px; padding-top:20px; display:flex">
+                                <a href="@complaint.Image1"><img src="@complaint.Image1" width="150"></a>
+                                <a href="@complaint.Image2"><img style="margin-left:30px;" src="@complaint.Image2" width="150"></a>
+                            </div>
+                            <div class="modal-body">
+                                <p>
+                                    @complaint.Reason
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger light" data-bs-dismiss="modal">Bağla</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+        </tbody>
+    </table>
+</div>

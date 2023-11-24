@@ -1,8 +1,47 @@
-﻿
+﻿@using OnlineShopping.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model AddComplaintViewModel
 @{
-    ViewData["Title"] = "AddComplaint";
-    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+    ViewData["Title"] = "Məhsuldan şikayət et";
+    Layout = "~/Views/Shared/_publicLayout.cshtml";
 }
 
-<h1>AddComplaint</h1>
+<div style="margin-left:250px; padding:50px;" class="col-xl-8 col-lg-12">
+    <div class="card-body">
+        <div class="basic-form">
+            <form enctype="multipart/form-data" asp-action="AddComplaint" asp-controller="Complaint" method="post">
+
+                <div class="row">
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Satış kodu</label>
+                        <input asp-for="SalesCode" type="text" class="form-control" required>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Məhsul kodu</label>
+                        <input asp-for="ProductCode" type="text" class="form-control">
+                    </div>
+                    <div class="mb-3 col-md-12">
+                        <label class="form-label">Şikayət mətni</label>
+                        <textarea asp-for="Reason" rows="5" class="form-control"></textarea>
+                    </div>
+                    <div class="mb-3 col-md-6">
+                        <img src="~/3927-200.png" id="blah1" alt="your image" width="100" height="100" />
+                        <br />
+                        <input asp-for="Image1" class="form-control" type="file"
+                               onchange="document.getElementById('blah1').src = window.URL.createObjectURL(this.files[0])">
+                    </div>
+
+                    <div class="mb-3 col-md-6">
+                        <img src="~/3927-200.png" id="blah2" alt="your image" width="100" height="100" />
+                        <br />
+                        <input asp-for="Image2" class="form-control" type="file"
+                               onchange="document.getElementById('blah2').src = window.URL.createObjectURL(this.files[0])">
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary">Göndər</button>
+            </form>
+        </div>
+    </div>
+</div>
 

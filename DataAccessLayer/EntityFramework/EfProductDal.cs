@@ -36,6 +36,16 @@ namespace DataAccessLayer.EntityFramework
             }
         }
 
+        public Product GetProductIdByCode(string productCode)
+        {
+            using (var context = new Context())
+            {
+                return context.Products
+                    .Where(x => x.ProductCode == productCode)
+                    .FirstOrDefault();
+            }
+        }
+
         public List<Product> GetProductListByStore(int ID)
         {
             using (var context = new Context())
@@ -78,13 +88,13 @@ namespace DataAccessLayer.EntityFramework
                 //var pc = context.Products.Where(x=>x.ProductCode == productCode).Select(x => x.StoreID).FirstOrDefault();
                 //if(pc == storyID)
                 //{
-                    var entity = context.Products.Where(item => item.ProductCode == productCode).ToList();
-                    foreach (var item in entity)
-                    {
-                        item.Interest = interest;
-                        context.Products.Update(item);
-                        context.SaveChanges();
-                    }
+                var entity = context.Products.Where(item => item.ProductCode == productCode).ToList();
+                foreach (var item in entity)
+                {
+                    item.Interest = interest;
+                    context.Products.Update(item);
+                    context.SaveChanges();
+                }
                 //}
                 //else
                 //{
