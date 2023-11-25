@@ -22,6 +22,30 @@ namespace DataAccessLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("EntityLayer.Concrete.Adress", b =>
+                {
+                    b.Property<int>("AdressID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdressID"), 1L, 1);
+
+                    b.Property<string>("City")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("AdressID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Adresses");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -177,6 +201,36 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("StoreID");
 
                     b.ToTable("CampaignSurveys");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Card", b =>
+                {
+                    b.Property<int>("CardID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CardID"), 1L, 1);
+
+                    b.Property<int>("Code16")
+                        .HasColumnType("int");
+
+                    b.Property<string>("EndOfDate")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("SecurityCode")
+                        .HasColumnType("int");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("CardID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Cards");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Cart", b =>
@@ -427,6 +481,61 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("NotificationTypes");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Order", b =>
+                {
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderId"), 1L, 1);
+
+                    b.Property<int>("OrderDetailID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SaleID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("UserID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("OrderId");
+
+                    b.HasIndex("OrderDetailID");
+
+                    b.HasIndex("ProductId");
+
+                    b.HasIndex("SaleID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.OrderDetail", b =>
+                {
+                    b.Property<int>("OrderDetailId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("OrderDetailId"), 1L, 1);
+
+                    b.Property<string>("Adress")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("OrderDetailId");
+
+                    b.ToTable("OrderDetails");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
                 {
                     b.Property<int>("ProductID")
@@ -552,6 +661,9 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("SaleID")
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<int>("CardID")
+                        .HasColumnType("int");
+
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
@@ -559,6 +671,8 @@ namespace DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("SaleID");
+
+                    b.HasIndex("CardID");
 
                     b.HasIndex("ProductID");
 
@@ -793,6 +907,15 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Adress", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany("Adress")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Store", "Store")
@@ -824,6 +947,15 @@ namespace DataAccessLayer.Migrations
                         .IsRequired();
 
                     b.Navigation("Store");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Card", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany("Card")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Cart", b =>
@@ -922,6 +1054,37 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Order", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.OrderDetail", "OrderDetail")
+                        .WithMany()
+                        .HasForeignKey("OrderDetailID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.Product", "Product")
+                        .WithMany("Order")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("EntityLayer.Concrete.Sale", "Sale")
+                        .WithMany()
+                        .HasForeignKey("SaleID");
+
+                    b.HasOne("EntityLayer.Concrete.AppUser", "User")
+                        .WithMany("Order")
+                        .HasForeignKey("UserID");
+
+                    b.Navigation("OrderDetail");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Sale");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.Product", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Category", "Category")
@@ -977,11 +1140,19 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Sale", b =>
                 {
+                    b.HasOne("EntityLayer.Concrete.Card", "Card")
+                        .WithMany()
+                        .HasForeignKey("CardID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EntityLayer.Concrete.Product", "Product")
                         .WithMany("Sale")
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Card");
 
                     b.Navigation("Product");
                 });
@@ -1073,6 +1244,10 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
                 {
+                    b.Navigation("Adress");
+
+                    b.Navigation("Card");
+
                     b.Navigation("Cart");
 
                     b.Navigation("Comments");
@@ -1080,6 +1255,8 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Note");
 
                     b.Navigation("Notification");
+
+                    b.Navigation("Order");
 
                     b.Navigation("Reciever");
 
@@ -1116,6 +1293,8 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Comments");
 
                     b.Navigation("Complaints");
+
+                    b.Navigation("Order");
 
                     b.Navigation("Sale");
                 });

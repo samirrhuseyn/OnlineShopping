@@ -14,5 +14,8 @@ namespace EntityLayer.Concrete
         public Product? Product { get; set; }
         public int ProductID { get; set; }
         public DateTime DateTime { get; set; }
+        List<Order>? Order { get; set; }
+        public int CardID { get; set; }
+        public Card? Card { get; set; }
     }
 }
