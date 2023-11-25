@@ -1,5 +1,7 @@
-﻿using DataAccessLayer.Concrete;
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +12,8 @@ namespace OnlineShopping.Areas.Seller.Controllers
     [Area("Seller")]
     public class AccountController : Controller
     {
-        private readonly UserManager<AppUser> _userManager;
+		MailManager mailManager = new MailManager();
+		private readonly UserManager<AppUser> _userManager;
         Context context = new Context();
 
         public AccountController(UserManager<AppUser> userManager)
@@ -56,7 +59,7 @@ namespace OnlineShopping.Areas.Seller.Controllers
                 values.PasswordHash = editAccount.Password != null ? editAccount.Password : values.PasswordHash;
                 values.ProfileImage = editAccount.Image != null ? UploadFile(editAccount.Image) : values.ProfileImage;
                 await _userManager.UpdateAsync(values);
-                return RedirectToAction("Index", "Product");
+                return RedirectToAction("MyAccount");
             }
             return View(editAccount);
         }
@@ -77,6 +80,86 @@ namespace OnlineShopping.Areas.Seller.Controllers
             }
 
             return "/ImagesFiles/AdminImagesFiles/" + file.FileName;
+        }
+
+		[HttpGet]
+		[AllowAnonymous]
+		public IActionResult ForgotPassword()
+		{
+			return View();
+		}
+
+		[HttpPost]
+		[AllowAnonymous]
+		[ValidateAntiForgeryToken]
+		public async Task<IActionResult> ForgotPassword(PasswordViewModel model)
+		{
+			var user = await _userManager.FindByEmailAsync(model.Email);
+			if (user != null)
+			{
+				var passwordCode = await _userManager.GeneratePasswordResetTokenAsync(user);
+				var returnUrl = Url.Action("UpdatePassword", new { userId = user.Id, passwordCode });
+				var body = "http://localhost:19728" + returnUrl;
+				mailManager.SendMail(model.Email, body, subject: "Reset Link");
+				return RedirectToAction("LinkSuccess");
+			}
+			return RedirectToAction("EmailNotFound");
+		}
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult UpdatePassword(string userId, string passwordCode)
+        {
+            if (userId != null && passwordCode != null)
+            {
+                var passwordDto = new PasswordViewModel();
+                passwordDto.UserId = userId;
+                passwordDto.PasswordCode = passwordCode;
+                return View(passwordDto);
+            }
+            return RedirectToAction("EmailNotFound");
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UpdatePassword(PasswordViewModel model)
+        {
+            if (!ModelState.IsValid)
+                return View(model);
+
+            if (model.NewPassword != null)
+            {
+                var user = await _userManager.FindByIdAsync(model.UserId);
+                var result = await _userManager.ResetPasswordAsync(user, model.PasswordCode, model.NewPassword);
+                if (result.Succeeded)
+                    return RedirectToAction("UpdateSuccess");
+            }
+            return RedirectToAction("UpdateFailed");
+        }
+
+        [AllowAnonymous]
+        public IActionResult LinkSuccess()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult EmailNotFound()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult UpdateSuccess()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult UpdateFailed()
+        {
+            return View();
         }
     }
 }
