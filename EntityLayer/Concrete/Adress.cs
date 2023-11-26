@@ -13,7 +13,9 @@ namespace EntityLayer.Concrete
         public int AdressID { get; set; }
         public string? UserID { get; set; }
         public AppUser? User { get; set; }
+        public string? AdressName { get; set; }
         public string? City { get; set; }
+        public string? Street { get; set; }
         public string? Country { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿@model EntityLayer.Concrete.AppUser
 @{
-    ViewData["Title"] = "MyAccount";
+    ViewData["Title"] = "Kabinetim";
     Layout = "~/Views/Shared/_publicLayout.cshtml";
 }
 
@@ -15,12 +15,16 @@
                            role="tab" aria-controls="account-dashboard" aria-selected="true">Əsas səhifə</a>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" id="account-dashboard-tab" data-bs-toggle="tab" href="#account-card"
+                           role="tab" aria-controls="account-dashboard" aria-selected="true">Kartlar</a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" id="account-orders-tab" data-bs-toggle="tab" href="#account-orders"
                            role="tab" aria-controls="account-orders" aria-selected="false">Sifarişlər</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="account-address-tab" data-bs-toggle="tab" href="#account-address"
-                           role="tab" aria-controls="account-address" aria-selected="false">Ünvanllar</a>
+                           role="tab" aria-controls="account-address" aria-selected="false">Ünvanlar</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" id="account-details-tab" href="/Account/EditAccount">
@@ -40,18 +44,74 @@
                          aria-labelledby="account-dashboard-tab">
                         <div class="myaccount-dashboard">
                             <p>
-                                
-                                  
+
+
                                 Salam <b>@Model.Name @Model.Surname!</b> (@Model.Name @Model.Surname deyil?  <a href="/Login/LogOut/">
                                     Çıxış
                                 </a>)
                             </p>
                             <p>
                                 Hesabınızın idarə panelindən son sifarişlərinizə baxa, göndərmə və faktura ünvanlarınızı idarə edə, <a href="/Account/EditAccount">
-                                    parol və hesab məlumatlarınızı redaktə 
+                                    parol və hesab məlumatlarınızı redaktə
                                 </a> edə bilərsiniz..
                             </p>
                         </div>
+                    </div>
+                    <div class="tab-pane fade" id="account-card" role="tabpanel" aria-labelledby="account-card-tab">
+                        <button style="margin-left:780px; margin-bottom:20px;" type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#exampleModalCenter">Kart əlavə et!</button>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModalCenter">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title">Kart məlumatlarınızı daxil edin</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="col-xl-12 col-lg-12">
+                                            <div class="card">
+                                                <div class="card-body">
+                                                    <div class="basic-form">
+                                                        <form action="/Card/AddCard/" method="post">
+
+                                                            <div class="row">
+                                                                <div class="mb-3 col-md-12">
+                                                                    <label class="form-label">Kart adı:</label>
+                                                                    <input name="CardName" type="text" class="form-control" placeholder="Alış-veriş kartım" required>
+                                                                </div>
+                                                                <div class="mb-3 col-md-12">
+                                                                    <label class="form-label">16 rəqəmli kod:</label>
+                                                                    <input name="Code16" type="text" class="form-control" placeholder="XXXX XXXX XXXX XXXX" maxlength="16" required>
+                                                                </div>
+                                                                <div class="mb-3 col-md-12">
+                                                                    <label class="form-label">Kart üstündəki ad:</label>
+                                                                    <input name="Name" type="text" class="form-control" placeholder="Ad və soyad" required>
+                                                                </div>
+                                                                <div class="mb-3 col-md-6">
+                                                                    <label class="form-label">Kartın bitmə vaxtı</label>
+                                                                    <input name="EndOfDate" type="text" class="form-control" placeholder="MM/YY" required>
+                                                                </div>
+                                                                <div class="mb-3 col-md-6">
+                                                                    <label class="form-label">Təhlükəsizlik kodu</label>
+                                                                    <input name="SecurityCode" type="text" class="form-control" placeholder="CVV" required>
+                                                                </div>
+                                                            </div>
+
+                                                            <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        @await Component.InvokeAsync("AccountCards");
+
+
                     </div>
                     <div class="tab-pane fade" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
                         <div class="myaccount-orders">
@@ -86,21 +146,56 @@
                         </div>
                     </div>
                     <div class="tab-pane fade" id="account-address" role="tabpanel" aria-labelledby="account-address-tab">
+                        <button style="margin-bottom:20px; margin-left:700px" type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#example1ModalCenter">Ünvan əlavə et!</button>
                         <div class="myaccount-address">
-                            <p>The following addresses will be used on the checkout page by default.</p>
-                            <div class="row">
-                                <div class="col">
-                                    <h4 class="small-title">BILLING ADDRESS</h4>
-                                    <address>
-                                        1234 Heaven Stress, Beverly Hill OldYork UnitedState of Lorem
-                                    </address>
+                            <div class="row">  
+                                <!-- Modal -->
+                                <div class="modal fade" id="example1ModalCenter">
+                                    <div class="modal-dialog modal-dialog-centered" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Ünvan daxil edin</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal">
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="col-xl-12 col-lg-12">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <div class="basic-form">
+                                                                <form action="/Adress/AddAdress/" method="post">
+
+                                                                    <div class="row">
+                                                                        <div class="mb-3 col-md-12">
+                                                                            <label class="form-label">Ünvan başlığı:</label>
+                                                                            <input name="AdressName" type="text" class="form-control" required>
+                                                                        </div>
+                                                                        <div class="mb-3 col-md-12">
+                                                                            <label class="form-label">Ölkə:</label>
+                                                                            <input name="Country" type="text" class="form-control" required>
+                                                                        </div>
+                                                                        <div class="mb-3 col-md-12">
+                                                                            <label class="form-label">Şəhər:</label>
+                                                                            <input name="City" type="text" class="form-control">
+                                                                        </div>
+                                                                        <div class="mb-3 col-md-12">
+                                                                            <label class="form-label">Küçə və ya prospekt:</label>
+                                                                            <input name="Street" type="text" class="form-control">
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <button type="submit" class="btn btn-primary">Yadda saxla</button>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col">
-                                    <h4 class="small-title">SHIPPING ADDRESS</h4>
-                                    <address>
-                                        1234 Heaven Stress, Beverly Hill OldYork UnitedState of Lorem
-                                    </address>
-                                </div>
+                                @await Component.InvokeAsync("AccountAdress")
                             </div>
                         </div>
                     </div>

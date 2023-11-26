@@ -30,10 +30,16 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AdressID"), 1L, 1);
 
+                    b.Property<string>("AdressName")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("City")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Street")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserID")
@@ -44,6 +50,27 @@ namespace DataAccessLayer.Migrations
                     b.HasIndex("UserID");
 
                     b.ToTable("Adresses");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Amount", b =>
+                {
+                    b.Property<int>("AmountID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("AmountID"), 1L, 1);
+
+                    b.Property<string>("AmountCount")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("CardID")
+                        .HasColumnType("int");
+
+                    b.HasKey("AmountID");
+
+                    b.HasIndex("CardID");
+
+                    b.ToTable("Amounts");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
@@ -211,8 +238,11 @@ namespace DataAccessLayer.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CardID"), 1L, 1);
 
-                    b.Property<int>("Code16")
-                        .HasColumnType("int");
+                    b.Property<string>("CardName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Code16")
+                        .HasColumnType("bigint");
 
                     b.Property<string>("EndOfDate")
                         .HasColumnType("nvarchar(max)");
@@ -916,6 +946,17 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.Amount", b =>
+                {
+                    b.HasOne("EntityLayer.Concrete.Card", "Card")
+                        .WithMany("Amount")
+                        .HasForeignKey("CardID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Card");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.AppUser", b =>
                 {
                     b.HasOne("EntityLayer.Concrete.Store", "Store")
@@ -1269,6 +1310,11 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("StoreMessage");
 
                     b.Navigation("StoreNotification");
+                });
+
+            modelBuilder.Entity("EntityLayer.Concrete.Card", b =>
+                {
+                    b.Navigation("Amount");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Category", b =>

@@ -56,5 +56,6 @@ namespace DataAccessLayer.Concrete
         public DbSet<OrderDetail>? OrderDetails { get; set; }
         public DbSet<Adress>? Adresses { get; set; }
         public DbSet<Card>? Cards { get; set; }
+        public DbSet<Amount>? Amounts { get; set; }
     }
 }

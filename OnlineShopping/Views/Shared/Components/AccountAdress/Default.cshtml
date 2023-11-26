@@ -1,0 +1,15 @@
+﻿@model IEnumerable<EntityLayer.Concrete.Adress>
+
+
+@foreach (var adress in Model)
+{
+    <div class="col">
+        <h4 class="small-title">@adress.AdressName  <a style="margin-left:100px" href="/Adress/DeleteAdress/@adress.AdressID" class="remove-product"><i class="ion ion-ios-close"></i></a></h4>
+        
+        <address>
+            @adress.Street @adress.City.@adress.Country
+        </address>
+    </div>
+}
+
+
