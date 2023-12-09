@@ -10,7 +10,7 @@ namespace OnlineShopping.ViewComponents.PublicHome
 		
 		public IViewComponentResult Invoke()
 		{
-			var value = productManager.TGetList().Take(6).OrderByDescending(x=>x.CreatedDate);
+			var value = productManager.TGetList().OrderByDescending(x=>x.CreatedDate);
 			return View(value);
 		}
 	}

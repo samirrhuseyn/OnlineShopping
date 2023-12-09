@@ -19,5 +19,6 @@ namespace EntityLayer.Concrete
         public string? EndOfDate { get; set; }
         public int SecurityCode { get; set; }
         public List<Amount>? Amount { get; set;}
+        public List<Order>? Order { get; set;}
     }
 }

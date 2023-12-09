@@ -63,7 +63,11 @@
                                         
                                         <input name="ProductID" value="@Model.ProductID" hidden/>
                                     </div>
-                                    <button class="btn btn-primary" type="submit">Səbətə əlavə et!</button>
+                                    <button class="btn btn-primary ho-button" type="submit">Səbətə əlavə et!</button>
+                                    <a style="height:51px;" role="button" href="/Order/AddOrder/@Model.ProductID" class="ho-button">
+                                        <i style="margin-bottom:10px; margin-right:5px;" class="ion ion-ios-wallet"></i>
+                                        <span>İndi Al!</span>
+                                    </a>
                                 </div>
                             </form>
                             

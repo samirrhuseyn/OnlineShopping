@@ -1,0 +1,44 @@
+﻿@model OnlineShopping.Models.AddOrderViewModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Məhsul sifariş et";
+    Layout = "~/Views/Shared/_publicLayout.cshtml";
+}
+
+<div style="margin-left:250px; padding-top:20px;" class="col-xl-8 col-lg-12">
+    <div class="card">
+        <div class="card-body">
+            <div class="basic-form">
+                <form asp-action="AddOrder" asp-controller="Order" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="row">
+                        <input asp-for="ProductID" hidden/>
+                        <input asp-for="Price" hidden/>
+                        <div class="mb-3 col-md-12">
+                            <label class="form-label">Kartınızı seçin</label>
+                            <select asp-for="CardID" asp-items="@ViewBag.cv" class="default-select form-control wide" required></select>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                            <label class="form-label">Ünvanı seçin</label>
+                            <select asp-for="AdressID" asp-items="@ViewBag.av" class="default-select form-control wide" required></select>
+                        </div>
+                        <div class="mb-3 col-md-12">
+                            <label class="form-label">Sayı</label>
+                            <input asp-for="Count" type="number" class="form-control" required>
+                        </div>
+                        <div class="col-xl-4 col-xxl-6 col-6">
+                            <div class="form-check custom-checkbox mb-3">
+                                <input asp-for="IsApplied" type="checkbox" class="form-check-input" id="customCheckBox1" required>
+                                
+                                <label class="form-check-label" for="customCheckBox1">Müqavilə şərtlərini qəbul et!</label>
+                                <span asp-validation-for="IsApplied" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sifariş et!</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

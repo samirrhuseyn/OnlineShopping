@@ -10,13 +10,14 @@
     <div class="menu-body">
         @await Component.InvokeAsync("ProfileLayout")
         <ul>
+            
             <li>
-                <a class="#"
-                    href="#">
+                <a class="@ViewBag.ActiveO"
+                   href="/Seller/Order/Index">
                     <span class="nav-link-icon">
-                        <i class="bi bi-bar-chart"></i>
+                        <i class="bi bi-bag-check"></i>
                     </span>
-                    <span>Hesabatlar</span>
+                    <span>Sifarişlər</span>
                 </a>
             </li>
             <li>
@@ -26,6 +27,15 @@
                         <i class="bi bi-layers"></i>
                     </span>
                     <span>Məhsullar</span>
+                </a>
+            </li>
+            <li>
+                <a class="@ViewBag.ActiveCash"
+                   href="/Seller/Cash/MyCash">
+                    <span class="nav-link-icon">
+                        <i class="bi bi-cash"></i>
+                    </span>
+                    <span>Kassa</span>
                 </a>
             </li>
             <li>

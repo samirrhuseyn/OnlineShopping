@@ -15,8 +15,8 @@ namespace EntityLayer.Concrete
         public string? Image2 { get; set; }
         public string? Image3 { get; set; }
         public string? ProductName { get; set; }
-        public string? Price { get; set; }
-        public string? DiscountedPrice { get; set; }
+        public float? Price { get; set; }
+        public float? DiscountedPrice { get; set; }
         public string? ProductDescription { get; set; }
         public string? Color { get; set; }
         public string? Size { get; set; }
@@ -28,7 +28,6 @@ namespace EntityLayer.Concrete
 		public bool InStock { get; set; }
         public string? ProductCode { get; set; }
         public int Interest { get; set; }
-        public List<Sale>? Sale { get; set; }
         public List<Comment>? Comments { get; set; }
         public List<Complaint>? Complaints { get; set; }
         public List<Cart>? Cart { get; set; }

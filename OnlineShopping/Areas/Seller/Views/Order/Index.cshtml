@@ -1,0 +1,64 @@
+﻿@using EntityLayer.Concrete
+@model List<Order>
+@{
+    ViewData["Title"] = "Sifarişlər";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+    ViewData["ActiveO"] = "active";
+}
+
+<div class="card">
+    <div class="card-body">
+        <div class="d-md-flex gap-4 align-items-center">
+            <div class="d-none d-md-flex">Sifariş axtar:</div>
+            <div class="d-md-flex gap-4 align-items-center">
+                <form class="mb-3 mb-md-0">
+                    <div class="row g-6">
+
+                        <div class="col-md-12">
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Search">
+                                <button class="btn btn-outline-light" type="button">
+                                    <i class="bi bi-search"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-custom table-lg mb-0" id="orders">
+        <thead>
+            <tr>
+                <th>Sifariş kodu</th>
+                <th>Sifarişçi</th>
+                <th>Sİfariş tarixi</th>
+                <th>Sifariş məbləği</th>
+                <th>Vəziyyəti</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+
+                    <td>
+                        <a href="#">#@order.OrderCode</a>
+                    </td>
+                    <td>@order.User.Name @order.User.Surname</td>
+                    <td>@(((DateTime)order.OrderDateTime).ToString("dd-MMMM-yyyy HH:mm"))</td>
+                    <td>
+                        @order.Price ₼
+                    </td>
+                    <td>
+                        <span class="badge bg-@order.OrderStatus.StatusColor">@order.OrderStatus.StatusName</span>
+                    </td>
+                </tr>
+            }
+
+        </tbody>
+    </table>
+</div>

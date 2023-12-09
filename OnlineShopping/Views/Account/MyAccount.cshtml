@@ -114,36 +114,7 @@
 
                     </div>
                     <div class="tab-pane fade" id="account-orders" role="tabpanel" aria-labelledby="account-orders-tab">
-                        <div class="myaccount-orders">
-                            <h4 class="small-title">MY ORDERS</h4>
-                            <div class="table-responsive">
-                                <table class="table table-bordered table-hover">
-                                    <tbody>
-                                        <tr>
-                                            <th>ORDER</th>
-                                            <th>DATE</th>
-                                            <th>STATUS</th>
-                                            <th>TOTAL</th>
-                                            <th></th>
-                                        </tr>
-                                        <tr>
-                                            <td><a class="account-order-id" href="#">#5364</a></td>
-                                            <td>July 27, 2018</td>
-                                            <td>On Hold</td>
-                                            <td>$162.00 for 2 items</td>
-                                            <td><a href="#" class="ho-button ho-button-sm"><span>View</span></a></td>
-                                        </tr>
-                                        <tr>
-                                            <td><a class="account-order-id" href="#">#5356</a></td>
-                                            <td>July 27, 2018</td>
-                                            <td>On Hold</td>
-                                            <td>$162.00 for 2 items</td>
-                                            <td><a href="#" class="ho-button ho-button-sm"><span>View</span></a></td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
+                        @await Component.InvokeAsync("AccountOrders")
                     </div>
                     <div class="tab-pane fade" id="account-address" role="tabpanel" aria-labelledby="account-address-tab">
                         <button style="margin-bottom:20px; margin-left:700px" type="button" class="btn btn-primary mb-2" data-bs-toggle="modal" data-bs-target="#example1ModalCenter">Ünvan əlavə et!</button>

@@ -38,7 +38,6 @@ namespace DataAccessLayer.Concrete
 		public DbSet<Store>? Stores { get; set; }
         public DbSet<Category>? Categories { get; set; }
         public DbSet<Product>? Products { get; set; }
-        public DbSet<Sale>? Sales { get; set; }
         public DbSet<CampaignSurvey>? CampaignSurveys { get; set; }
         public DbSet<Complaint>? Complaints { get; set; }
         public DbSet<Campaign>? Campaigns { get; set; }
@@ -53,9 +52,9 @@ namespace DataAccessLayer.Concrete
         public DbSet<Note>? Notes { get; set; }
         public DbSet<StoreMessage>? StoreMessages { get; set; }
         public DbSet<Order>? Orders { get; set; }
-        public DbSet<OrderDetail>? OrderDetails { get; set; }
         public DbSet<Adress>? Adresses { get; set; }
         public DbSet<Card>? Cards { get; set; }
         public DbSet<Amount>? Amounts { get; set; }
+        public DbSet<OrderStatus>? OrderStatuses { get; set; }
     }
 }
