@@ -1,9 +1,82 @@
 ﻿@model EntityLayer.Concrete.Order
 @{
-    ViewData["Title"] = "MyCash";
+    ViewData["Title"] = "Kassa";
     Layout = "~/Views/Shared/_sellerLayout.cshtml";
     ViewData["ActiveCash"] = "active";
 }
 
-<h1>@ViewBag.Cash</h1>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col-lg-4 col-md-12">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="d-flex mb-3">
+                    <div style="display:flex;" class="display-7">
+                        <i class="bi bi-credit-card-2-front"></i>
+                        <h5 class="text-primary" style="margin-top:8px; margin-left:10px;">@DateTime.Now.ToString("MMMM yyyy")</h5>
+                    </div>
+                    <div class="dropdown ms-auto">
+                        <a href="#" data-bs-toggle="dropdown" class="btn btn-sm" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="bi bi-three-dots"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a href="#" class="dropdown-item">View Detail</a>
+                            <a href="#" class="dropdown-item">Download</a>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="mb-3">Cari ayın gəliri:</h4>
+                <div class="d-flex mb-3">
+                    <div class="display-7">@ViewBag.Cash ₼</div>
+                </div>
+                @{
+                    float cash = ViewBag.Cash;
+                    float lastcash = ViewBag.LastCash;
+                }
+
+                @if (cash > lastcash)
+                {
+                    <div class="text-success">
+                        Keçən aya nisbətən @ViewBag.Percentage% <i class="small bi bi-arrow-up"></i>
+                    </div>
+                }
+                else
+                {
+                    <div class="text-danger">
+                        Keçən aya nisbətən @ViewBag.Percentage% <i class="small bi bi-arrow-down"></i>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4 col-md-12">
+        <div class="card h-100">
+            <div class="card-body">
+                <div class="d-flex mb-3">
+                    <div class="display-7">
+                        <i class="bi bi-basket"></i>
+                    </div>
+                    <div class="dropdown ms-auto">
+                        <a href="#" data-bs-toggle="dropdown" class="btn btn-sm" aria-haspopup="true"
+                           aria-expanded="false">
+                            <i class="bi bi-three-dots"></i>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end">
+                            <a href="#" class="dropdown-item">View Detail</a>
+                            <a href="#" class="dropdown-item">Download</a>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="mb-3">Orders</h4>
+                <div class="d-flex mb-3">
+                    <div class="display-7">@ViewBag.Order</div>
+                    <div class="ms-auto" id="total-orders"></div>
+                </div>
+                <div class="text-success">
+                    Over last month 1.4% <i class="small bi bi-arrow-up"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
