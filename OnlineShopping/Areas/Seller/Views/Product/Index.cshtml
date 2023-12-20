@@ -39,7 +39,7 @@
                         </a>
                     </td>
                     <td>@product.Category.Name</td>
-                    <td>
+                    @*<td>
                         @if (product.InStock)
                         {
                             <span class="badge rounded-pill bg-success">Mövcuddur</span>
@@ -49,7 +49,7 @@
                             <span class="badge rounded-pill bg-danger">Mövcud deyil</span>
                         }
                         
-                    </td>
+                    </td>*@
                     <td>
                         @if (product.DiscountedPrice != null)
                         {

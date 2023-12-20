@@ -54,11 +54,11 @@
                                 <h2>@Model.ProductName</h2>
                                 <p>
 
-                                    @if (Model.InStock)
+                                    @if (Model.Stock > 0)
                                     {
                                         <span class="badge rounded-pill bg-success">Mövcuddur</span>
                                     }
-                                    else
+                                    else if (Model.Stock == 0)
                                     {
                                         <span class="badge rounded-pill bg-danger">Mövcud deyil</span>
                                     }
@@ -119,7 +119,7 @@
             }
             else
             {
-                
+
                 <br />
                 <h6 style="text-align:center">Heç kim bu məhsula rəy bildirməyib,ilk rəy bildirən sən ol!</h6>
                 <br />
@@ -138,3 +138,5 @@
 
         </div>
     </div>
+
+   

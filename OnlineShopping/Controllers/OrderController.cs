@@ -77,10 +77,9 @@ namespace OnlineShopping.Controllers
             if (addOrder.IsApplied == true)
             {
                 orderManager.TAdd(order);
-                //var value = orderManager.TGetByID(order.OrderId);
-                //float? price = value.Product.DiscountedPrice != null ? value.Product.DiscountedPrice : value.Product.Price;
-                //value.Price = order.Count * price;
-                //orderManager.TUpdate(value);
+                var value = productManager.TGetByID(order.ProductID);
+                value.Stock = value.Stock - order.Count;
+                productManager.TUpdate(value);
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -133,17 +132,22 @@ namespace OnlineShopping.Controllers
                 Count = addOrder.Count,
                 OrderId = addOrder.OrderId,
                 OrderCode = id.Substring(0, id.Length - 28) + addOrder.ProductID + DateTime.Now.Millisecond,
+                Price = addOrder.Price * addOrder.Count
+
             };
             if (addOrder.IsApplied == true)
             {
                 orderManager.TAdd(order);
-
+                var value = productManager.TGetByID(order.ProductID);
+                value.Stock = value.Stock - order.Count;
+                productManager.TUpdate(value);
+                return RedirectToAction("Index", "Home");
             }
             else
             {
                 return View(addOrder);
             }
-            return RedirectToAction("Index", "Home");
+            
         }
     }
 }

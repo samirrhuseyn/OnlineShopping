@@ -609,9 +609,6 @@ namespace DataAccessLayer.Migrations
                     b.Property<string>("Image3")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("InStock")
-                        .HasColumnType("bit");
-
                     b.Property<int>("Interest")
                         .HasColumnType("int");
 
@@ -629,6 +626,9 @@ namespace DataAccessLayer.Migrations
 
                     b.Property<string>("Size")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Stock")
+                        .HasColumnType("int");
 
                     b.Property<int>("StoreID")
                         .HasColumnType("int");

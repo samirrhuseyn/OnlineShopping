@@ -76,11 +76,11 @@
                                         <p class="price float-start d-block">@Model.Price ₼</p>
                                     }
                                 </div>
-                                @if (Model.InStock)
+                                @if (Model.Stock > 0)
                                 {
                                     <p><span class="item fs-14">Mövcudluq:</span> Stokda var <i class="fa fa-check-circle text-success"></i></p>
                                 }
-                                else
+                                else if (Model.Stock == 0)
                                 {
                                     <p><span class="item fs-14">Mövcudluq:</span> Stokda yoxdur <i class="fa fa-circle-xmark text-danger"></i></p>
                                 }

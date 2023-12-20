@@ -64,7 +64,6 @@ namespace OnlineShopping.Areas.Seller.Controllers
 					Image3 = UploadFile(addProduct.Image3),
 					Size = addProduct.Size,
 					Color = addProduct.Color,
-					InStock = true,
 					Price = addProduct.Price,
 					StoreID = values.StoreID,
 					ProductCode = addProduct.ProductCode

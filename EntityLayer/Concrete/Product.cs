@@ -25,9 +25,9 @@ namespace EntityLayer.Concrete
         public Store? Store { get; set; }
         public Category? Category { get; set; }
         public int CategoryID { get; set; }
-		public bool InStock { get; set; }
         public string? ProductCode { get; set; }
         public int Interest { get; set; }
+        public int Stock { get; set; }
         public List<Comment>? Comments { get; set; }
         public List<Complaint>? Complaints { get; set; }
         public List<Cart>? Cart { get; set; }

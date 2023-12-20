@@ -49,11 +49,11 @@
                                     }
                                    
                                 </div>
-                                @if (product.InStock)
+                                @if (product.Stock > 0)
                                 {
                                     <p><span class="item fs-14">Mövcudluq:</span> Stokda var <i class="fa fa-check-circle text-success"></i></p>
                                 }
-                                else
+                                else if (product.Stock == 0)
                                 {
                                     <p><span class="item fs-14">Mövcudluq:</span> Stokda yoxdur <i class="fa fa-circle-xmark text-danger"></i></p>
                                 }

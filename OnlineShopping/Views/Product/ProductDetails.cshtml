@@ -5,6 +5,9 @@
     ViewData["ID"] = Model.ProductID;
 }
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script src="~/lib/jquery/dist/jquery.js"></script>
 <main class="page-content">
 
     <!-- Product Details Area -->
@@ -45,7 +48,7 @@
 
                             <h3>@Model.ProductName</h3>
                             <div class="pdetails-pricebox">
-                                @if(Model.DiscountedPrice != null)
+                                @if (Model.DiscountedPrice != null)
                                 {
                                     <del class="oldprice">@Model.Price ₼</del>
                                     <span class="price">@Model.DiscountedPrice ₼</span>
@@ -60,17 +63,29 @@
                                 <div class="pdetails-quantity">
                                     <div class="quantity-select">
                                         <input name="Count" value="1" required>
-                                        
-                                        <input name="ProductID" value="@Model.ProductID" hidden/>
+
+                                        <input name="ProductID" value="@Model.ProductID" hidden />
                                     </div>
                                     <button class="btn btn-primary ho-button" type="submit">Səbətə əlavə et!</button>
-                                    <a style="height:51px;" role="button" href="/Order/AddOrder/@Model.ProductID" class="ho-button">
-                                        <i style="margin-bottom:10px; margin-right:5px;" class="ion ion-ios-wallet"></i>
-                                        <span>İndi Al!</span>
-                                    </a>
+
+                                    @if (Model.Stock > 0)
+                                    {
+                                        <a style="height:51px;" role="button" href="/Order/AddOrder/@Model.ProductID" class="ho-button">
+                                            <i style="margin-bottom:10px; margin-right:5px;" class="ion ion-ios-wallet"></i>
+                                            <span>İndi Al!</span>
+                                        </a>
+                                    }
+                                    else if (Model.Stock == 0)
+                                    {
+                                        <a style="height:51px;" role="button" href="#" class="ho-button" id="aboutbtn">
+                                            <i style="margin-bottom:10px; margin-right:5px;" class="ion ion-ios-wallet"></i>
+                                            <span>İndi Al!</span>
+                                        </a>
+                                    }
+
                                 </div>
                             </form>
-                            
+
                             <div class="pdetails-categories">
                                 <span>Məhsul kodu :</span>
                                 <ul>
@@ -89,7 +104,7 @@
                                     <li><a href="/Store/StoreDetails/@Model.StoreID">@Model.Store.Name</a></li>
                                 </ul>
                             </div>
-                            @if(Model.Color != null)
+                            @if (Model.Color != null)
                             {
                                 <div class="pdetails-tags">
                                     <span>Rəng :</span>
@@ -100,7 +115,7 @@
                             }
                             else
                             {
-                                
+
                             }
 
                             @if (Model.Size != null)
@@ -118,20 +133,20 @@
                             }
                             <div class="pdetails-tags">
                                 <span>Mövcudluğu :</span>
-                                @if(Model.InStock)
+                                @if (Model.Stock > 0)
                                 {
                                     <ul>
                                         <li><span style="-webkit-text-fill-color:limegreen">Stokda var!</span></li>
                                     </ul>
                                 }
-                                else
+                                else if (Model.Stock == 0)
                                 {
                                     <ul>
                                         <li><span style="-webkit-text-fill-color:red">Stokda yoxdur!</span></li>
                                     </ul>
                                 }
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -159,14 +174,14 @@
                                 <br />
                                 Məhsul barədə şikayətiniz varsa <a href="/Complaint/AddComplaint">buradan</a> bizə şikayətinizi göndərə bilərsiniz :)
                             </p>
-                            
-                            
+
+
                         </div>
                     </div>
                     <div class="tab-pane fade" id="product-details-area3" role="tabpanel" aria-labelledby="product-details-area3-tab">
                         <div class="pdetails-reviews">
                             <div class="product-review">
-                                
+
                                 @await Component.InvokeAsync("CommentListInDetails")
                                 <div class="commentbox mt-5">
                                     <h5>Rəy əlavə et!</h5>
@@ -188,7 +203,7 @@
                                                 <textarea name="Content" id="new-review-textbox" cols="30" rows="5" required></textarea>
                                             </div>
                                             <div class="single-input">
-                                                
+
                                                 <button class="ho-button" type="submit"><span>SUBMIT</span></button>
                                             </div>
                                         </div>
@@ -257,7 +272,7 @@
                     <!--// Single Product -->
                 </div>
 
-               
+
             </div>
         </div>
     </div>
@@ -305,4 +320,18 @@
             return false;
         }
     }
+
+    
+
+    $('#aboutbtn').click(function(){
+        Swal.fire({
+            icon: "error",
+            title: "Xəta!",
+            text: "Bu məhsuldan stokda yoxdur!",
+            
+        });
+    })
+
+
 </script>
+
