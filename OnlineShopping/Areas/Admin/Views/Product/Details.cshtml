@@ -78,14 +78,14 @@
                                 </div>
                                 @if (Model.Stock > 0)
                                 {
-                                    <p><span class="item fs-14">Mövcudluq:</span> Stokda var <i class="fa fa-check-circle text-success"></i></p>
+                                    <p><span class="item fs-14">Mövcudluq:</span> Stokda var <i class="fa fa-check-circle text-success"></i> : @Model.Stock</p>
                                 }
                                 else if (Model.Stock == 0)
                                 {
                                     <p><span class="item fs-14">Mövcudluq:</span> Stokda yoxdur <i class="fa fa-circle-xmark text-danger"></i></p>
                                 }
-                                <p><span class="item fs-14">Product code:</span>	 @Model.ProductCode</p>
-                                <p><span class="item fs-14">Brand:</span> @Model.Store.Name</p>
+                                <p><span class="item fs-14">Məhsul kodu:</span>	 @Model.ProductCode</p>
+                                <p><span class="item fs-14">Mağaza:</span><a href="/Admin/Store/StoreDetails/@Model.Store.StoreID"> @Model.Store.Name</a> </p>
                                 <p class="text-content">
                                     @Html.Raw(Model.ProductDescription)
                                 </p>
