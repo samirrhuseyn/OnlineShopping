@@ -1,0 +1,24 @@
+﻿@model OnlineShopping.Areas.Seller.Models.OrderCancel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Sifarişi ləğv edin";
+    Layout = "~/Views/Shared/_sellerLayout.cshtml";
+}
+
+<div class="col-xl-6 col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="basic-form">
+                <form method="post" asp-controller="Order" asp-action="OrderCancel">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3">
+                        <label>Sifariş kodu:</label>
+                        <input asp-for="OrderCode" type="text" class="form-control input-default ">
+                        <span asp-validation-for="OrderCode" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Göndər</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

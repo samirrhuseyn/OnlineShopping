@@ -1,8 +1,10 @@
 ﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using OnlineShopping.Areas.Admin.Models;
 
 namespace OnlineShopping.Areas.Admin.Controllers
 {
@@ -10,16 +12,13 @@ namespace OnlineShopping.Areas.Admin.Controllers
     public class OrderController : Controller
     {
         OrderManager orderManager = new OrderManager(new EfOrderDal());
-        private readonly UserManager<AppUser> _userManager;
+        Context context = new Context();
 
-        public OrderController(UserManager<AppUser> userManager)
+        public IActionResult Index(OrderSearch search)
         {
-            _userManager = userManager;
-        }
 
-        public async Task<IActionResult> Index()
-        {
-            
+            var total = context.Orders.Select(x=>x.Price).Sum();
+            ViewBag.Total = total;
             var values = orderManager.GetListByUser();
             return View(values);
         }
