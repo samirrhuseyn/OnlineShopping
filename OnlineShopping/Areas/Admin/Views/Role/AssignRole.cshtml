@@ -1,0 +1,20 @@
+﻿@using OnlineShopping.Areas.Admin.Models
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model List<RoleAssignViewModel>
+@{
+    ViewData["Title"] = "Səlahiyyətləndirmə";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<form method="post" asp-controller="Role" asp-action="AssignRole">
+    @for (int i = 0; i < Model.Count; i++)
+    {
+        <div class="form-check">
+            <input type="hidden" asp-for="@Model[i].RoleID" />
+            <input type="hidden" asp-for="@Model[i].RoleName" />
+            <input type="checkbox" asp-for="@Model[i].Exists" class="form-check-input" />
+            <label class="form-check-label" for="@Model[i].Exists">  @Model[i].RoleName</label>
+        </div>
+    }
+    <button class="btn btn-primary">Yadda saxla</button>
+</form>

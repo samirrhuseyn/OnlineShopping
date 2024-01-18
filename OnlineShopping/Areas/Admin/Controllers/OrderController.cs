@@ -17,7 +17,7 @@ namespace OnlineShopping.Areas.Admin.Controllers
         public IActionResult Index(OrderSearch search)
         {
 
-            var total = context.Orders.Select(x=>x.Price).Sum();
+            var total = context.Orders.Where(x=>x.OrderStatusID == 1).Select(x=>x.Price).Sum();
             ViewBag.Total = total;
             var values = orderManager.GetListByUser();
             return View(values);

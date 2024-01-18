@@ -1,0 +1,35 @@
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityRole>
+@{
+    ViewData["Title"] = "Rollar";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="col-xl-12">
+    <div class="card" id="bootstrap-table10">
+        <div class="tab-content" id="myTabContent-8">
+            <div class="tab-pane fade show active" id="activebackground" role="tabpanel" aria-labelledby="home-tab-8">
+                <div class="card-body p-0">
+                    <div class="table-responsive">
+                        <table class="table header-border table-responsive-sm">
+                            <thead>
+                                <tr>
+                                    <th>Rol adı</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var role in Model)
+                                {
+                                    <tr>
+                                        <td>@role.Name</td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

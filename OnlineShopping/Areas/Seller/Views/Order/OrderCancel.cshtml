@@ -3,6 +3,8 @@
 @{
     ViewData["Title"] = "Sifarişi ləğv edin";
     Layout = "~/Views/Shared/_sellerLayout.cshtml";
+    ViewData["ActiveOC"] = "active";
+
 }
 
 <div class="col-xl-6 col-lg-6">
@@ -16,7 +18,7 @@
                         <input asp-for="OrderCode" type="text" class="form-control input-default ">
                         <span asp-validation-for="OrderCode" class="text-danger"></span>
                     </div>
-                    <button type="submit" class="btn btn-primary">Göndər</button>
+                    <button type="submit" class="btn btn-primary">Ləğv et</button>
                 </form>
             </div>
         </div>

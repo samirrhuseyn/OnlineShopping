@@ -76,6 +76,7 @@ namespace OnlineShopping.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
+            
             var value = _userManager.Users.Where(x => x.StoreID == 4).Where(x => x.IsSeller == false).Where(x => x.IsAdmin == true).ToList();
             return View(value);
         }
