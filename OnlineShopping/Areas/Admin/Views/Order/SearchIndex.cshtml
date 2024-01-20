@@ -1,0 +1,26 @@
+﻿@model OnlineShopping.Areas.Admin.Models.OrderSearch
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+    ViewData["Title"] = "Tarixə görə sifariş axtar";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="col-xl-6 col-lg-6">
+    <div class="card">
+        <div class="card-body">
+            <div class="basic-form">
+                <form method="post" asp-action="SearchIndex" asp-controller="Order">
+                    <div class="mb-3">
+                        <label class="form-label">Başlama vaxtı:</label>
+                        <input asp-for="StartDate" type="date" class="form-control input-default ">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Bitmə vaxtı:</label>
+                        <input asp-for="EndDate" type="date" class="form-control input-default">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Axtar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

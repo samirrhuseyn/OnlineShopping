@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concrete;
+﻿using DataAccessLayer.Concrete;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -10,7 +11,7 @@ namespace OnlineShopping.Areas.Admin.Controllers
     public class AdminController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
-
+        Context context = new Context();
         public AdminController(UserManager<AppUser> userManager)
         {
             _userManager = userManager;
@@ -75,8 +76,8 @@ namespace OnlineShopping.Areas.Admin.Controllers
         }
 
         public IActionResult Index()
-        {
-            
+        {   
+           
             var value = _userManager.Users.Where(x => x.StoreID == 4).Where(x => x.IsSeller == false).Where(x => x.IsAdmin == true).ToList();
             return View(value);
         }

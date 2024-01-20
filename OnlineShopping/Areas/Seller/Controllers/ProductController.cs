@@ -211,10 +211,33 @@ namespace OnlineShopping.Areas.Seller.Controllers
 
 		public async Task<IActionResult> Interests()
 		{
-
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             var value = productManager.GetListAllWithCategory().DistinctBy(x=>x.CategoryID).Where(x=>x.StoreID == values.StoreID);
 			return View(value);
 		}
+
+		[HttpGet]
+		public IActionResult AddStock()
+		{
+			return View();
+		}
+
+        [HttpPost]
+        public async Task<IActionResult> AddStock(AddStock addStock)
+        {
+            var value = await _userManager.FindByNameAsync(User.Identity.Name);
+			var productwhere = context.Products.Where(x=>x.ProductCode ==  addStock.ProductCode).FirstOrDefault();
+			var store = context.Products.Where(x => x.ProductCode == addStock.ProductCode).Select(x => x.StoreID).FirstOrDefault();
+			if(store == value.StoreID)
+			{
+                productwhere.Stock = productwhere.Stock + addStock.Stock;
+                productManager.TUpdate(productwhere);
+                return RedirectToAction("Index");
+            }
+			else
+			{
+				return Content("Başqa mağazanın qalığını artıra bilməzsiniz!");
+			}
+        }
     }
 }

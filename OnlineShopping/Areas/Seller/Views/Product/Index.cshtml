@@ -15,7 +15,7 @@
             <tr>
                 <th>Ad</th>
                 <th>Kateqoriya</th>
-                <th>Vəziyyət</th>
+                <th>Qalıq</th>
                 <th>Qiymət</th>
                 <th>Məhsul kodu</th>
                 <th>Action</th>
@@ -39,17 +39,22 @@
                         </a>
                     </td>
                     <td>@product.Category.Name</td>
-                    @*<td>
-                        @if (product.InStock)
+                    <td>
+                        @if (product.Stock > 3)
                         {
-                            <span class="badge rounded-pill bg-success">Mövcuddur</span>
+                            <p class="text-success">@product.Stock</p>
+                        }
+                        else if (product.Stock > 1)
+                        {
+                            <p class="text-warning">@product.Stock</p>
                         }
                         else
                         {
-                            <span class="badge rounded-pill bg-danger">Mövcud deyil</span>
+                            <p class="text-danger">@product.Stock</p>
                         }
                         
-                    </td>*@
+                    </td>
+
                     <td>
                         @if (product.DiscountedPrice != null)
                         {
