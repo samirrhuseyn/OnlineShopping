@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Kassa";
+    Layout = "~/Views/Shared/_adminLayout.cshtml";
+}
+
+<div class="col-xl-3 col-sm-6">
+    <div class="card">
+        <div class="card-body">
+            <ul class="d-flex align-items-center">
+                <li class="icon-box icon-box-lg bg-primary me-3">
+                    <img src="~/akademi/xhtml/images/manat-sign.png" width="20">
+                </li>
+                <li>
+                    <h5>@DateTime.Now.ToString("MMMM yyyy")</h5>
+                    <h3 class="my-1">@ViewBag.Cash ₼</h3>
+                    @{
+                        float cash = ViewBag.Cash;
+                        float lastcash = ViewBag.LastCash;
+                    }
+
+                    @if (cash > lastcash)
+                    {
+                        <span class="text-success">
+                            Keçən aya nisbətən @ViewBag.Percentage% <i class="small bi bi-arrow-up"></i>
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="text-danger">
+                            Keçən aya nisbətən @ViewBag.Percentage% <i class="small bi bi-arrow-down"></i>
+                        </span>
+                    }
+
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</div>
