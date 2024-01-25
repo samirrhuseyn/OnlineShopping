@@ -19,6 +19,7 @@ namespace OnlineShopping.Controllers
         CartManager cartManager = new CartManager(new EfCartDal());
         AdressManager adressManager = new AdressManager(new EfAdressDal());
         Context context = new Context();
+        MailManager mailManager = new MailManager();
         private readonly UserManager<AppUser> _userManager;
 
         public OrderController(UserManager<AppUser> userManager)
@@ -76,7 +77,40 @@ namespace OnlineShopping.Controllers
             };
             if (addOrder.IsApplied == true)
             {
+                
                 orderManager.TAdd(order);
+                var product = context.Products.Where(x => x.ProductID == order.ProductID).FirstOrDefault();
+                mailManager.SendMail(user.Email, "<!Doctype html>" +
+                    "<html>" +
+                    "<body>" +
+                    "<h5>" + "Sifarişin kodu:" + order.OrderCode + "</h5>" +
+                    "<table style=\"border:1px solid black;\">" +
+                    "<tr>" +
+                    "<th style=\"border:1px solid black;\">Məhsulun adı</th>" +
+                    "<th style=\"border:1px solid black;\">Məhsulun kodu</th>" +
+                    "<th style=\"border:1px solid black;\">Say</th>" +
+                    "<th style=\"border:1px solid black;\">Qiyməti</th>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td style=\"border:1px solid black;\">" + product.ProductName + "</td>" +
+                    "<td style=\"border:1px solid black;\">" + product.ProductCode + "</td>" +
+                    "<td style=\"border:1px solid black;\">" + order.Count + "</td>" +
+                    "<td style=\"border:1px solid black;\">" + order.Price + " ₼" + "</td>" +
+                    "</tr>" +
+                    "</table>" +
+                    "<br />" +
+                    "<br />" +
+                    
+                    "ÖDƏNİLİB!" +
+                    "<br />" + 
+                    "<br />" +
+                    order.OrderDateTime?.ToString("dd.MM.yyyy HH.mm") +
+                    "<br />" +
+                    "<br />" +
+                    "QARABAĞ AZƏRBAYCANDIR!" +
+                    "</body>" +
+                    "</html>"
+                    , "Satışın qəbzi");
                 var value = productManager.TGetByID(order.ProductID);
                 value.Stock = value.Stock - order.Count;
                 productManager.TUpdate(value);
@@ -138,6 +172,38 @@ namespace OnlineShopping.Controllers
             if (addOrder.IsApplied == true)
             {
                 orderManager.TAdd(order);
+                var product = context.Products.Where(x => x.ProductID == order.ProductID).FirstOrDefault();
+                mailManager.SendMail(user.Email, "<!Doctype html>" +
+                    "<html>" +
+                    "<body>" +
+                    "<h5>" + "Sifarişin kodu:" + order.OrderCode + "</h5>" +
+                    "<table style=\"border:1px solid black;\">" +
+                    "<tr>" +
+                    "<th style=\"border:1px solid black;\">Məhsulun adı</th>" +
+                    "<th style=\"border:1px solid black;\">Məhsulun kodu</th>" +
+                    "<th style=\"border:1px solid black;\">Say</th>" +
+                    "<th style=\"border:1px solid black;\">Qiyməti</th>" +
+                    "</tr>" +
+                    "<tr>" +
+                    "<td style=\"border:1px solid black;\">" + product.ProductName + "</td>" +
+                    "<td style=\"border:1px solid black;\">" + product.ProductCode + "</td>" +
+                    "<td style=\"border:1px solid black;\">" + order.Count + "</td>" +
+                    "<td style=\"border:1px solid black;\">" + order.Price + " ₼" + "</td>" +
+                    "</tr>" +
+                    "</table>" +
+                    "<br />" +
+                    "<br />" +
+
+                    "ÖDƏNİLİB!" +
+                    "<br />" +
+                    "<br />" +
+                    order.OrderDateTime?.ToString("dd.MM.yyyy HH.mm") +
+                    "<br />" +
+                    "<br />" +
+                    "QARABAĞ AZƏRBAYCANDIR!" +
+                    "</body>" +
+                    "</html>"
+                    , "Satışın qəbzi");
                 var value = productManager.TGetByID(order.ProductID);
                 value.Stock = value.Stock - order.Count;
                 productManager.TUpdate(value);
